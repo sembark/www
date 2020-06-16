@@ -728,7 +728,23 @@
           </div>
         </div>
         <div class="lg:max-w-2xl mx-auto">
-          <form name="demo-request" netlify>
+          <form
+            name="demo-request"
+            data-netlify="true"
+            data-netlify-recaptcha="true"
+            netlify-honeypot="name"
+            method="POST"
+          >
+            <!-- This is to prevent the spamming using honeypot -->
+            <!-- https://docs.netlify.com/forms/spam-filters/#honeypot-field -->
+            <div class="hidden">
+              <!-- Give a sensible name to it -->
+              <input
+                name="name"
+                type="text"
+                placeholder="Don’t fill this out if you're human"
+              />
+            </div>
             <label class="block mb-8">
               <span class="text-gray-700">Company Name</span>
               <input
@@ -779,14 +795,18 @@
                 />
               </div>
             </label>
-            <div class="rounded-md shadow">
-              <button
-                href="#request_demo"
-                type="submit"
-                class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition duration-150 ease-in-out md:py-4 md:text-lg md:px-10"
-              >
-                Let's Talk
-              </button>
+            <!-- https://docs.netlify.com/forms/spam-filters/#netlify-provided-recaptcha-2 -->
+            <div data-netlify-recaptcha="true"></div>
+            <div class="mt-8">
+              <div class="rounded-md shadow">
+                <button
+                  href="#request_demo"
+                  type="submit"
+                  class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition duration-150 ease-in-out md:py-4 md:text-lg md:px-10"
+                >
+                  Let's Talk
+                </button>
+              </div>
             </div>
           </form>
         </div>
