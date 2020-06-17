@@ -20,7 +20,9 @@
   "dependencies": {
     "@tailwindcss/ui": "^0.3.0",
     "parcel-bundler": "^1.12.4",
+    "parcel-plugin-asset-copier": "^1.1.0",
     "posthtml-modules": "^0.6.0",
     "tailwindcss": "^1.4.6"
-  }
+  },
+  "assetsPath": "public"
 }
