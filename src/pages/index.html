@@ -6,7 +6,7 @@
     <div class="relative bg-white overflow-hidden">
       <div class="max-w-screen-xl mx-auto">
         <div
-          class="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32"
+          class="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:w-full lg:pb-28 xl:pb-32"
           x-data="{ isOpen: false }"
         >
           <svg
@@ -176,9 +176,9 @@
           </div>
 
           <div
-            class="mt-10 mx-auto max-w-screen-xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28"
+            class="mt-10 mx-auto max-w-screen-xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28 text-center"
           >
-            <div class="sm:text-center lg:text-left">
+            <div>
               <h2
                 class="mb-8 uppercase tracking-widest font-medium text-gray-500"
               >
@@ -194,13 +194,11 @@
                 <span>your travel business</span>
               </h1>
               <p
-                class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0"
+                class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg md:mt-5 md:text-xl lg:mx-0"
               >
-                Manage Sales, Operations and Accounting at one place.
+                Manage Sales, Operations and Accounting at one connected place.
               </p>
-              <div
-                class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start"
-              >
+              <div class="mt-5 sm:mt-8 sm:flex justify-center">
                 <div class="rounded-md shadow">
                   <a
                     href="#request_demo"
@@ -213,13 +211,6 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
-        <img
-          class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full"
-          src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80"
-          alt=""
-        />
       </div>
     </div>
   </header>
@@ -610,11 +601,10 @@
           <h2
             class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10"
           >
-            Contact sales
+            Contact Us
           </h2>
           <p class="mt-4 max-w-2xl text-xl leading-7 text-gray-500 lg:mx-auto">
-            Provide your contact information and our sales person will be right
-            back to you.
+            Provide your contact information and we will be right back to you.
           </p>
         </div>
       </div>
@@ -638,7 +628,7 @@
             />
           </div>
           <label class="block mb-8">
-            <span class="text-gray-700">Company Name</span>
+            <span class="text-gray-700">Company Name *</span>
             <input
               name="company_name"
               type="text"
@@ -648,7 +638,7 @@
             />
           </label>
           <label class="block mb-8">
-            <span class="text-gray-700">Contact Person Name</span>
+            <span class="text-gray-700">Contact Person Name *</span>
             <input
               name="contact_person"
               type="text"
@@ -658,7 +648,7 @@
             />
           </label>
           <label class="block mb-8">
-            <span class="text-gray-700">Contact Email</span>
+            <span class="text-gray-700">Contact Email *</span>
             <input
               name="contact_email"
               type="email"
@@ -668,7 +658,7 @@
             />
           </label>
           <label class="block mb-8">
-            <span class="text-gray-700">Contact Phone Number</span>
+            <span class="text-gray-700">Contact Phone Number *</span>
             <div class="flex flex-wrap items-stretch w-full mb-4 relative mt-1">
               <div class="flex -mr-px">
                 <span
@@ -683,6 +673,16 @@
                 placeholder="9999999999"
                 required
               />
+            </div>
+          </label>
+          <label class="block mb-8">
+            <span class="text-gray-700">More Information</span>
+            <div class="flex flex-wrap items-stretch w-full mb-4 relative mt-1">
+              <textarea
+                name="comments"
+                class="form-input mt-1 block w-full"
+                placeholder="Any more information about you and your company.."
+              ></textarea>
             </div>
           </label>
           <!-- https://docs.netlify.com/forms/spam-filters/#netlify-provided-recaptcha-2 -->
