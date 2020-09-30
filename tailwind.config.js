@@ -9,5 +9,12 @@ module.exports = {
     },
   },
   variants: {},
+  corePlugins: {
+    animation: false,
+  },
   plugins: [require("@tailwindcss/ui")],
+  future: {
+    removeDeprecatedGapUtilities: true,
+    purgeLayersByDefault: true,
+  },
 };
