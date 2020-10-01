@@ -30,6 +30,10 @@
       href="https://assets.sembark.com/favicons/favicon.svg"
       color="#1A202C"
     />
+    <meta
+      name="keywords"
+      content="Travel SAAS, Tour SAAS, Travel Management Software, Travel Expense, Hotel Bookings, Package Itinerary"
+    />
     <title>
       {{ title }}
     </title>
@@ -79,19 +83,19 @@
       defer
     ></script>
     <meta name="google-analytics" content="UA-169640999-1" />
-    <!-- Google Analytics -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-169640999-1"
+    ></script>
     <script>
-      window.ga =
-        window.ga ||
-        function () {
-          (ga.q = ga.q || []).push(arguments);
-        };
-      ga.l = +new Date();
-      ga("create", "UA-169640999-1", "auto");
-      ga("send", "pageview");
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "UA-169640999-1");
     </script>
-    <script async src="https://www.google-analytics.com/analytics.js"></script>
-    <!-- End Google Analytics -->
   </head>
   <body class="font-sans">
     <content></content>
