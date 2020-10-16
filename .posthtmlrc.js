@@ -13,7 +13,7 @@ module.exports = {
     }),
     expressions({
       locals: {
-        APP_VERSION: process.env.npm_package_version,
+        version: process.env.npm_package_version,
         title: "Sembark: Manage and Grow your Travel Business",
         appName: "Sembark",
         description:
