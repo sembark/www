@@ -2,8 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="dns-prefetch" href="https://assets.sembark.com" />
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://assets.sembark.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://www.google-analytics.com" />
     <link rel="assets" href="https://assets.sembark.com" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta property="version" content="{{ version }}" />
@@ -69,19 +70,19 @@
       defer
     ></script>
     <meta name="google-analytics" content="UA-169640999-1" />
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?{{ gaId }}"
-    ></script>
+    <!-- Google Analytics -->
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-      gtag("config", "{{ gaId }}");
+      (window.ga =
+        window.ga ||
+        function () {
+          (ga.q = ga.q || []).push(arguments);
+        }),
+        (ga.l = +new Date()),
+        ga("create", "{{ gaId }}", "auto"),
+        ga("set", "anonymizeIp", true),
+        ga("send", "pageview");
     </script>
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
   </head>
   <body class="font-sans">
     <block name="content"></block>
