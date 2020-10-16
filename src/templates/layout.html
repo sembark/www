@@ -5,6 +5,7 @@
     <link rel="dns-prefetch" href="https://rsms.com" />
     <link rel="assets" href="https://assets.sembark.com" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta property="version" content="{{ APP_VERSION }}" />
     <!-- the inner fonts -->
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
     <!-- fluid icon for Mac OS desktop app -->
@@ -30,55 +31,34 @@
       href="https://assets.sembark.com/favicons/favicon.svg"
       color="#1A202C"
     />
-    <meta
-      name="keywords"
-      content="tour agency software, travel agency software, tour operator software, dmc management software, travel
-      operator software, sass software, cloud base software, top 10 travel software, best travel agency software, best
-      tour operator software, affordable tour software, sambark, sembak, sambak"
-    />
-    <title>
-      {{ title }}
-    </title>
+    <meta name="keywords" content="{{ keywords }}" />
+    <title>{{ title }}</title>
     <meta property="twitter:title" content="{{ title }}" />
     <meta
       name="description"
       property="twitter:description"
-      content="Manage travel sales, operations and accounting with Sembark. Get 1-click
-        quotation, smart operations and accounting, and all you need for a modern travel business."
+      content="{{ description }}"
     />
-    <meta property="twitter:site" content="@SembarkTech" />
-    <meta property="twitter:creator" content="@SembarkTech" />
+    <meta property="twitter:site" content="{{ twitterUsername }}" />
+    <meta property="twitter:creator" content="{{ twitterUsername }}" />
     <meta property="twitter:card" content="summary_large_image" />
-    <meta
-      property="twitter:image:src"
-      content="https://assets.sembark.com/images/og-image.png"
-    />
+    <meta property="twitter:image:src" content="{{ ogImageUrl }}" />
     <meta property="twitter:image:width" content="1200" />
     <meta property="twitter:image:height" content="630" />
     <meta property="og:title" content="{{ title }}" />
-    <meta
-      property="og:description"
-      content="Manage travel sales, operations and accounting with Sembark. Get 1-click
-        quotation, smart operations and accounting, and all you need for a modern travel business."
-    />
-    <meta
-      property="og:image:secure_url"
-      content="https://assets.sembark.com/images/og-image.png"
-    />
-    <meta
-      property="og:image"
-      content="https://assets.sembark.com/images/og-image.png"
-    />
+    <meta property="og:description" content="{{ description }}" />
+    <meta property="og:image:secure_url" content="{{ ogImageUrl }}" />
+    <meta property="og:image" content="{{ ogImageUrl }}" />
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:site_name" content="Sembark" />
-    <meta property="og:url" content="https://sembark.com" />
+    <meta property="og:site_name" content="{{ appName }}" />
+    <meta property="og:url" content="{{ publicUrl }}" />
     <meta property="og:type" content="website" />
-    <meta property="fb:app_id" content="596194027695907" />
+    <meta property="fb:app_id" content="{{ fbAppId }}" />
     <meta name="theme-color" content="#1A202C" />
-    <meta name="apple-mobile-web-app-title" content="Sembark" />
-    <meta name="application-name" content="Sembark" />
+    <meta name="apple-mobile-web-app-title" content="{{ appName }}" />
+    <meta name="application-name" content="{{ appName }}" />
     <link rel="stylesheet" href="../styles.css" />
     <script
       src="https://assets.sembark.com/js/themed-favicon.js"
@@ -88,7 +68,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script
       async
-      src="https://www.googletagmanager.com/gtag/js?id=UA-169640999-1"
+      src="https://www.googletagmanager.com/gtag/js?{{ gaId }}"
     ></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -96,11 +76,11 @@
         dataLayer.push(arguments);
       }
       gtag("js", new Date());
-      gtag("config", "UA-169640999-1");
+      gtag("config", "{{ gaId }}");
     </script>
   </head>
   <body class="font-sans">
-    <content></content>
+    <block name="content"></block>
     <footer>
       <div class="max-w-screen-xl mx-auto py-16 px-4 sm:px-6 lg:py-24 lg:px-8">
         <div class="md:flex">

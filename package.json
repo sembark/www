@@ -2,7 +2,7 @@
   "name": "@sembark/www",
   "version": "0.1.0",
   "description": "Sembark Application marketing website",
-  "main": "index.js",
+  "private": true,
   "bugs": {
     "url": "https://github.com/sembark/www/issues"
   },
@@ -21,8 +21,29 @@
     "@tailwindcss/ui": "^0.6.2",
     "parcel-bundler": "^1.12.4",
     "parcel-plugin-asset-copier": "^1.1.0",
-    "posthtml-modules": "^0.6.0",
-    "tailwindcss": "^1.8.10"
+    "tailwindcss": "^1.9.2",
+    "posthtml-expressions": "^1.5.0",
+    "posthtml-extend": "^0.5.0"
   },
-  "assetsPath": "public"
+  "assetsPath": "public",
+  "release": {
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/changelog",
+      [
+        "@semantic-release/npm",
+        {
+          "npmPublish": false
+        }
+      ],
+      [
+        "@semantic-release/git",
+        {
+          "message": "chore(release): ${nextRelease.version} :tada: :rocket:\n\n${nextRelease.notes}"
+        }
+      ],
+      "@semantic-release/github"
+    ]
+  }
 }

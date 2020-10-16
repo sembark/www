@@ -1,64 +1,65 @@
-<module
-  href="/layout.html"
-  locals='{"title": "Thank you for connecting with Sembark"}'
->
-  <div class="max-w-screen-xl mx-auto">
-    <header class="relative pt-6 px-4 sm:px-6 lg:px-8">
-      <a href="/" class="flex items-center">
-        <img
-          src="https://assets.sembark.com/images/icon.svg"
-          class="h-8 mr-2"
-        />
-        <div>
-          <h2 class="text-xl">Sembark</h2>
-        </div>
-      </a>
-    </header>
-    <div class="text-center mt-16">
-      <div class="text-green-300">
-        <svg
-          fill="none"
-          class="w-16 h-16 mx-auto"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"
-          ></path>
-        </svg>
-      </div>
-      <h1 class="text-4xl my-8">
-        Thank you.. We received your request!
-      </h1>
-      <p class="text-lg mb-16 max-w-2xl mx-auto leading-relaxed text-gray-500">
-        Thank you for connecting and giving us a chance to serve you. Our sales
-        executive will contact you shortly. In the meantime, please
-        <em class="font-medium text-gray-700"
-          >check your inbox for more details regarding the demo.</em
-        >
-      </p>
-      <div class="mb-16">
-        <a
-          href="/"
-          class="text-lg font-medium text-indigo-600 hover:text-indigo-900 transition duration-150 ease-in-out"
-        >
+<extends src="layout.html">
+  <block name="content">
+    <div class="max-w-screen-xl mx-auto">
+      <header class="relative pt-6 px-4 sm:px-6 lg:px-8">
+        <a href="/" class="flex items-center">
+          <img
+            src="https://assets.sembark.com/images/icon.svg"
+            class="h-8 mr-2"
+          />
+          <div>
+            <h2 class="text-xl">Sembark</h2>
+          </div>
+        </a>
+      </header>
+      <div class="text-center mt-16">
+        <div class="text-green-300">
           <svg
             fill="none"
+            class="w-16 h-16 mx-auto"
             stroke-linecap="round"
-            class="w-4 h-4 inline-block"
             stroke-linejoin="round"
             stroke-width="2"
             viewBox="0 0 24 24"
             stroke="currentColor"
           >
-            <path d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            <path
+              d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"
+            ></path>
           </svg>
-          Back to our website</a
+        </div>
+        <h1 class="text-4xl my-8">
+          Thank you.. We received your request!
+        </h1>
+        <p
+          class="text-lg mb-16 max-w-2xl mx-auto leading-relaxed text-gray-500"
         >
+          Thank you for connecting and giving us a chance to serve you. Our
+          sales executive will contact you shortly. In the meantime, please
+          <em class="font-medium text-gray-700"
+            >check your inbox for more details regarding the demo.</em
+          >
+        </p>
+        <div class="mb-16">
+          <a
+            href="/"
+            class="text-lg font-medium text-indigo-600 hover:text-indigo-900 transition duration-150 ease-in-out"
+          >
+            <svg
+              fill="none"
+              stroke-linecap="round"
+              class="w-4 h-4 inline-block"
+              stroke-linejoin="round"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            Back to our website</a
+          >
+        </div>
       </div>
     </div>
-  </div>
-</module>
+  </block>
+</extends>
