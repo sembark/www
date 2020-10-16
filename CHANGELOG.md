@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/sembark/www/compare/v1.1.0...v1.1.1) (2020-10-16)
+
+
+### Bug Fixes
+
+* **spacing:** between footer links ([b0708ff](https://github.com/sembark/www/commit/b0708ffc17c36b3dcddefb7563fdfc2752278710))
+
 # [1.1.0](https://github.com/sembark/www/compare/v1.0.0...v1.1.0) (2020-10-16)
 
 
