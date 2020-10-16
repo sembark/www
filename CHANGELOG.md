@@ -1,0 +1,37 @@
+# 1.0.0 (2020-10-16)
+
+
+### Bug Fixes
+
+* **captcha:** remove the captcha ([b59aef7](https://github.com/sembark/www/commit/b59aef7d27697e17dc87f4b89eae30bde7b00552))
+* **css:** remove unused css ([089ff9f](https://github.com/sembark/www/commit/089ff9f8c4757c4499626cd197a3da4f01146ec2))
+* **footer:** repeating footer on home page ([79da48c](https://github.com/sembark/www/commit/79da48cabc6ff0636eaede62b6e184e1548ffc95))
+* **ga:** use google analytics instead of tags ([13ce669](https://github.com/sembark/www/commit/13ce6699ccb5de529e3099a4da7f3c6f1488e72a))
+* **icons:** themed favicons not working ([44949aa](https://github.com/sembark/www/commit/44949aaa1541a5574c28a2a34d7ca46ea2bc75af))
+* **links:** email and phone number not clickable ([d85aaea](https://github.com/sembark/www/commit/d85aaeaaa64d8a4cde45e40fdf3f4d77388ca11c))
+* **meta:** og url not correct ([d8cb4bb](https://github.com/sembark/www/commit/d8cb4bb2404cac35f277b98c7f159b7c7dd93a53))
+* **meta:** specify image dimensions ([9bf1e93](https://github.com/sembark/www/commit/9bf1e9319092467ab034c1ac75dc6d9ffe9b17f9))
+* **mis-spells:** correct spell mistakes ([dd6d44f](https://github.com/sembark/www/commit/dd6d44fa1da271a4c153bef60b45c001f0544d8b))
+* **prices:** add * to all prices ([fe2c79f](https://github.com/sembark/www/commit/fe2c79f57dbebbe4bbb6a1bc01e306272b614333))
+* **spacing:** reduce spacing in pricing and contact section ([7c8ff3e](https://github.com/sembark/www/commit/7c8ff3e04c94863ba4bdac070e1f312ee99c569c))
+* **spams:** added honeypot and reCAPTCHA2 ([70b6e2a](https://github.com/sembark/www/commit/70b6e2ab6f40a6056944cbaeb374f7e355bb46e6))
+* **typo:** fix trial spell ([c691360](https://github.com/sembark/www/commit/c6913605ab3e36a4916c2d5073fdb0678a7bac54))
+* **typo:** update copy writting for features and faqs ([33a99d7](https://github.com/sembark/www/commit/33a99d7d4cce0302dd653f3facdfb1b2b25d2908))
+
+
+### Features
+
+* **captcha:** remove for not ([5bb05b5](https://github.com/sembark/www/commit/5bb05b537a859723f47986f9156e3cb1601def82))
+* **contact:** add comments section ([5994b3e](https://github.com/sembark/www/commit/5994b3ef1a850160cb95583ee648d4a865e28edd))
+* **custom-thanks:** add custom thank you page ([50bf88c](https://github.com/sembark/www/commit/50bf88cb4744fdb87a537cf31241b936dd6b5fcb))
+* **gt:** added google tags ([927bf78](https://github.com/sembark/www/commit/927bf783168a3ef680b4e764a99379cca81be772))
+* **keywords:** add keywords and google tags ([17c4050](https://github.com/sembark/www/commit/17c40506efeab7bd82eeca1a2a1e26fadd44f60e))
+* **pricing:** update pricing plans ([911963c](https://github.com/sembark/www/commit/911963cf992a68d8f226d1369a5f3632ca3226f2))
+* **sitemap:** added sitemap ([9280367](https://github.com/sembark/www/commit/9280367b90059efb47fb49f4ffb0464cf55ad272))
+* **ui:** move faq below pricing ([800dd92](https://github.com/sembark/www/commit/800dd923650e88851e8dcc39668cc0e46cbe2267))
+* **version:** add version to og image ([a061719](https://github.com/sembark/www/commit/a0617194f656b1875129ecb03cfe30077cce77e0))
+
+
+### Reverts
+
+* **url:** remove og url ([e7605ff](https://github.com/sembark/www/commit/e7605ff4d75177fad22af1da6df5a01ed9a5c86e))
