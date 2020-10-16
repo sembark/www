@@ -1,3 +1,15 @@
+# [1.1.0](https://github.com/sembark/www/compare/v1.0.0...v1.1.0) (2020-10-16)
+
+
+### Bug Fixes
+
+* **audit:** improve markup and accesibility ([0fc0711](https://github.com/sembark/www/commit/0fc07112e93a0936cd1ec63d0982e352324748bd))
+
+
+### Features
+
+* **version:** add version in footer ([72ff62d](https://github.com/sembark/www/commit/72ff62d79359b3876b1b4fd1109ab57a0cf64859))
+
 # 1.0.0 (2020-10-16)
 
 
