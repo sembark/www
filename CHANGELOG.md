@@ -1,3 +1,10 @@
+## [1.1.4](https://github.com/sembark/www/compare/v1.1.3...v1.1.4) (2020-11-01)
+
+
+### Bug Fixes
+
+* **footer:** update company name on the footer ([92ea7f9](https://github.com/sembark/www/commit/92ea7f9a920fcabfd2e448dbf6763b2e33f63c22))
+
 ## [1.1.3](https://github.com/sembark/www/compare/v1.1.2...v1.1.3) (2020-11-01)
 
 
