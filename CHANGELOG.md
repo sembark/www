@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/sembark/www/compare/v1.1.1...v1.1.2) (2020-10-16)
+
+
+### Bug Fixes
+
+* **analytics:** remove gtag and add ga ([433b444](https://github.com/sembark/www/commit/433b444ab986e0d01b2ea1d70afcb24f6d2dc000))
+
 ## [1.1.1](https://github.com/sembark/www/compare/v1.1.0...v1.1.1) (2020-10-16)
 
 
