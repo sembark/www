@@ -14,7 +14,7 @@ module.exports = {
     expressions({
       locals: {
         version: process.env.npm_package_version,
-        title: "Sembark: Manage and Grow your Travel Business",
+        title: "Sembark Tech Pvt Ltd - The Travel Software",
         appName: "Sembark",
         description:
           "Manage travel sales, operations and accounting with Sembark. Get 1-click quotation, smart operations and accounting, and all you need for a modern travel business.",
