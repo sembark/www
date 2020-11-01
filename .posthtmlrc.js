@@ -19,7 +19,7 @@ module.exports = {
         description:
           "Manage travel sales, operations and accounting with Sembark. Get 1-click quotation, smart operations and accounting, and all you need for a modern travel business.",
         keywords:
-          "tour agency software, travel agency software, tour operator software, dmc management software, travel operator software, sass software, cloud base software, top 10 travel software, best travel agency software, best tour operator software, affordable tour software, sambark, sembak, sambak",
+          "sembark pvt ltd, sembark tech pvt ltd,sembark technology private limited,semark technologies,tour agency software, travel agency software, tour operator software, dmc management software, travel operator software, sass software, cloud base software, top 10 travel software, best travel agency software, best tour operator software, affordable tour software, sambark, sembak, sambak",
         publicUrl: "https://sembark.com",
         ogImageUrl,
         twitterUsername: "@SembarkTech",
