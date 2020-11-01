@@ -1,3 +1,10 @@
+## [1.1.5](https://github.com/sembark/www/compare/v1.1.4...v1.1.5) (2020-11-01)
+
+
+### Bug Fixes
+
+* **tags:** update meta tags ([d517c2c](https://github.com/sembark/www/commit/d517c2c8eb43695265ce4d8262333b055fcfe6f1))
+
 ## [1.1.4](https://github.com/sembark/www/compare/v1.1.3...v1.1.4) (2020-11-01)
 
 
