@@ -1,3 +1,10 @@
+## [1.1.3](https://github.com/sembark/www/compare/v1.1.2...v1.1.3) (2020-11-01)
+
+
+### Bug Fixes
+
+* **title:** update title for the website ([75e5d8f](https://github.com/sembark/www/commit/75e5d8ff15ff3f3c4ff0308c7896be02f7f64f12))
+
 ## [1.1.2](https://github.com/sembark/www/compare/v1.1.1...v1.1.2) (2020-10-16)
 
 
