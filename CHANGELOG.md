@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/sembark/www/compare/v1.1.5...v1.2.0) (2020-11-04)
+
+
+### Features
+
+* **blogs:** add our first blog ([edd6491](https://github.com/sembark/www/commit/edd64914c71af93059d8f8313f6c8ea05ce274f8))
+
 ## [1.1.5](https://github.com/sembark/www/compare/v1.1.4...v1.1.5) (2020-11-01)
 
 
