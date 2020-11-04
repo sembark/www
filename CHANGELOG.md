@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/sembark/www/compare/v1.2.0...v1.2.1) (2020-11-04)
+
+
+### Bug Fixes
+
+* **build:** build not working ([daa68af](https://github.com/sembark/www/commit/daa68af3cdcde6310a4619da6aa8670502f076d8))
+
 # [1.2.0](https://github.com/sembark/www/compare/v1.1.5...v1.2.0) (2020-11-04)
 
 
