@@ -12,7 +12,7 @@
   },
   "scripts": {
     "dev": "parcel serve src/pages/index.html src/pages/thank-you.html",
-    "build": "parcel build src/pages/*.html"
+    "build": "parcel build src/pages/index.html src/pages/thank-you.html"
   },
   "keywords": [],
   "author": "Sudhir Mitharwal <sudhir@sembark.com>",
