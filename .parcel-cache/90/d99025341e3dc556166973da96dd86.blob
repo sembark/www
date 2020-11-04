@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="preconnect" href="17fdc98386acca320ef606eed665fc1d">
+    <link rel="preconnect" href="d7853b7e3be5815b02e8ff16450e9cd9">
+    <link rel="preconnect" href="d275fcc8a26c28d6d576cf9a105b815c">
+    <link rel="assets" href="17fdc98386acca320ef606eed665fc1d">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="version" content="1.1.4">
+    <!-- fonts -->
+    <link href="4aba7d7d24496af02144fe08125567b9" rel="stylesheet">
+    <!-- fluid icon for Mac OS desktop app -->
+    <link rel="fluid-icon" href="e8ce0de498e66564d7e8e8aa61ac931b" title="Sembark">
+    <link rel="alternate icon" class="js-site-favicon" type="image/png" href="b316bb5f979bad225e51bf925f2d0b87">
+    <link rel="icon" class="js-site-favicon" type="image/svg+xml" href="3a8b950d1611e01d5f5d99ecf6e32f7f">
+    <link rel="mask-icon" href="3a8b950d1611e01d5f5d99ecf6e32f7f" color="#1A202C">
+    <meta name="keywords" content="tour agency software, travel agency software, tour operator software, dmc management software, travel operator software, sass software, cloud base software, top 10 travel software, best travel agency software, best tour operator software, affordable tour software, sambark, sembak, sambak">
+    <title>Sembark Tech Pvt Ltd - The Travel Software</title>
+    <meta property="twitter:title" content="Sembark Tech Pvt Ltd - The Travel Software">
+    <meta name="description" property="twitter:description" content="Manage travel sales, operations and accounting with Sembark. Get 1-click quotation, smart operations and accounting, and all you need for a modern travel business.">
+    <meta property="twitter:site" content="@SembarkTech">
+    <meta property="twitter:creator" content="@SembarkTech">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:image:src" content="https://assets.sembark.com/images/og-image.png?v=1.1.4">
+    <meta property="twitter:image:width" content="1200">
+    <meta property="twitter:image:height" content="630">
+    <meta property="og:title" content="Sembark Tech Pvt Ltd - The Travel Software">
+    <meta property="og:description" content="Manage travel sales, operations and accounting with Sembark. Get 1-click quotation, smart operations and accounting, and all you need for a modern travel business.">
+    <meta property="og:image:secure_url" content="8a402e6d9a36909dd8e5a7f62db2d6fc">
+    <meta property="og:image" content="8a402e6d9a36909dd8e5a7f62db2d6fc">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="Sembark">
+    <meta property="og:url" content="https://sembark.com">
+    <meta property="og:type" content="website">
+    <meta property="fb:app_id" content="596194027695907">
+    <meta name="theme-color" content="#1A202C">
+    <meta name="apple-mobile-web-app-title" content="Sembark">
+    <meta name="application-name" content="Sembark">
+    <link rel="stylesheet" href="4acc89a3f88ade08684c58caf5f35300">
+    <script src="d7bc5059340ac67a24306bdee2a813f8" defer=""></script>
+    <meta name="google-analytics" content="UA-169640999-1">
+    <!-- Google Analytics -->
+    <script data-parcel-key="30d5c827b2228eca5102c19ba2d573ba">
+      (window.ga =
+        window.ga ||
+        function () {
+          (ga.q = ga.q || []).push(arguments);
+        }),
+        (ga.l = +new Date()),
+        ga("create", "UA-169640999-1", "auto"),
+        ga("set", "anonymizeIp", true),
+        ga("send", "pageview");
+    </script>
+    <script async="" src="26a559086b8a3e83fa1e2a8dc4bad9ea"></script>
+  </head>
+  <body class="font-sans">
+    
+    <div class="max-w-screen-xl mx-auto">
+      <header class="relative pt-6 px-4 sm:px-6 lg:px-8">
+        <a href="/" class="flex items-center">
+          <img src="1ce75f955fbaef8df0b14ee80f72d2c4" class="h-8 mr-2">
+          <div>
+            <h2 class="text-xl">Sembark</h2>
+          </div>
+        </a>
+      </header>
+      <div class="text-center mt-16">
+        <div class="text-green-300">
+          <svg fill="none" class="w-16 h-16 mx-auto" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" stroke="currentColor">
+            <path d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"></path>
+          </svg>
+        </div>
+        <h1 class="text-4xl my-8">
+          Thank you.. We received your request!
+        </h1>
+        <p class="text-lg mb-16 max-w-2xl mx-auto leading-relaxed text-gray-500">
+          Thank you for connecting and giving us a chance to serve you. Our
+          sales executive will contact you shortly. In the meantime, please
+          <em class="font-semibold text-gray-700">check your inbox for more details regarding the demo.</em>
+        </p>
+        <div class="mb-16">
+          <a href="/" class="text-lg font-semibold text-indigo-600 hover:text-indigo-900 transition duration-150 ease-in-out">
+            <svg fill="none" stroke-linecap="round" class="w-4 h-4 inline-block" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" stroke="currentColor">
+              <path d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            Back to our website</a>
+        </div>
+      </div>
+    </div>
+  
+    <footer>
+      <div class="max-w-screen-xl mx-auto py-16 px-4 sm:px-6 lg:py-24 lg:px-8">
+        <div class="md:flex">
+          <div class="max-w-sm mb-16">
+            <img src="1ce75f955fbaef8df0b14ee80f72d2c4" alt="Logo" class="w-16 h-16 opacity-25">
+            <p class="pt-8 text-gray-500 text-lg">
+              Helping travel businesses to grow using smart technologies.
+            </p>
+          </div>
+          <div class="md:ml-16 flex-1 mb-16">
+            <div>
+              <h2 class="uppercase text-sm text-gray-600 font-semibold tracking-wider mb-4">
+                Support
+              </h2>
+              <ul class="grid gap-4 text-gray-800 font-semibold">
+                <li>
+                  <a href="#pricing">Pricing</a>
+                </li>
+                <li>
+                  <a href="96f1781e86503e1d3cccf16f52d70268">Help & Support</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="md:ml-16 flex-1 mb-16">
+            <div>
+              <h2 class="uppercase text-sm text-gray-600 font-semibold tracking-wider mb-4">
+                Company
+              </h2>
+              <ul class="grid gap-4 text-gray-800 font-semibold">
+                <li>
+                  <a href="33b4fef3ccce7d637ed13d68fb665e5d">Blogs</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="md:ml-16 flex-1 mb-16">
+            <div>
+              <h2 class="uppercase text-sm text-gray-600 font-semibold tracking-wider mb-4">
+                Contact Us
+              </h2>
+            </div>
+            <div>
+              <svg class="w-6 h-6 inline-block mr-2 gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <title>Email</title>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+              </svg>
+              <a href="fbc664baf810dff137fca88fbe34fdcb">
+                contact@sembark.com
+              </a>
+            </div>
+            <div class="flex mt-2">
+              <div class="mr-2">
+                <svg class="w-6 h-6 inline-block text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <title>Phone Number</title>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                </svg>
+              </div>
+              <ol>
+                <li>
+                  <a href="tel:+918950392425">+91-8950392425</a>
+                </li>
+                <li class="mt-2">
+                  <a href="tel:+919005505374"> +91-9005505374 </a>
+                </li>
+              </ol>
+            </div>
+          </div>
+        </div>
+        <div class="border-t pt-8 text-gray-600 text-lg text-center">
+          &copy; 2020 - present. Sembark Tech Pvt Ltd. All rights reserved.
+        </div>
+        <div class="text-center text-gray-600 text-sm italic">
+          v1.1.4
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
+

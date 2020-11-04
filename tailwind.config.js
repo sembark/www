@@ -12,7 +12,7 @@ module.exports = {
   corePlugins: {
     animation: false,
   },
-  plugins: [require("@tailwindcss/ui")],
+  plugins: [require("@tailwindcss/ui"), require("@tailwindcss/typography")],
   future: {
     removeDeprecatedGapUtilities: true,
     purgeLayersByDefault: true,
