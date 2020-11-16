@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/sembark/www/compare/v1.2.1...v1.3.0) (2020-11-16)
+
+
+### Features
+
+* **free:** change in free plan features ([acc326d](https://github.com/sembark/www/commit/acc326d2738c677b719fb94835cea23a2e5680f6))
+
 ## [1.2.1](https://github.com/sembark/www/compare/v1.2.0...v1.2.1) (2020-11-04)
 
 
