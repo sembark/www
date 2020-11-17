@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/sembark/www/compare/v1.3.0...v1.4.0) (2020-11-17)
+
+
+### Features
+
+* **plans:** update premium plan features ([3cbf99d](https://github.com/sembark/www/commit/3cbf99dd1bb270e2466d9dcd1300a2dff5168869))
+
 # [1.3.0](https://github.com/sembark/www/compare/v1.2.1...v1.3.0) (2020-11-16)
 
 
