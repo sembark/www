@@ -13,7 +13,7 @@ publishedOn: published on
       <div class="text-center mt-16 max-w-2xl mx-auto">
         <a
           href="/blogs"
-          class="mb-2 inline-flex items-center space-x-2 text-indigo-200 font-medium"
+          class="mb-4 inline-flex items-center space-x-2 text-indigo-300 font-medium"
         >
           <svg
             fill="none"
@@ -33,19 +33,21 @@ publishedOn: published on
         >
           {{ title }}
         </h1>
-        <p class="mt-4 text-lg">{{ publishedOn }} by {{ author }}</p>
+        <p class="mt-4 text-indigo-300">{{ publishedOn }} by {{ author }}</p>
       </div>
     </div>
   </header>
   <article class="py-16 prose mx-auto max-w-2xl px-4">
     {{ content | safe }}
   </article>
-  <div class="mt-8 border-t pt-8 max-w-2xl px-4 mx-auto">
+  <div
+    class="mt-8 border-t-4 border-indigo-700 pt-8 max-w-2xl px-4 mx-auto text-indigo-200"
+  >
     <p>
-      Thank you for reading. I hope it was helpful. Follow us on
+      Thank you for reading. Follow us on
       <a
         href="https://twitter.com/{{ meta.twitterUsername }}"
-        class="text-indigo-200 font-semibold"
+        class="text-indigo-200 font-semibold underline"
         >twitter</a
       >
       for upcoming updates.
