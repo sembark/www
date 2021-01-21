@@ -1327,12 +1327,9 @@ title: Grow your Travel Business
           >Contact Us</a
         >
         <div
-          class="text-lg text-purple-200 sm:flex space-y-4 sm:space-x-8 sm:space-y-0"
+          class="text-lg text-purple-200 sm:flex space-y-4 sm:space-y-0 sm:space-x-8"
         >
-          <a
-            href="tel:{{ meta.address.phoneCall }}"
-            class="inline-flex items-center"
-          >
+          <a href="tel:{{ meta.address.phoneCall }}" class="flex items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
@@ -1345,10 +1342,7 @@ title: Grow your Travel Business
             </svg>
             {{ meta.address.phoneDisplay }}
           </a>
-          <a
-            href="mailto:{{ meta.address.email }}"
-            class="inline-flex items-center"
-          >
+          <a href="mailto:{{ meta.address.email }}" class="flex items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
@@ -1386,7 +1380,7 @@ title: Grow your Travel Business
       <div class="mt-8 pt-8 border-t-4 border-indigo-400">
         <h5 class="text-2xl mb-16">Enterprise plans available</h5>
         <div
-          class="mt-8 md:flex space-y-8 md:space-x-8 md:space-y-0 items-center text-white"
+          class="mt-8 lg:flex space-y-8 lg:space-x-8 lg:space-y-0 items-center text-white"
         >
           <a
             class="inline-block px-8 py-3 font-medium text-lg md:text-2xl rounded-lg bg-gradient-to-r from-indigo-500 to-indigo-600 shadow-lg hover:shadow-xl"
@@ -1398,7 +1392,7 @@ title: Grow your Travel Business
           >
             <a
               href="tel:{{ meta.address.phoneCall }}"
-              class="inline-flex items-center"
+              class="flex items-center"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -1412,10 +1406,7 @@ title: Grow your Travel Business
               </svg>
               {{ meta.address.phoneDisplay }}
             </a>
-            <a
-              href="mailto:{{ meta.address.email }}"
-              class="inline-flex items-center"
-            >
+            <a href="mailto:{{ meta.address.email }}" class="flex items-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 20 20"
