@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-indigo-900 text-white">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="dns-prefetch" href="https://assets.sembark.com" />
+    <link rel="dns-prefetch" href="https://rsms.com" />
+    <link rel="assets" href="https://assets.sembark.com" />
+
+    <title>{{ seo.title or title }} | {{ meta.siteName }}</title>
+    <meta
+      property="twitter:title"
+      content="{{ seo.title or title }} | {{ meta.siteName }}"
+    />
+    <meta
+      property="og:title"
+      content="{{ seo.title or title }} | {{ meta.siteName }}"
+    />
+    <meta name="description" content="{{ meta.description }}" />
+    <meta property="og:description" content="{{ meta.description }}" />
+    <meta name="twitter:description" value="{{ meta.description }}" />
+    <meta property="twitter:site" content="{{ meta.twitterUsername }}" />
+    <meta property="twitter:creator" content="{{ meta.twitterCreator }}" />
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:image:src" content="{{ meta.ogImageUrl }}" />
+    <meta property="og:image:secure_url" content="{{ meta.ogImageUrl }}" />
+    <meta property="og:image" content="{{ meta.ogImageUrl }}" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="twitter:image:width" content="1200" />
+    <meta property="twitter:image:height" content="630" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="{{ meta.siteName }}" />
+    <meta property="og:url" content="{{ meta.publicUrl }}" />
+    <meta property="og:type" content="website" />
+    <meta name="keywords" value="{{ meta.keywords }}" />
+    <meta name="theme-color" content="#1A202C" />
+    <meta name="apple-mobile-web-app-title" content="{{ meta.appName }}" />
+    <meta name="application-name" content="{{ meta.appName }}" />
+
+    <link rel="stylesheet" href="/assets/main.css" />
+    <!-- fluid icon for Mac OS desktop app -->
+    <link
+      rel="fluid-icon"
+      href="https://assets.sembark.com/images/logos/logo_512x512.png"
+      title="Sembark"
+    />
+    <link
+      rel="alternate icon"
+      class="js-site-favicon"
+      type="image/png"
+      href="https://assets.sembark.com/favicons/favicon.png"
+    />
+    <link
+      rel="icon"
+      class="js-site-favicon"
+      type="image/svg+xml"
+      href="https://assets.sembark.com/favicons/favicon.svg"
+    />
+    <link
+      rel="mask-icon"
+      href="https://assets.sembark.com/favicons/favicon.svg"
+      color="#1A202C"
+    />
+    <!-- the inner fonts -->
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+      html,
+      body {
+        font-family: "Inter var", sans-serif !important;
+      }
+    </style>
+    <script
+      src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js"
+      defer
+    ></script>
+    <meta name="google-analytics" content="{{ meta.gaId }}" />
+    <!-- Google Analytics -->
+    <script>
+      (window.ga =
+        window.ga ||
+        function () {
+          (ga.q = ga.q || []).push(arguments);
+        }),
+        (ga.l = +new Date()),
+        ga("create", "{{ gaId }}", "auto"),
+        ga("set", "anonymizeIp", true),
+        ga("send", "pageview");
+    </script>
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
+  </head>
+  <body class="relative">
+    {{ content | safe }}
+    <footer
+      id="footer"
+      class="w-full bg-gradient-to-b from-indigo-800 to-indigo-900 text-white"
+    >
+      <section id="footer" class="container px-4 mx-auto py-24">
+        <div class="lg:flex space-y-12 lg:space-x-16 lg:space-y-0">
+          <div>
+            <a href="/#main">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 16 16"
+                class="w-16 h-16"
+                fill="currentColor"
+              >
+                <path
+                  d="M8 16a8 8 0 10-4.465-1.361c.41.276 0-.846.715-2.639.534-1.34 1.81-4.466 1.825-5.205.01-.534-.193-.994-.4-1.466-.046-.101-.09-.204-.134-.307-.391.768-1.764 1.929-2.69 1.743-1.285-.256-.419-1.777.116-2.359l.18-.201c.498-.563 1.191-1.347 1.836-1.076.312.13 1.09.701 1.707 1.19 0 0-.018-.047-.028-.079-.282-.87-.67-1.896 1.14-2.047.46-.04 2.776-.023 2.275.854-.202.352-1.139.45-1.863.526-.305.032-.573.06-.732.101.076.42.121.93.128 1.396 1.074.123 1.755.032 2.557-.075.399-.053.827-.11 1.348-.147C12.035 4.81 12.75 4.75 13 5c.165.165.204.575.145.934-.247 1.491-1.68 2.794-2.812 3.823-.191.174-.374.34-.54.498-1.642 1.55-2.523 3.144-2.434 5.127.01.189-.011.607.225.607.138.007.276.011.416.011z"
+                />
+              </svg>
+            </a>
+            <p class="text-indigo-200 mt-4 text-lg max-w-auto lg:max-w-sm">
+              Helping travel businesses to grow with smart technologies.
+            </p>
+            <div class="mt-4 text-sm">
+              &copy; 2019-present • Sembark • All Rights Reserved. v{{
+                meta.version
+              }}
+            </div>
+          </div>
+          <div class="flex-1 grid sm:grid-cols-2 gap-8">
+            <div>
+              <div>
+                <h2
+                  class="uppercase text-sm text-indigo-400 font-semibold tracking-wider mb-4"
+                >
+                  Company
+                </h2>
+                <ul class="grid gap-4 text-indigo-100 font-medium">
+                  <li>
+                    <a href="#pricing">Pricing</a>
+                  </li>
+                  <li>
+                    <a href="https://docs.sembark.com">Help & Support</a>
+                  </li>
+                  <li>
+                    <a href="/blogs">Blogs</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div>
+              <div>
+                <h2
+                  class="uppercase text-sm text-indigo-400 font-semibold tracking-wider mb-4"
+                >
+                  Contact Us
+                </h2>
+              </div>
+              <ul class="grid gap-4 text-indigo-100 font-medium">
+                <li>
+                  <svg
+                    class="w-6 h-6 inline-block mr-2 text-indigo-300"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <title>Email</title>
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                    ></path>
+                  </svg>
+                  <a href="mailto:{{ meta.address.email }}">
+                    {{ meta.address.email }}
+                  </a>
+                </li>
+                <li class="flex">
+                  <div class="mr-2">
+                    <svg
+                      class="w-6 h-6 inline-block text-indigo-300"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <title>Phone Number</title>
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                      ></path>
+                    </svg>
+                  </div>
+                  <ol>
+                    <li>
+                      <a href="tel:{{ meta.address.phoneCall }}">{{
+                        meta.address.phoneDisplay
+                      }}</a>
+                    </li>
+                  </ol>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+    </footer>
+    <script
+      src="https://assets.sembark.com/js/themed-favicon.js"
+      defer
+    ></script>
+  </body>
+</html>
