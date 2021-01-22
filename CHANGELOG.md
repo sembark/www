@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/sembark/www/compare/v1.4.0...v1.5.0) (2021-01-22)
+
+
+### Features
+
+* **phone:** add secondary phone number and improve secondary title ([d270042](https://github.com/sembark/www/commit/d27004288edb59f27b80b724d7f7e4217facfb1f))
+
 # [1.4.0](https://github.com/sembark/www/compare/v1.3.0...v1.4.0) (2020-11-17)
 
 
