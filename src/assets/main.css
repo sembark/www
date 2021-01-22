@@ -7,3 +7,7 @@
     @apply block w-full rounded-md bg-indigo-200 border-transparent focus:border-indigo-500 focus:bg-white focus:ring-0;
   }
 }
+
+[id] {
+  scroll-margin-top: 72px;
+}

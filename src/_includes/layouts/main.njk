@@ -7,7 +7,7 @@ layout: base
     <div class="container mx-auto py-4 px-4">
       <nav x-data="{ open: false }">
         <div class="flex space-x-4 items-center">
-          <h1>
+          <h1 class="flex items-center">
             <a href="/#main" class="inline-flex items-center space-x-3 text-lg">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -25,7 +25,7 @@ layout: base
           <div
             class="flex-1 flex justify-end items-center font-medium tracking-wider"
           >
-            <ul class="flex items-center space-x-4">
+            <ul class="flex items-center md:space-x-2 lg:space-x-4">
               <li class="hidden sm:block">
                 <a href="/#features" class="px-4">Features</a>
               </li>
@@ -33,14 +33,31 @@ layout: base
                 <a href="/#pricing" class="px-4">Pricing</a>
               </li>
               <li class="hidden sm:block">
-                <a href="https://app.sembark.com/login" class="px-4">Login</a>
-              </li>
-              <li class="hidden sm:block">
                 <a
                   href="/#contact-us"
                   class="px-4 py-2 bg-gradient-to-r from-indigo-500 to-indigo-600 rounded-lg shadow-lg"
                   >Contact Us</a
                 >
+              </li>
+              <li class="hidden sm:block">
+                <a
+                  href="https://app.sembark.com/login"
+                  class="px-4 inline-flex space-x-2 items-center opacity-80"
+                >
+                  <span>Login</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    class="w-4 h-4"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </a>
               </li>
               {# MOBILE MENU #}
               <li class="flex items-center sm:hidden">
@@ -99,7 +116,7 @@ layout: base
             <li>
               <a
                 href="/#features"
-                class="text-gray-300 hover:bg-indigo-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                class="text-indigo-100 hover:bg-indigo-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                 >Features</a
               >
             </li>
@@ -107,16 +124,36 @@ layout: base
             <li>
               <a
                 href="/#pricing"
-                class="text-gray-300 hover:bg-indigo-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                class="text-indigo-100 hover:bg-indigo-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                 >Pricing</a
               >
             </li>
             <li>
               <a
                 href="/#contact-us"
-                class="text-gray-300 hover:bg-indigo-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                class="text-indigo-100 hover:bg-indigo-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                 >Contact Us</a
               >
+            </li>
+            <li class="border-t-4 border-indigo-700">
+              <a
+                href="https://app.sembark.com"
+                class="text-indigo-100 hover:bg-indigo-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium flex items-center space-x-2 mt-2"
+              >
+                <span>Login</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  class="w-4 h-4"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </a>
             </li>
           </ul>
         </div>
