@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/sembark/www/compare/v1.5.0...v1.5.1) (2021-01-22)
+
+
+### Bug Fixes
+
+* **link:** footer link not correct for pricing ([8bfbda1](https://github.com/sembark/www/commit/8bfbda10e77827e8b46cefca904803a7de2db194))
+
 # [1.5.0](https://github.com/sembark/www/compare/v1.4.0...v1.5.0) (2021-01-22)
 
 
