@@ -1,3 +1,10 @@
+## [1.5.2](https://github.com/sembark/www/compare/v1.5.1...v1.5.2) (2021-01-22)
+
+
+### Bug Fixes
+
+* **colors:** remove transparency from header ([6f1eead](https://github.com/sembark/www/commit/6f1eead8cf4794de947f84c3dc469b8931decd2b))
+
 ## [1.5.1](https://github.com/sembark/www/compare/v1.5.0...v1.5.1) (2021-01-22)
 
 
