@@ -26,6 +26,8 @@ module.exports = {
     zip: "302012",
     phoneDisplay: "+91-9005505374",
     phoneCall: "+919005505374",
+    secondaryPhoneDisplay: "8950392425",
+    secondaryPhoneCall: "+918950392425",
     email: "contact@sembark.com",
     landmark: "Akshardham Temple",
     country: "India",
