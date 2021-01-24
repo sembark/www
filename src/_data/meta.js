@@ -16,7 +16,7 @@ module.exports = {
   ogImageUrl,
   twitterCreator: "@sudhirmith",
   twitterUsername: "@SembarkTech",
-  gaId: "UA-169640999-1",
+  gaMeasurementId: "G-2DEQQHZL6V",
   publicUrl: "https://sembark.com",
   address: {
     name: "Sembark Tech. Pvt. Ltd",

@@ -77,20 +77,24 @@
       src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js"
       defer
     ></script>
-    <meta name="google-analytics" content="{{ meta.gaId }}" />
-    <!-- Google Analytics -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id={{
+        meta.gaMeasurementId
+      }}"
+    ></script>
     <script>
-      (window.ga =
-        window.ga ||
-        function () {
-          (ga.q = ga.q || []).push(arguments);
-        }),
-        (ga.l = +new Date()),
-        ga("create", "{{ gaId }}", "auto"),
-        ga("set", "anonymizeIp", true),
-        ga("send", "pageview");
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "{{ meta.gaMeasurementId }}", {
+        cookie_domain: "sembark.com",
+        cookie_flags: "SameSite=None;Secure",
+      });
     </script>
-    <script async src="https://www.google-analytics.com/analytics.js"></script>
   </head>
   <body class="relative">
     {{ content | safe }}
