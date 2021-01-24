@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/sembark/www/compare/v1.5.2...v1.6.0) (2021-01-24)
+
+
+### Features
+
+* **analytics:** add ga tags ([9bf01f7](https://github.com/sembark/www/commit/9bf01f7cf91a3f4c396e38137d068986a6abf36a))
+
 ## [1.5.2](https://github.com/sembark/www/compare/v1.5.1...v1.5.2) (2021-01-22)
 
 
