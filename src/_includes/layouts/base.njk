@@ -94,6 +94,23 @@
         cookie_domain: "sembark.com",
         cookie_flags: "SameSite=None;Secure",
       });
+      var locationSearch = location.search.substring(1);
+      function parseSearch(search) {
+        try {
+          return JSON.parse(
+            '{"' + search.replace(/&/g, '","').replace(/=/g, '":"') + '"}',
+            function (key, value) {
+              return key === "" ? value : decodeURIComponent(value);
+            }
+          );
+        } catch (e) {
+          return {};
+        }
+      }
+      var searchQueryObject = parseSearch(locationSearch);
+      if (searchQueryObject.ref) {
+        gtag("event", "ref_from_quote_assets", searchQueryObject.ref);
+      }
     </script>
   </head>
   <body class="relative">
