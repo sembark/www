@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/sembark/www/compare/v1.6.0...v1.7.0) (2021-02-06)
+
+
+### Features
+
+* **analytics:** track quote document refers ([338c6ab](https://github.com/sembark/www/commit/338c6abe443140d9de2323c56141798f6c2366db))
+
 # [1.6.0](https://github.com/sembark/www/compare/v1.5.2...v1.6.0) (2021-01-24)
 
 
