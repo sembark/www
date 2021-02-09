@@ -1,6 +1,8 @@
 const appVersion = process.env.npm_package_version;
+const appEnv = process.env.NODE_ENV;
 const ogImageUrl = `https://assets.sembark.com/images/og-image.png?v=${appVersion}`;
 module.exports = {
+  appEnv,
   siteURL: process.env.URL || "http://localhost:8080",
   version: appVersion,
   appName: "Sembark",
