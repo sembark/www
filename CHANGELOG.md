@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/sembark/www/compare/v1.7.0...v1.8.0) (2021-03-18)
+
+
+### Features
+
+* **sitemap:** add app link ([283bee1](https://github.com/sembark/www/commit/283bee1081c0de72ba0e3261e5998522f4f4aa98))
+
 # [1.7.0](https://github.com/sembark/www/compare/v1.6.0...v1.7.0) (2021-02-06)
 
 
