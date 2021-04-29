@@ -1,3 +1,10 @@
+## [1.8.1](https://github.com/sembark/www/compare/v1.8.0...v1.8.1) (2021-04-29)
+
+
+### Bug Fixes
+
+* **title:** improve title ([ffba4c8](https://github.com/sembark/www/commit/ffba4c8878aa3f7ed1ec3c6493f77534e000b422))
+
 # [1.8.0](https://github.com/sembark/www/compare/v1.7.0...v1.8.0) (2021-03-18)
 
 
