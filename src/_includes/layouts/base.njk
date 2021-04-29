@@ -6,15 +6,14 @@
     <link rel="dns-prefetch" href="https://assets.sembark.com" />
     <link rel="dns-prefetch" href="https://rsms.com" />
     <link rel="assets" href="https://assets.sembark.com" />
-
-    <title>{{ seo.title or title }} | {{ meta.siteName }}</title>
+    <title>{{ meta.appName }} - {{ seo.title or title }}</title>
     <meta
       property="twitter:title"
-      content="{{ seo.title or title }} | {{ meta.siteName }}"
+      content="{{ meta.appName }} - {{ seo.title or title }}"
     />
     <meta
       property="og:title"
-      content="{{ seo.title or title }} | {{ meta.siteName }}"
+      content="{{ meta.appName }} - {{ seo.title or title }}"
     />
     <meta name="description" content="{{ meta.description }}" />
     <meta property="og:description" content="{{ meta.description }}" />
