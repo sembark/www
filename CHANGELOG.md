@@ -1,3 +1,10 @@
+## [1.8.2](https://github.com/sembark/www/compare/v1.8.1...v1.8.2) (2021-05-01)
+
+
+### Bug Fixes
+
+* **css:** add version suffix to links ([21b0161](https://github.com/sembark/www/commit/21b01614baa068edb51ff0216490733a49446324))
+
 ## [1.8.1](https://github.com/sembark/www/compare/v1.8.0...v1.8.1) (2021-04-29)
 
 
