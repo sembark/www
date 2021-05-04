@@ -1,0 +1,29 @@
+---
+layout: covidDistrictSlots
+pagination:
+  data: covid.districts
+  size: 1
+  alias: district
+permalink: "covid/vaccination-slots-in-{{ district.slug }}/"
+---
+
+<h1>
+  Check for vaccination slots availability in {{ district.district_name }},
+  {{ district.state.state_name }}
+</h1>
+
+<script>
+  function winLoad(callback) {
+    if (document.readyState === "complete") {
+      callback();
+    } else {
+      window.addEventListener("load", callback);
+    }
+  }
+
+  winLoad(function () {
+    window.location =
+      window.location.origin +
+      "/covid/vaccination-slots-availability?district_id={{ district.district_id }}&minAgeLimit=18&utm_source=direct&utm_medium=site&utm_campaign=covid-vaccination";
+  });
+</script>

@@ -6,31 +6,17 @@
     <link rel="dns-prefetch" href="https://assets.sembark.com" />
     <link rel="dns-prefetch" href="https://rsms.com" />
     <link rel="assets" href="https://assets.sembark.com" />
-    {% if seo.title %}
-    <title>{{ seo.title }}</title>
-    {% else %}
-    <title>{{ meta.appName }} - {{ title }}</title>
-    {% endif %}
-    <meta
-      property="twitter:title"
-      content="{{ meta.appName }} - {{ seo.title or title }}"
-    />
-    <meta
-      property="og:title"
-      content="{{ meta.appName }} - {{ seo.title or title }}"
-    />
-    <meta
-      name="description"
-      content="{{ seo.description or description or  meta.description }}"
-    />
-    <meta
-      property="og:description"
-      content="{{ seo.description or description or meta.description }}"
-    />
-    <meta
-      name="twitter:description"
-      value="{{ seo.description or description or meta.description }}"
-    />
+    {% set title = "Check vaccination slots availability in " +
+    district.district_name + ", " + district.state.state_name %} {% set
+    description = "Search for available slots in " + district.district_name + ",
+    " + district.state.state_name + " and book an appointment to get vaccinated"
+    %}
+    <title>{{ title }}</title>
+    <meta property="twitter:title" content="{{ title }}" />
+    <meta property="og:title" content="{{ title }}" />
+    <meta name="description" content="{{ description }}" />
+    <meta property="og:description" content="{{ description }}" />
+    <meta name="twitter:description" value="{{ description }}" />
     <meta property="twitter:site" content="{{ meta.twitterUsername }}" />
     <meta property="twitter:creator" content="{{ meta.twitterCreator }}" />
     <meta property="twitter:card" content="summary_large_image" />
@@ -49,8 +35,6 @@
     <meta name="theme-color" content="#1A202C" />
     <meta name="apple-mobile-web-app-title" content="{{ meta.appName }}" />
     <meta name="application-name" content="{{ meta.appName }}" />
-
-    <link rel="stylesheet" href="/assets/main.css?v={{ meta.version }}" />
 
     <!-- fluid icon for Mac OS desktop app -->
     <link
@@ -75,21 +59,6 @@
       href="https://assets.sembark.com/favicons/favicon.svg"
       color="#1A202C"
     />
-    <!-- the inner fonts -->
-    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
-    <style>
-      html {
-        scroll-behavior: smooth;
-      }
-      html,
-      body {
-        font-family: "Inter var", sans-serif !important;
-      }
-    </style>
-    <script
-      src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js"
-      defer
-    ></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script
       async
