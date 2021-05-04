@@ -1,21 +1,18 @@
-// const got = require("got");
 const fetch = require("node-fetch");
 
 async function fetchStates() {
   const resp = await fetch(
     "https://cdn-api.co-vin.in/api/v2/admin/location/states"
   );
+  console.log(await resp.text());
   const json = await resp.json();
   return json.states;
 }
 
 async function fetchDistrictsForState(state) {
-  const resp = await got(
+  const resp = await fetch(
     "https://cdn-api.co-vin.in/api/v2/admin/location/districts/" +
-      state.state_id,
-    {
-      responseType: "json",
-    }
+      state.state_id
   );
   const json = await resp.json();
   return json.districts.map((d) => ({
