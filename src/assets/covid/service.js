@@ -1,7 +1,7 @@
 setTimeout(function () {
   self.registration.showNotification("Subscribed to slots updates", {
     body: "You will receive a notification when there are slots available.",
-    image: "https://assets.sembark.com/images/logos/logo_96x96.png",
+    icon: "https://assets.sembark.com/images/logos/logo_96x96.png",
   });
 }, 1000);
 
@@ -12,14 +12,14 @@ function scheduleSlotsAvailability(after) {
     clearTimeout(timer);
   }
   timer = setTimeout(function () {
+    timer = undefined;
     checkForSlotsAvailability();
   }, after);
 }
 
-scheduleSlotsAvailability(1000);
+scheduleSlotsAvailability(5000);
 
 function checkForSlotsAvailability() {
-  clearTimeout(timer);
   return getSubscriptions().then((subscriptions) => {
     subscriptions.map(function (sub) {
       const query = JSON.parse(sub.id);
@@ -47,7 +47,7 @@ function checkForSlotsAvailability() {
                     },
                   ],
                   tag: sub.id,
-                  image:
+                  icon:
                     "https://assets.sembark.com/images/logos/logo_96x96.png",
                   data: {
                     link: `/covid/vaccination-slots-availability/?${
@@ -65,7 +65,7 @@ function checkForSlotsAvailability() {
               console.log("Rescheduling availability check...");
               // no slots available
               // after 30 minutes
-              scheduleSlotsAvailability(1000 * 60 * 1);
+              scheduleSlotsAvailability(1000 * 60 * 30);
             }
           })
           .catch(function (e) {
@@ -82,7 +82,7 @@ self.addEventListener("notificationclick", function (event) {
     ? event.notification.data.link
     : "/covid/vaccination-slots-availability";
   event.notification.close();
-  if (!link || !event.action) return;
+  if (!link || !event.notification.actions.length) return;
 
   // This looks to see if the current is already open and
   // focuses if it is
@@ -92,7 +92,6 @@ self.addEventListener("notificationclick", function (event) {
         type: "window",
       })
       .then(function (clientList) {
-        console.log(clientList);
         for (var i = 0; i < clientList.length; i++) {
           var client = clientList[i];
           if (client.url == link && "focus" in client) return client.focus();
@@ -102,20 +101,20 @@ self.addEventListener("notificationclick", function (event) {
   );
 
   switch (event.action) {
-    case "view":
-      clearTimeout(timer);
-      // there were some slots available, client clicked on view
-      // reschedule the check
-      console.log(
-        "Notification clicked on view. Rescheduling slots availability check"
-      );
-      // after 30 minutes
-      scheduleSlotsAvailability(1000 * 60 * 1);
-      break;
     case "unsubscribe":
       removeAllSubscriptions();
       self.registration.unregister();
       console.log("unsubscribe from this");
+      break;
+    default:
+      clearTimeout(timer);
+      // there were some slots available, client clicked on view / simply  the notification
+      // reschedule the check
+      console.log(
+        "Notification clicked. Rescheduling slots availability check"
+      );
+      // after 30 minutes
+      scheduleSlotsAvailability(1000 * 60 * 30);
       break;
   }
 });
@@ -126,7 +125,8 @@ self.addEventListener("notificationclose", function (event) {
   // there were some slots available, client closed the notification without any action
   // re-register a call to check for availability
   // after 30 minutes
-  scheduleSlotsAvailability(1000 * 60 * 1);
+  console.log("Notification closed. Rescheduling slots availability check");
+  scheduleSlotsAvailability(1000 * 60 * 30);
 });
 
 function notify(title, options) {
