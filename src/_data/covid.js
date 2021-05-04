@@ -1,13 +1,11 @@
-const got = require("got");
+// const got = require("got");
+const fetch = require("node-fetch");
 
 async function fetchStates() {
-  const resp = await got(
-    "https://cdn-api.co-vin.in/api/v2/admin/location/states",
-    {
-      responseType: "json",
-    }
+  const resp = await fetch(
+    "https://cdn-api.co-vin.in/api/v2/admin/location/states"
   );
-  const json = resp.body;
+  const json = await resp.json();
   return json.states;
 }
 
@@ -19,7 +17,7 @@ async function fetchDistrictsForState(state) {
       responseType: "json",
     }
   );
-  const json = resp.body;
+  const json = await resp.json();
   return json.districts.map((d) => ({
     ...d,
     state,
