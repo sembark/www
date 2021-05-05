@@ -32,7 +32,7 @@ module.exports = {
   ogImageUrl,
   twitterCreator: "@sudhirmith",
   twitterUsername: "@SembarkTech",
-  gaMeasurementId: "G-2DEQQHZL6V",
+  gaMeasurementId: process.env.APP_GA_MEASUREMENT_ID,
   address: {
     name: "Sembark Tech. Pvt. Ltd",
     street: "Vaisali Nagar",

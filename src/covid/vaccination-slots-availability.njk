@@ -1,5 +1,6 @@
 ---
 layout: base
+ogImage: /covid/og_image.png
 seo:
   title: Check your nearest Vaccination Center and  Slots Availability
 description: Search for Vaccination center and Slots Availability. Get Vaccinated and Help India in making Covid Free. Stay Safe. Stay Healthy.
@@ -658,6 +659,12 @@ sitemap:
           query.district_id = m.query.district_id;
         }
         if (!query.pincode && !query.district_id) return;
+        gtag("event", "covid_vaccination_search", {
+          using: m.searchUsing,
+          pincode: query.pincode,
+          district_id: query.district_id,
+          min_age_limit: m.minAgeLimit,
+        });
         m.updateHasSubscribedIfNecessary();
         m.isSubmitting = true;
         m.error = null;
@@ -697,6 +704,9 @@ sitemap:
       },
       handleInit() {
         const m = this;
+        if (locationQuery.viaNotification) {
+          gtag("event", "covid_notification_viewed");
+        }
         if (
           locationQuery &&
           (locationQuery.pincode || locationQuery.district_id)
@@ -738,6 +748,7 @@ sitemap:
         const m = this;
         m.hasSubscribed = false;
         m.totalSubscriptionCount -= 1;
+        gtag("event", "covid_notification_unsubscribed");
         if (!m.totalSubscriptionCount && activeServiceWorkerRegistration) {
           activeServiceWorkerRegistration.unregister();
         }
@@ -747,6 +758,7 @@ sitemap:
         const m = this;
         window.Notification.requestPermission().then(function (permission) {
           if (permission !== "granted") {
+            gtag("event", "covid_notification_permission_denied");
             alert("Please grant permission to get notified regarding updates.");
             setTimeout(function () {
               m.hasSubscribed = false;
@@ -754,6 +766,7 @@ sitemap:
             m.handleUnsubscribeFromAll();
             return;
           }
+          gtag("event", "covid_notification_subscribed");
           storage.add(queryString);
           m.hasSubscribed = true;
           m.totalSubscriptionCount += 1;
@@ -766,11 +779,27 @@ sitemap:
                   "Subscribed to slots updates",
                   {
                     body:
-                      "You will receive a notification when there are slots available.",
+                      "You will receive notification(s) for slots availability in this area.",
                     icon:
                       "https://assets.sembark.com/images/logos/logo_96x96.png",
                   }
                 );
+                // get the tracking id
+                const cookie = document.cookie;
+                if (cookie) {
+                  const ga = document.cookie
+                    .split(";")
+                    .map((s) => s.trim().split("="))
+                    .filter((item) => item[0] == "_ga")[0];
+                  if (ga) {
+                    const cid = ga[1];
+                    // send it to service worker
+                    activeServiceWorkerRegistration.active.postMessage({
+                      type: "gcid",
+                      value: cid,
+                    });
+                  }
+                }
               }, 1000);
             });
           }
@@ -778,6 +807,9 @@ sitemap:
       },
       handleUnsubscribeFromAll() {
         const m = this;
+        if (m.hasSubscribed) {
+          gtag("event", "covid_notification_unsubscribed_all");
+        }
         m.hasSubscribed = false;
         m.totalSubscriptionCount = 0;
         if (activeServiceWorkerRegistration) {

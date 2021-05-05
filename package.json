@@ -14,7 +14,7 @@
     "clean": "rimraf dist",
     "dev_eleventy": "eleventy --serve",
     "dev_postcss": "postcss src/assets/main.css -o dist/assets/main.css --watch",
-    "dev": "NODE_ENV=development npm-run-all clean --parallel dev_* --print-label",
+    "dev": "NODE_ENV=development env-cmd -f ./.env.development npm-run-all clean --parallel dev_* --print-label",
     "build_eleventy": "ELEVENTY_ENV=production eleventy",
     "build_postcss": "NODE_ENV=production postcss src/assets/main.css -o dist/assets/main.css",
     "build": "run-s clean build_* --print-label",

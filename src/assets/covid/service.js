@@ -1,4 +1,7 @@
 let timer;
+let gcid = `GA1.2.${parseInt(Math.random() * 1000000000)}${parseInt(
+  Math.random() * 1000000000
+)}`;
 
 function scheduleSlotsAvailability(after) {
   if (timer) {
@@ -9,6 +12,15 @@ function scheduleSlotsAvailability(after) {
     checkForSlotsAvailability();
   }, after);
 }
+
+// Receive the messages
+self.addEventListener("message", (event) => {
+  switch (event.data.type) {
+    case "gcid":
+      gcid = event.data.value;
+      break;
+  }
+});
 
 scheduleSlotsAvailability(5000);
 
@@ -49,7 +61,7 @@ function checkForSlotsAvailability() {
                       query.district_id
                         ? `district_id=${query.district_id}`
                         : ``
-                    }&minAgeLimit=45`,
+                    }&minAgeLimit=45&viaNotification=1`,
                   },
                 }
               );
@@ -57,8 +69,8 @@ function checkForSlotsAvailability() {
               console.log("No slots available till " + new Date());
               console.log("Rescheduling availability check...");
               // no slots available
-              // after 30 minutes
-              scheduleSlotsAvailability(1000 * 60 * 30);
+              // after 5 minutes
+              scheduleSlotsAvailability(1000 * 60 * 5);
             }
           })
           .catch(function (e) {
@@ -90,9 +102,16 @@ self.addEventListener("notificationclick", function (event) {
 
   switch (event.action) {
     case "unsubscribe":
-      removeAllSubscriptions();
-      self.registration.unregister();
-      console.log("unsubscribe from this");
+      console.log("unsubscribe from " + event.notification.tag);
+      removeSubscription(event.notification.tag).then(() => {
+        getSubscriptions().then((subscriptions) => {
+          if (!subscriptions.length) {
+            console.log("No subscriptions left, unregister service provider");
+            self.registration.unregister();
+          }
+        });
+      });
+      reportToGA("covid_notification_clicked", "unsubscribe");
       break;
     case "retry_now":
       clearTimeout(timer);
@@ -100,6 +119,7 @@ self.addEventListener("notificationclick", function (event) {
       // reschedule the check
       console.log("Refresh the slots availability");
       scheduleSlotsAvailability(1000);
+      reportToGA("covid_notification_clicked", "retry_now");
       break;
     default:
       event.waitUntil(openOrFocusLink(link));
@@ -109,8 +129,9 @@ self.addEventListener("notificationclick", function (event) {
       console.log(
         "Notification clicked. Rescheduling slots availability check"
       );
-      // after 30 minutes
-      scheduleSlotsAvailability(1000 * 60 * 30);
+      // after 5 minutes
+      scheduleSlotsAvailability(1000 * 60 * 5);
+      reportToGA("covid_notification_clicked", "view_or_others");
       break;
   }
 });
@@ -118,15 +139,17 @@ self.addEventListener("notificationclick", function (event) {
 self.addEventListener("notificationclose", function (event) {
   console.log("On notification close: ", event.notification);
   if (!event.notification.actions.length) return;
+  reportToGA("covid_notification_closed", event.notification.title);
   // there were some slots available, client closed the notification without any action
   // re-register a call to check for availability
-  // after 30 minutes
   console.log("Notification closed. Rescheduling slots availability check");
-  scheduleSlotsAvailability(1000 * 60 * 30);
+  // after 5 minutes
+  scheduleSlotsAvailability(1000 * 60 * 5);
 });
 
 function notify(title, options) {
   if (self.registration.active) {
+    reportToGA("covid_notification_shown", title);
     self.registration.showNotification(
       title,
       Object.assign({}, options, {
@@ -275,5 +298,46 @@ function removeAllSubscriptions() {
         db.createObjectStore("subscriptions", { keyPath: "id" }); // create it
       }
     };
+  });
+}
+
+function removeSubscription(subscription) {
+  return new Promise((resolve) => {
+    let db;
+    const request = self.indexedDB.open("covid", 1);
+    request.onsuccess = function () {
+      db = request.result;
+      db.transaction("subscriptions", "readwrite")
+        .objectStore("subscriptions")
+        .delete(subscription);
+      setTimeout(() => {
+        resolve();
+      }, 300);
+    };
+    // create/upgrade the database without version checks
+    request.onupgradeneeded = function () {
+      let db = request.result;
+      if (!db.objectStoreNames.contains("subscriptions")) {
+        // if there's no "books" store
+        db.createObjectStore("subscriptions", { keyPath: "id" }); // create it
+      }
+    };
+  });
+}
+
+function reportToGA(eventCategory, eventAction) {
+  console.log(location.hostname);
+  if (location.hostname !== "sembark.com") return;
+  fetch("https://www.google-analytics.com/collect", {
+    method: "post",
+    body: JSON.stringify({
+      tid: "G-2DEQQHZL6V",
+      cid: gcid,
+      v: 1, // Version Number
+      t: "event", // Hit Type
+      ec: eventCategory, // Event Category
+      ea: eventAction, // Event Action
+      el: "covid-serviceworker", // Event Label
+    }),
   });
 }
