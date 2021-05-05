@@ -1,10 +1,3 @@
-setTimeout(function () {
-  self.registration.showNotification("Subscribed to slots updates", {
-    body: "You will receive a notification when there are slots available.",
-    icon: "https://assets.sembark.com/images/logos/logo_96x96.png",
-  });
-}, 1000);
-
 let timer;
 
 function scheduleSlotsAvailability(after) {
@@ -47,10 +40,10 @@ function checkForSlotsAvailability() {
                     },
                   ],
                   tag: sub.id,
-                  icon:
-                    "https://assets.sembark.com/images/logos/logo_96x96.png",
                   data: {
-                    link: `/covid/vaccination-slots-availability/?${
+                    link: `${
+                      location.origin
+                    }/covid/vaccination-slots-availability/?${
                       query.pincode ? `pincode=${query.pincode}` : ``
                     }${
                       query.district_id
@@ -69,7 +62,18 @@ function checkForSlotsAvailability() {
             }
           })
           .catch(function (e) {
-            console.error(e);
+            // Something went wrong
+            notify("Failed to refresh vaccination slots availability", {
+              body: `Error: ${
+                e.message || "Network Issue"
+              }. Please check that you have a working internet connection.`,
+              actions: [
+                {
+                  action: "retry_now",
+                  title: "Retry Now",
+                },
+              ],
+            });
           });
       }
     });
@@ -80,25 +84,9 @@ self.addEventListener("notificationclick", function (event) {
   console.log("On notification click: ", event.notification);
   const link = event.notification.data
     ? event.notification.data.link
-    : "/covid/vaccination-slots-availability";
+    : undefined;
   event.notification.close();
   if (!link || !event.notification.actions.length) return;
-
-  // This looks to see if the current is already open and
-  // focuses if it is
-  event.waitUntil(
-    clients
-      .matchAll({
-        type: "window",
-      })
-      .then(function (clientList) {
-        for (var i = 0; i < clientList.length; i++) {
-          var client = clientList[i];
-          if (client.url == link && "focus" in client) return client.focus();
-        }
-        if (clients.openWindow) return clients.openWindow(link || "/");
-      })
-  );
 
   switch (event.action) {
     case "unsubscribe":
@@ -106,7 +94,15 @@ self.addEventListener("notificationclick", function (event) {
       self.registration.unregister();
       console.log("unsubscribe from this");
       break;
+    case "retry_now":
+      clearTimeout(timer);
+      // there were some slots available, client clicked on view / simply  the notification
+      // reschedule the check
+      console.log("Refresh the slots availability");
+      scheduleSlotsAvailability(1000);
+      break;
     default:
+      event.waitUntil(openOrFocusLink(link));
       clearTimeout(timer);
       // there were some slots available, client clicked on view / simply  the notification
       // reschedule the check
@@ -131,7 +127,12 @@ self.addEventListener("notificationclose", function (event) {
 
 function notify(title, options) {
   if (self.registration.active) {
-    self.registration.showNotification(title, options);
+    self.registration.showNotification(
+      title,
+      Object.assign({}, options, {
+        icon: "https://assets.sembark.com/images/logos/logo_96x96.png",
+      })
+    );
   }
 }
 
@@ -196,6 +197,23 @@ function fetchSessions(query) {
         }
         return true;
       });
+    });
+}
+
+function openOrFocusLink(link) {
+  // This looks to see if the current is already open and
+  // focuses if it is
+  return clients
+    .matchAll({
+      includeUncontrolled: true,
+      type: "window",
+    })
+    .then(function (clientList) {
+      for (let i = 0; i < clientList.length; i++) {
+        const client = clientList[i];
+        if (client.url == link && "focus" in client) return client.focus();
+      }
+      if (clients.openWindow) return clients.openWindow(link || "/");
     });
 }
 

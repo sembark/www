@@ -17,7 +17,9 @@ sitemap:
     <div class="px-6">
       <h1 class="text-lg font-medium">
         <a
-          href="https://sembark.com/?utm_source=direct&utm_medium=site&utm_campaign=covid-vaccination"
+          href="{{
+            meta.publicUrl
+          }}/?utm_source=direct&utm_medium=site&utm_campaign=covid-vaccination"
           class="inline-flex items-center space-x-3 text-lg"
         >
           <svg
@@ -243,27 +245,50 @@ sitemap:
                     x-if="!hasSubscribed && notificationsSupportedByBrowser"
                   >
                     <div>
-                      <p class="text-sm mt-2">
-                        Please select bellow checkbox to get notified on
-                        updates.
-                      </p>
+                      <template x-if="!hasBlockedNotifications">
+                        <p class="text-sm mt-2">
+                          Please select bellow checkbox to get notified on
+                          updates.
+                        </p>
+                      </template>
                       <div class="mb-8 mt-8">
                         <form>
                           <label
                             class="p-4 border-2 border-dashed border-indigo-100 rounded-lg flex space-x-2 w-full bg-indigo-50 cursor-pointer"
                           >
-                            <input
-                              class="block mt-1"
-                              type="checkbox"
-                              x-bind:checked="hasSubscribed"
-                              @change="handleSubscriptionChange"
-                            />
                             <div>
-                              <div>Notify me on updates in this area</div>
-                              <div class="text-xs text-gray-600 mt-1">
-                                You will receive notifications in your browser.
-                                No phone/email required.
-                              </div>
+                              <input
+                                class="block mt-1"
+                                type="checkbox"
+                                x-bind:checked="hasSubscribed"
+                                @change="handleSubscriptionChange"
+                              />
+                            </div>
+                            <div>
+                              <template x-if="hasBlockedNotifications">
+                                <div>
+                                  <div>Notifications have been blocked.</div>
+                                  <div class="text-xs text-gray-600 mt-1">
+                                    Please grant permissions to show
+                                    notifications from the browser settings to
+                                    receive updates regarding slots
+                                    availability.
+                                  </div>
+                                </div>
+                              </template>
+                              <template x-if="!hasBlockedNotifications">
+                                <div>
+                                  <div>
+                                    Get notification on updates in this area
+                                  </div>
+                                  <div class="text-xs text-gray-600 mt-1">
+                                    Please select the checkbox to get
+                                    notifications for slots availability in this
+                                    area. You will receive notifications in your
+                                    browser. No phone or email required.
+                                  </div>
+                                </div>
+                              </template>
                             </div>
                           </label>
                         </form>
@@ -305,10 +330,8 @@ sitemap:
                                 <span x-text="session.name"></span>
                               </div>
                               <div class="text-sm">
-                                <span x-text="session.block_name"></span> (<span
-                                  x-text="session.pincode"
-                                ></span
-                                >)
+                                <span x-text="session.block_name"></span> -
+                                <span x-text="session.pincode"></span>
                               </div>
                             </div>
                             <div class="text-right">
@@ -323,10 +346,14 @@ sitemap:
                               ></time>
                             </div>
                           </div>
-                          <div class="text-gray-600">
+                          <div class="text-gray-600 inline-flex -ml-4">
                             <div
                               x-text="session.vaccine"
-                              class="font-medium text-xs"
+                              class="font-medium text-xs ml-4"
+                            ></div>
+                            <div
+                              x-text="session.fee_type"
+                              class="font-medium text-xs ml-4"
                             ></div>
                           </div>
                         </li>
@@ -345,18 +372,55 @@ sitemap:
                     <label
                       class="p-4 border-2 border-dashed border-indigo-100 rounded-lg flex space-x-2 w-full bg-indigo-50 cursor-pointer"
                     >
-                      <input
-                        class="block mt-1"
-                        type="checkbox"
-                        x-bind:checked="hasSubscribed"
-                        @change="handleSubscriptionChange"
-                      />
                       <div>
-                        <div>Notify me on updates in this area</div>
-                        <div class="text-xs text-gray-600 mt-1">
-                          You will receive notifications in your browser. No
-                          phone/email required.
-                        </div>
+                        <input
+                          class="block mt-1"
+                          type="checkbox"
+                          x-bind:checked="hasSubscribed"
+                          @change="handleSubscriptionChange"
+                        />
+                      </div>
+                      <div>
+                        <template x-if="hasBlockedNotifications">
+                          <div>
+                            <div>Notifications have been blocked.</div>
+                            <div class="text-xs text-gray-600 mt-1">
+                              Please grant permissions to show notifications
+                              from the browser settings to receive updates
+                              regarding slots availability.
+                            </div>
+                          </div>
+                        </template>
+                        <template
+                          x-if="!hasSubscribed && !hasBlockedNotifications"
+                        >
+                          <div>
+                            <div>Get notification on updates in this area</div>
+                            <div class="text-xs text-gray-600 mt-1">
+                              Please select the checkbox to get notifications
+                              for slots availability in this area. You will
+                              receive notifications in your browser. No phone or
+                              email required.
+                            </div>
+                          </div>
+                        </template>
+                        <template
+                          x-if="hasSubscribed && !hasBlockedNotifications"
+                        >
+                          <div>
+                            <div>
+                              You have subscribed for slots availability
+                              updates.
+                            </div>
+                            <div class="text-xs text-gray-600 mt-1">
+                              You will receive browser notification for slots
+                              availability for this area.
+                            </div>
+                            <div class="text-xs mt-1">
+                              To unsubscribe, please deselect the checkbox.
+                            </div>
+                          </div>
+                        </template>
                       </div>
                     </label>
                   </form>
@@ -399,11 +463,81 @@ sitemap:
       <ol class="space-y-8">
         <li>
           <div class="font-medium mb-2">
+            Q. What is Sembark - Travel Management Software ?
+          </div>
+          <div class="text-sm">
+            Sembark is technology company, focusing on Travel Management
+            softwares. It provides complete solutions including sales,
+            follow-ups, bookings, reservations and accounting for travel
+            business (travel operations, DMCs etc).
+            <a
+              href="{{
+                meta.publicUrl
+              }}/?utm_source=direct&utm_medium=site&utm_campaign=covid-vaccination&utm_content=from_faq"
+              class="underline"
+            >
+              Learn more about Sembark
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4 inline"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"
+                />
+              </svg>
+            </a>
+          </div>
+        </li>
+        <li>
+          <div class="font-medium mb-2">
             Q. I can not see the "Notify Me" button on my device
           </div>
           <div class="text-sm">
             It means that your browser doesn't support notifications feature. We
             recommend using Google Chorme or Firefox to enable notifications.
+          </div>
+        </li>
+        <li>
+          <div class="font-medium mb-2">
+            Q. I blocked the notifications by mistake. How can I unblock these?
+          </div>
+          <div class="text-sm">
+            The procedure to unblock notifications depends on your browser
+            (Chrome/Firefox). Here are some common way to unblock notifications:
+            <ul class="list-disc ml-5 space-y-2 mt-2">
+              <li>
+                If you are using Google Chrome or Firefox (or similar Chromium
+                based browser) on an Android device, click on the lock icon
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-4 w-4 inline-block"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                at the top menu bar (in the url). You will see a "Permissions"
+                option. Click on it. You will see the "Notifications blocked"
+                option. Click on it and allow "Show notifications".
+              </li>
+              <li>
+                If you are using Google Chrome or Firefox (or similar Chromium
+                based browser) on a dektop (PC, Laptop), you will find some
+                icons in the top url/search bar. Click on these icons to see
+                which one has an option to "Permissions". Once you find it,
+                click on "Allow" to unblock the notifications permission.
+              </li>
+            </ul>
           </div>
         </li>
         <li>
@@ -497,7 +631,10 @@ sitemap:
       "serviceWorker" in navigator && "Notification" in window;
     const permissionGranted =
       notificationsSupportedByBrowser && Notification.permission === "granted";
+    const permissionBlocked =
+      notificationsSupportedByBrowser && Notification.permission === "denied";
     const locationQuery = getQueryFromLocationSearch();
+    let activeServiceWorkerRegistration = undefined;
     return {
       query: {
         pincode: locationQuery.pincode || "",
@@ -510,6 +647,7 @@ sitemap:
       searchUsing: locationQuery.district_id ? "district" : "pincode",
       minAgeLimit: locationQuery.minAgeLimit || "18",
       sessions: [],
+      hasBlockedNotifications: permissionBlocked,
       error: null,
       handleSubmit() {
         const query = {};
@@ -558,14 +696,31 @@ sitemap:
         });
       },
       handleInit() {
+        const m = this;
         if (
           locationQuery &&
           (locationQuery.pincode || locationQuery.district_id)
         ) {
-          this.handleSubmit();
+          m.handleSubmit();
         } else {
-          this.updateHasSubscribedIfNecessary();
+          m.updateHasSubscribedIfNecessary();
         }
+        if (m.hasBlockedNotifications) {
+          m.handleUnsubscribeFromAll();
+        }
+        // get the service worker
+        getServiceWorkerRegistration()
+          .then(function (registration) {
+            activeServiceWorkerRegistration = registration;
+            // make sure we are on latest every update
+            registration.update();
+          })
+          .catch(function (error) {
+            // service worker not round
+            setTimeout(function () {
+              m.handleUnsubscribeFromAll();
+            }, 1000);
+          });
       },
       updateHasSubscribedIfNecessary() {
         const m = this;
@@ -583,34 +738,51 @@ sitemap:
         const m = this;
         m.hasSubscribed = false;
         m.totalSubscriptionCount -= 1;
-        if (!m.totalSubscriptionCount) {
-          registerNotificationServiceWorker().then(function (registration) {
-            registration.unregister();
-          });
+        if (!m.totalSubscriptionCount && activeServiceWorkerRegistration) {
+          activeServiceWorkerRegistration.unregister();
         }
       },
       subscribe() {
         const queryString = this.getQueryString();
         const m = this;
-        m.totalSubscriptionCount += 1;
         window.Notification.requestPermission().then(function (permission) {
           if (permission !== "granted") {
             alert("Please grant permission to get notified regarding updates.");
+            setTimeout(function () {
+              m.hasSubscribed = false;
+            }, 1000);
+            m.handleUnsubscribeFromAll();
             return;
           }
           storage.add(queryString);
           m.hasSubscribed = true;
-          // now we will register the service worker
-          registerNotificationServiceWorker();
+          m.totalSubscriptionCount += 1;
+          if (!activeServiceWorkerRegistration) {
+            // now we will register the service worker
+            registerNotificationServiceWorker().then(function (registration) {
+              activeServiceWorkerRegistration = registration;
+              setTimeout(() => {
+                activeServiceWorkerRegistration.showNotification(
+                  "Subscribed to slots updates",
+                  {
+                    body:
+                      "You will receive a notification when there are slots available.",
+                    icon:
+                      "https://assets.sembark.com/images/logos/logo_96x96.png",
+                  }
+                );
+              }, 1000);
+            });
+          }
         });
       },
       handleUnsubscribeFromAll() {
         const m = this;
         m.hasSubscribed = false;
         m.totalSubscriptionCount = 0;
-        registerNotificationServiceWorker().then(function (registration) {
-          registration.unregister();
-        });
+        if (activeServiceWorkerRegistration) {
+          activeServiceWorkerRegistration.unregister();
+        }
         storage.removeAll();
       },
     };
@@ -743,6 +915,32 @@ sitemap:
       });
   }
 
+  function getServiceWorkerRegistration() {
+    return new Promise(function (resolve, reject) {
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker
+          .getRegistrations()
+          .then(function (registrations) {
+            for (let registration of registrations) {
+              if (
+                registration.active &&
+                registration.active.state === "activated"
+              ) {
+                if (
+                  registration.active.scriptURL.indexOf("covid/service.js") !==
+                    -1 &&
+                  registration.scope.indexOf("covid/notification-scope") !== -1
+                ) {
+                  return resolve(registration);
+                }
+              }
+            }
+            reject("Not registered");
+          });
+      }
+    });
+  }
+
   function registerNotificationServiceWorker() {
     return navigator.serviceWorker.register("/assets/covid/service.js", {
       scope: "/assets/covid/notification-scope",
@@ -845,7 +1043,7 @@ sitemap:
       },
       removeAll() {
         if (!db) {
-          cbs.push(() => this.removeAll(subscription));
+          cbs.push(() => this.removeAll());
           return;
         }
         let transaction = db.transaction("subscriptions", "readwrite");

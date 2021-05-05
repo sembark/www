@@ -3,10 +3,10 @@ const appEnv = process.env.NODE_ENV;
 const ogImageUrl = `https://assets.sembark.com/images/og-image.png?v=${appVersion}`;
 module.exports = {
   appEnv,
-  siteURL: process.env.URL || "http://localhost:8080",
   version: appVersion,
   appName: "Sembark",
   siteName: "Sembark - The Travel Management Software",
+  publicUrl: process.env.APP_PUBLIC_URL,
   description:
     "Manage travel sales, reservation and accounting with Sembark and get 1-click quotation, smart calendar reservation and accounting with expense management",
   keywords: [
@@ -33,7 +33,6 @@ module.exports = {
   twitterCreator: "@sudhirmith",
   twitterUsername: "@SembarkTech",
   gaMeasurementId: "G-2DEQQHZL6V",
-  publicUrl: "https://sembark.com",
   address: {
     name: "Sembark Tech. Pvt. Ltd",
     street: "Vaisali Nagar",

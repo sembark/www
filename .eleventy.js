@@ -1,4 +1,5 @@
 const sitemap = require("@quasibit/eleventy-plugin-sitemap");
+const htmlmin = require("html-minifier");
 
 module.exports = function (eleventyConfig) {
   /**
@@ -40,6 +41,22 @@ module.exports = function (eleventyConfig) {
     sitemap: {
       hostname: "https://sembark.com",
     },
+  });
+
+  eleventyConfig.addTransform("htmlmin", function (content, outputPath) {
+    // Eleventy 1.0+: use this.inputPath and this.outputPath instead
+    if (outputPath && outputPath.endsWith(".html")) {
+      let minified = htmlmin.minify(content, {
+        useShortDoctype: true,
+        removeComments: true,
+        collapseWhitespace: true,
+        minifyJs: true,
+        minifyCSS: true,
+      });
+      return minified;
+    }
+
+    return content;
   });
   return {
     dir: {
