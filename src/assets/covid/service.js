@@ -166,12 +166,12 @@ function fetchSessions(query) {
       let url;
       if (query.pincode) {
         url =
-          "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByPin" +
+          "https://cdn-api.co-vin.in/api/v2/appointment/sessions/calendarByPin" +
           "?pincode=" +
           encodeURIComponent(query.pincode);
       } else {
         url =
-          "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByDistrict" +
+          "https://cdn-api.co-vin.in/api/v2/appointment/sessions/calendarByDistrict" +
           "?district_id=" +
           encodeURIComponent(query.district_id);
       }
