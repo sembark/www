@@ -897,6 +897,10 @@ sitemap:
         return fetch(url + "&date=" + formatDate(new Date()), {
           method: "GET",
           headers: { "Content-Type": "application/json" },
+          referrer: "",
+          referrerPolicy: "same-origin",
+          mode: "cors",
+          keepalive: true,
         })
           .then(function (resp) {
             return resp.json();

@@ -84,6 +84,10 @@ function checkForSlotsAvailability() {
                   action: "retry_now",
                   title: "Retry Now",
                 },
+                {
+                  action: "unsubscribe",
+                  title: "Unsubscribe",
+                },
               ],
             });
           });
@@ -178,6 +182,10 @@ function fetchSessions(query) {
       return fetch(url + "&date=" + formatDate(new Date()), {
         method: "GET",
         headers: { "Content-Type": "application/json" },
+        referrer: "",
+        referrerPolicy: "same-origin",
+        mode: "cors",
+        keepalive: true,
       })
         .then(function (resp) {
           return resp.json();
