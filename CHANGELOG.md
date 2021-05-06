@@ -1,3 +1,10 @@
+## [1.9.7](https://github.com/sembark/www/compare/v1.9.6...v1.9.7) (2021-05-06)
+
+
+### Bug Fixes
+
+* **image:** updated image ([71ffc6f](https://github.com/sembark/www/commit/71ffc6f609727e873334c5f3b749c63fad68d100))
+
 ## [1.9.6](https://github.com/sembark/www/compare/v1.9.5...v1.9.6) (2021-05-06)
 
 
