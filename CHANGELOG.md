@@ -1,3 +1,10 @@
+## [1.9.1](https://github.com/sembark/www/compare/v1.9.0...v1.9.1) (2021-05-06)
+
+
+### Bug Fixes
+
+* **analytics:** update the env ([5c85e5f](https://github.com/sembark/www/commit/5c85e5fe62000e93ba2f89ba6c5e919434ccf753))
+
 # [1.9.0](https://github.com/sembark/www/compare/v1.8.2...v1.9.0) (2021-05-06)
 
 
