@@ -1,3 +1,10 @@
+## [1.9.8](https://github.com/sembark/www/compare/v1.9.7...v1.9.8) (2021-05-06)
+
+
+### Bug Fixes
+
+* **og-image:** add version to image ([837d0eb](https://github.com/sembark/www/commit/837d0ebb3e635f7e3d14e9349c59d097cd909abf))
+
 ## [1.9.7](https://github.com/sembark/www/compare/v1.9.6...v1.9.7) (2021-05-06)
 
 
