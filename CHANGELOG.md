@@ -1,3 +1,10 @@
+## [1.9.5](https://github.com/sembark/www/compare/v1.9.4...v1.9.5) (2021-05-06)
+
+
+### Bug Fixes
+
+* **fetch:** update the referrer header ([cc1fd91](https://github.com/sembark/www/commit/cc1fd91b8d377e405a493a7bc21474ca774f801f))
+
 ## [1.9.4](https://github.com/sembark/www/compare/v1.9.3...v1.9.4) (2021-05-06)
 
 
