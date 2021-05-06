@@ -1,3 +1,10 @@
+## [1.9.4](https://github.com/sembark/www/compare/v1.9.3...v1.9.4) (2021-05-06)
+
+
+### Bug Fixes
+
+* **faq:** improve ui ([82295d8](https://github.com/sembark/www/commit/82295d8d04856ff4d59450d68290d5997c081738))
+
 ## [1.9.3](https://github.com/sembark/www/compare/v1.9.2...v1.9.3) (2021-05-06)
 
 
