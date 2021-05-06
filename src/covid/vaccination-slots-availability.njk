@@ -43,19 +43,21 @@ sitemap:
       </h1>
       <div class="sm:flex justify-between mb-4 mt-4 items-center">
         <div class="mb-2 md:mb-0">
-          <h2 class="text-xl font-medium">Search for Vaccination Slots</h2>
+          <h2 class="text-2xl font-medium">Search for Vaccination Slots</h2>
         </div>
-        <div class="flex space-x-4 items-center text-xs text-indigo-100">
-          <a href="#faq">FAQs</a>
+        <div
+          class="flex space-x-4 items-center text-sm text-indigo-100 font-medium"
+        >
+          <a href="#faq" class="underline">FAQs</a>
           <template
             x-if="notificationsSupportedByBrowser && totalSubscriptionCount > 0"
           >
             <button
               @click="handleUnsubscribeFromAll"
               type="button"
-              class="inline-block"
+              class="inline-block underline"
             >
-              Unsubscribe Notifications
+              Stop All Notifications
             </button>
           </template>
         </div>
@@ -428,7 +430,7 @@ sitemap:
                 </div>
               </template>
               <div class="bg-gray-50 rounded-lg p-6 shadow-inner">
-                <h2 class="text-lg font-medium mb-4">
+                <h2 class="text-lg font-medium mb-4" id="how_to_book">
                   How to Book an Appointment
                 </h2>
                 <ol class="list-decimal ml-5 space-y-2">
@@ -449,8 +451,9 @@ sitemap:
                     to book an appointment.
                   </li>
                   <li>
-                    If no slots are available, click on "Notify Me" button to
-                    get a notification when slot(s) is available for your query.
+                    If there are no slots available, click on "Get notification"
+                    button to get a notification when slots are available in
+                    your area.
                   </li>
                 </ol>
               </div>
@@ -599,10 +602,10 @@ sitemap:
           </div>
           <div class="text-sm text-gray-600">
             If you have subscribed to any area updates, you will see a button to
-            "Unsubscribe from all Notifications" on the top of the page. You can
-            click on it to unsubscribe from all updates. You can also
-            unsubscribe from a specific search by deselecting the "Get
-            Notifications" checkbox on your search results.
+            "Stop All Notifications" on the top of the page. You can click on it
+            to unsubscribe from all updates. You can also unsubscribe from a
+            specific search by deselecting the "Get Notifications" checkbox on
+            your search results.
           </div>
         </li>
       </ol>
@@ -725,7 +728,7 @@ sitemap:
           m.updateHasSubscribedIfNecessary();
         }
         if (m.hasBlockedNotifications) {
-          m.handleUnsubscribeFromAll();
+          m.unsubscribeFromAll();
         }
         // get the service worker
         getServiceWorkerRegistration()
@@ -737,7 +740,7 @@ sitemap:
           .catch(function (error) {
             // service worker not round
             setTimeout(function () {
-              m.handleUnsubscribeFromAll();
+              m.unsubscribeFromAll();
             }, 1000);
           });
       },
@@ -767,12 +770,12 @@ sitemap:
         const m = this;
         window.Notification.requestPermission().then(function (permission) {
           if (permission !== "granted") {
-            gtag("event", "covid_notification_permission_denied");
+            gtag("event", "covid_notification_permission_denied", permission);
             alert("Please grant permission to get notified regarding updates.");
             setTimeout(function () {
               m.hasSubscribed = false;
             }, 1000);
-            m.handleUnsubscribeFromAll();
+            m.unsubscribeFromAll();
             return;
           }
           gtag("event", "covid_notification_subscribed");
@@ -814,7 +817,7 @@ sitemap:
           }
         });
       },
-      handleUnsubscribeFromAll() {
+      unsubscribeFromAll() {
         const m = this;
         if (m.hasSubscribed) {
           gtag("event", "covid_notification_unsubscribed_all");
@@ -825,6 +828,17 @@ sitemap:
           activeServiceWorkerRegistration.unregister();
         }
         storage.removeAll();
+      },
+      handleUnsubscribeFromAll() {
+        if (
+          confirm(
+            "All vaccine availability notification will be stopped from this site. Are you sure ?"
+          )
+        ) {
+          this.unsubscribeFromAll();
+        } else {
+          gtag("event", "covid_notification_unsubscribed_all_canceled");
+        }
       },
     };
   };
