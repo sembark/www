@@ -1,3 +1,10 @@
+## [1.9.3](https://github.com/sembark/www/compare/v1.9.2...v1.9.3) (2021-05-06)
+
+
+### Bug Fixes
+
+* **district:** update district page ui ([ce1320b](https://github.com/sembark/www/commit/ce1320b45231bfc88c15135287efe60fc6b913c9))
+
 ## [1.9.2](https://github.com/sembark/www/compare/v1.9.1...v1.9.2) (2021-05-06)
 
 
