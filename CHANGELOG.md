@@ -1,3 +1,10 @@
+## [1.9.6](https://github.com/sembark/www/compare/v1.9.5...v1.9.6) (2021-05-06)
+
+
+### Bug Fixes
+
+* **unsubscribe:** add confirmation before unsubscribe ([f0e43ac](https://github.com/sembark/www/commit/f0e43ac03dd209e171f95c0f516e599ef69ab036))
+
 ## [1.9.5](https://github.com/sembark/www/compare/v1.9.4...v1.9.5) (2021-05-06)
 
 
