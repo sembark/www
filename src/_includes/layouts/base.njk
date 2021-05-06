@@ -34,8 +34,9 @@
     <meta property="twitter:site" content="{{ meta.twitterUsername }}" />
     <meta property="twitter:creator" content="{{ meta.twitterCreator }}" />
     <meta property="twitter:card" content="summary_large_image" />
-    {% if ogImage %} {% set ogImageUrl = meta.publicUrl + "/assets" + ogImage %}
-    {% else %} {% set ogImageUrl = meta.ogImageUrl %} {% endif %}
+    {% if ogImage %} {% set ogImageUrl = meta.publicUrl + "/assets" + ogImage +
+    "?v=" + meta.version%} {% else %} {% set ogImageUrl = meta.ogImageUrl %} {%
+    endif %}
     <meta property="twitter:image:src" content="{{ ogImageUrl }}" />
     <meta property="og:image:secure_url" content="{{ ogImageUrl }}" />
     <meta property="og:image" content="{{ ogImageUrl }}" />
