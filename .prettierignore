@@ -1,0 +1,2 @@
+# Ignore Sitemap as prettier adds new line after frontmatter
+src/sitemap.njk
