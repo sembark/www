@@ -1,3 +1,10 @@
+## [1.9.2](https://github.com/sembark/www/compare/v1.9.1...v1.9.2) (2021-05-06)
+
+
+### Bug Fixes
+
+* **url:** revert back to public urls ([c00e863](https://github.com/sembark/www/commit/c00e863c18bfc7c67d5532c3e073b6142f541715))
+
 ## [1.9.1](https://github.com/sembark/www/compare/v1.9.0...v1.9.1) (2021-05-06)
 
 
