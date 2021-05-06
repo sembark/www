@@ -1,3 +1,10 @@
+# [1.9.0](https://github.com/sembark/www/compare/v1.8.2...v1.9.0) (2021-05-06)
+
+
+### Features
+
+* **covid:** help India in vaccination ([#7](https://github.com/sembark/www/issues/7)) ([886fd64](https://github.com/sembark/www/commit/886fd6481e4ab5fde750809142a242703ae3713f))
+
 ## [1.8.2](https://github.com/sembark/www/compare/v1.8.1...v1.8.2) (2021-05-01)
 
 
