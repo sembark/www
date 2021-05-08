@@ -1,98 +1,173 @@
-let timer;
+importScripts("https://unpkg.com/idb@6.0.0/build/iife/index-min.js");
+
 let gcid = `GA1.2.${parseInt(Math.random() * 1000000000)}${parseInt(
   Math.random() * 1000000000
 )}`;
 
+let timer;
 function scheduleSlotsAvailability(after) {
+  console.log(
+    `[Scheduled (${new Date()})]: Check for slots availability after ${
+      after / (1000 * 60)
+    } minutes`
+  );
   if (timer) {
     clearTimeout(timer);
   }
   timer = setTimeout(function () {
     timer = undefined;
-    checkForSlotsAvailability();
+    // stop the availability check if there are no subscriptions left
+    getSubscriptionsLength().then(function (count) {
+      if (count > 0) {
+        checkForSlotsAvailability().then(() => {
+          // retry after 5 minutes
+          scheduleSlotsAvailability(1000 * 60 * 5);
+        });
+      }
+    });
   }, after);
 }
+
+self.addEventListener("activate", function (evt) {
+  getSubscriptionsLength().then((count) => {
+    if (count > 0) {
+      scheduleSlotsAvailability(5000);
+    }
+  });
+});
 
 // Receive the messages
 self.addEventListener("message", (event) => {
   switch (event.data.type) {
     case "gcid":
-      gcid = event.data.value;
+      gcid = event.data.payload;
+      break;
+    case "check_availability_if_subscribed":
+      getSubscriptionsLength().then((count) => {
+        if (count > 0 && !timer) {
+          scheduleSlotsAvailability(100);
+        }
+      });
+      break;
+    case "subscribe":
+      saveSubscription(event.data.payload);
+      scheduleSlotsAvailability(5000);
+      notify("Subscribed to slots updates", {
+        body:
+          "You will receive notification(s) for slots availability in this area.",
+        tag: "subscribed",
+      });
+      break;
+    case "unsubscribe":
+      deleteSubscription(event.data.payload);
+      getSubscriptions().then(function (subscriptions) {
+        event.source.postMessage({
+          type: "subscriptions",
+          payload: subscriptions,
+        });
+      });
+      break;
+    case "unsubscribe_all":
+      removeAllSubscriptions();
+      scheduleSlotsAvailability(0);
+      break;
+    case "get_subscriptions":
+      getSubscriptions().then(function (subscriptions) {
+        event.source.postMessage({
+          type: "subscriptions",
+          payload: subscriptions,
+        });
+      });
+      break;
+    case "get_subscription_details":
+      getSubscriptionDetails(event.data.payload).then(function (details) {
+        event.source.postMessage({
+          type: "subscription_details",
+          payload: details,
+        });
+      });
+      break;
+    case "get_availability_stats":
+      getAvailabilityStatsForQuery(event.data.payload).then(function (details) {
+        event.source.postMessage({
+          type: "availability_stats",
+          payload: details,
+        });
+      });
       break;
   }
 });
 
-scheduleSlotsAvailability(5000);
-
-function checkForSlotsAvailability() {
-  return getSubscriptions().then((subscriptions) => {
-    subscriptions.map(function (sub) {
-      const query = JSON.parse(sub.id);
-      if (query.pincode || query.district_id) {
-        fetchSessions(query)
-          .then((sessions) => {
-            if (sessions.length) {
-              console.log("Slots available at " + new Date());
-              // some sessions are available
-              notify(
-                `${sessions.reduce(
-                  (total, s) => total + s.available_capacity,
-                  0
-                )} Vaccination Slots Available for ${query.minAgeLimit}+`,
-                {
-                  body: `${sessions.length} centers in ${sessions[0].district_name} (${sessions[0].pincode})`,
-                  actions: [
-                    {
-                      action: "view",
-                      title: "View",
+async function checkForSlotsAvailability() {
+  console.log(`[${new Date()}]: Checking for slots availability...`);
+  return await getSubscriptions().then((subscriptions) => {
+    return Promise.all([
+      subscriptions.map(function (sub) {
+        const query = JSON.parse(sub.id);
+        if (query.pincode || query.district_id) {
+          fetchSessions(query)
+            .then((sessions) => {
+              if (sessions.length) {
+                console.log(`[${new Date()}]: Slots available at for `, query);
+                // some sessions are available
+                notify(
+                  `${sessions.reduce(
+                    (total, s) => total + s.available_capacity,
+                    0
+                  )} Vaccination Slots Available for ${query.minAgeLimit}+`,
+                  {
+                    body: `${sessions.length} centers in ${sessions[0].district_name} (${sessions[0].pincode})`,
+                    actions: [
+                      {
+                        action: "view",
+                        title: "View",
+                      },
+                      {
+                        action: "unsubscribe",
+                        title: "Unsubscribe",
+                      },
+                    ],
+                    tag: sub.id,
+                    data: {
+                      link: `${
+                        location.origin
+                      }/covid/vaccination-slots-availability/?${
+                        query.pincode ? `pincode=${query.pincode}` : ``
+                      }${
+                        query.district_id
+                          ? `district_id=${query.district_id}`
+                          : ``
+                      }&minAgeLimit=45&viaNotification=1`,
                     },
-                    {
-                      action: "unsubscribe",
-                      title: "Unsubscribe",
-                    },
-                  ],
-                  tag: sub.id,
-                  data: {
-                    link: `${
-                      location.origin
-                    }/covid/vaccination-slots-availability/?${
-                      query.pincode ? `pincode=${query.pincode}` : ``
-                    }${
-                      query.district_id
-                        ? `district_id=${query.district_id}`
-                        : ``
-                    }&minAgeLimit=45&viaNotification=1`,
+                  }
+                );
+              } else {
+                // no slots available
+                console.log(`[${new Date()}]: No slots available`);
+              }
+            })
+            .catch(function (e) {
+              // Something went wrong
+              notify("Failed to refresh vaccination slots availability", {
+                body: `Error: ${
+                  e.message || "Network Issue"
+                }. Please check that you have a working internet connection.`,
+                tag: "error",
+                actions: [
+                  {
+                    action: "retry_now",
+                    title: "Retry Now",
                   },
-                }
-              );
-            } else {
-              console.log("No slots available till " + new Date());
-              console.log("Rescheduling availability check...");
-              // no slots available
-              // after 5 minutes
-              scheduleSlotsAvailability(1000 * 60 * 5);
-            }
-          })
-          .catch(function (e) {
-            // Something went wrong
-            notify("Failed to refresh vaccination slots availability", {
-              body: `Error: ${
-                e.message || "Network Issue"
-              }. Please check that you have a working internet connection.`,
-              actions: [
-                {
-                  action: "retry_now",
-                  title: "Retry Now",
-                },
-                {
-                  action: "unsubscribe",
-                  title: "Unsubscribe",
-                },
-              ],
+                  {
+                    action: "unsubscribe",
+                    title: "Unsubscribe",
+                  },
+                ],
+              });
             });
-          });
-      }
-    });
+        }
+      }),
+    ]);
   });
 }
 
@@ -104,37 +179,27 @@ self.addEventListener("notificationclick", function (event) {
   event.notification.close();
   if (!link || !event.notification.actions.length) return;
 
+  event.waitUntil(openOrFocusLink(link));
   switch (event.action) {
     case "unsubscribe":
       console.log("unsubscribe from " + event.notification.tag);
-      removeSubscription(event.notification.tag).then(() => {
-        getSubscriptions().then((subscriptions) => {
-          if (!subscriptions.length) {
-            console.log("No subscriptions left, unregister service provider");
-            self.registration.unregister();
-          }
-        });
-      });
+      deleteSubscription(event.notification.tag);
       reportToGA("covid_notification_clicked", "unsubscribe");
       break;
     case "retry_now":
-      clearTimeout(timer);
       // there were some slots available, client clicked on view / simply  the notification
       // reschedule the check
-      console.log("Refresh the slots availability");
-      scheduleSlotsAvailability(1000);
+      console.log("Retry now, Refresh the slots availability");
+      event.waitUntil(openOrFocusLink(link));
       reportToGA("covid_notification_clicked", "retry_now");
+      scheduleSlotsAvailability(1000);
       break;
     default:
-      event.waitUntil(openOrFocusLink(link));
-      clearTimeout(timer);
       // there were some slots available, client clicked on view / simply  the notification
       // reschedule the check
       console.log(
         "Notification clicked. Rescheduling slots availability check"
       );
-      // after 5 minutes
-      scheduleSlotsAvailability(1000 * 60 * 5);
       reportToGA("covid_notification_clicked", "view_or_others");
       break;
   }
@@ -142,13 +207,8 @@ self.addEventListener("notificationclick", function (event) {
 
 self.addEventListener("notificationclose", function (event) {
   console.log("On notification close: ", event.notification);
-  if (!event.notification.actions.length) return;
   reportToGA("covid_notification_closed", event.notification.title);
-  // there were some slots available, client closed the notification without any action
-  // re-register a call to check for availability
-  console.log("Notification closed. Rescheduling slots availability check");
-  // after 5 minutes
-  scheduleSlotsAvailability(1000 * 60 * 5);
+  // if (!event.notification.actions.length) return;
 });
 
 function notify(title, options) {
@@ -163,10 +223,10 @@ function notify(title, options) {
   }
 }
 
-function fetchSessions(query) {
+async function fetchSessions(query) {
   const today = new Date();
   return Promise.all(
-    [today].map(function fetchSlotsToDate(date) {
+    [today].map(async function fetchSlotsToDate(date) {
       let url;
       if (query.pincode) {
         url =
@@ -179,7 +239,7 @@ function fetchSessions(query) {
           "?district_id=" +
           encodeURIComponent(query.district_id);
       }
-      return fetch(url + "&date=" + formatDate(new Date()), {
+      return fetch(url + "&date=" + formatDate(date), {
         method: "GET",
         headers: { "Content-Type": "application/json" },
         referrer: "",
@@ -218,17 +278,155 @@ function fetchSessions(query) {
       []);
     })
     .then(function (sessions) {
-      return sessions.filter(function hasAvailableSlots(session) {
-        if (parseInt(session.available_capacity) <= 0) {
-          return false;
+      const sessionsAfterOtherFiltersApplied = sessions.filter(
+        function hasAvailableSlots(session) {
+          const minAgeLimit = parseInt(query.minAgeLimit);
+          if (Number(session.min_age_limit) !== minAgeLimit) {
+            return false;
+          }
+          return true;
         }
-        const minAgeLimit = parseInt(query.minAgeLimit);
-        if (Number(session.min_age_limit) > minAgeLimit) {
+      );
+      storeAvailabilityStatsForQuery(query, sessionsAfterOtherFiltersApplied);
+      return sessionsAfterOtherFiltersApplied.filter(function hasAvailableSlots(
+        session
+      ) {
+        if (parseInt(session.available_capacity) <= 0) {
           return false;
         }
         return true;
       });
     });
+}
+
+async function saveSubscription(query) {
+  const db = await getDB();
+  return await db.add("subscriptions", { id: query });
+}
+
+async function deleteSubscription(query) {
+  const db = await getDB();
+  return await db.delete("subscriptions", query);
+}
+
+async function getSubscriptionsLength() {
+  const db = await getDB();
+  return await db.count("subscriptions");
+}
+
+async function getSubscriptions() {
+  const db = await getDB();
+  return await db.getAll("subscriptions");
+}
+
+async function getSubscriptionDetails(subscription) {
+  const db = await getDB();
+  try {
+    return await db.get("subscriptions", subscription);
+  } catch (e) {
+    return Promise.resolve();
+  }
+}
+
+async function removeAllSubscriptions() {
+  let db = await getDB();
+  return await db.clear("subscriptions");
+}
+
+async function storeAvailabilityStatsForQuery(query, sessions) {
+  if (typeof query !== "string") {
+    query = JSON.stringify(query);
+  }
+  if (sessions.length === 0) return Promise.resolve([]);
+  let totalAvailability = sessions.reduce(
+    (total, s) => total + Number(s.available_capacity),
+    0
+  );
+  const db = await getDB();
+  const existingAvailabilityStats = await db.getAllFromIndex(
+    "availability",
+    "query_idx",
+    query
+  );
+  const now = new Date();
+  now.setMinutes(Math.ceil(now.getMinutes() / 5) * 5);
+  const at = getTimeString(now);
+  const existing = existingAvailabilityStats.find((s) => s.at === at);
+  if (existing) {
+    const average_available_capacity =
+      (Number(existing.average_available_capacity) + totalAvailability) / 2;
+    return await db.put("availability", {
+      id: existing.id,
+      query,
+      at,
+      average_available_capacity,
+    });
+  } else {
+    return await db.add("availability", {
+      query,
+      at,
+      average_available_capacity: totalAvailability,
+    });
+  }
+}
+
+function getTimeString(date) {
+  var d = new Date(date),
+    hours = "" + d.getHours(),
+    minutes = "" + d.getMinutes();
+  return [hours, minutes].map((s) => (s.length < 2 ? "0" + s : s)).join(":");
+}
+
+async function getAvailabilityStatsForQuery(query) {
+  if (typeof query !== "string") {
+    query = JSON.stringify(query);
+  }
+  const db = await getDB();
+  const availability = await db.getAllFromIndex(
+    "availability",
+    "query_idx",
+    query
+  );
+  return availability.filter((d) => d.average_available_capacity > 0);
+}
+
+let db;
+async function getDB() {
+  if (!db) {
+    db = await idb.openDB("covid", 2, {
+      upgrade(db) {
+        if (!db.objectStoreNames.contains("subscriptions")) {
+          // if there's no "subscriptions" store
+          db.createObjectStore("subscriptions", { keyPath: "id" }); // create it
+        }
+        if (!db.objectStoreNames.contains("availability")) {
+          const store = db.createObjectStore("availability", {
+            keyPath: "id",
+            autoIncrement: true,
+          });
+          store.createIndex("query_idx", "query", { unique: false });
+        }
+      },
+    });
+  }
+  return Promise.resolve(db);
+}
+
+function parseDate(date) {
+  try {
+    var [day, month, year] = date.split("-").map((d) => parseInt(d));
+    var d = new Date();
+    d.setFullYear(year);
+    d.setMonth(month - 1);
+    d.setDate(day);
+    d.setMinutes(0);
+    d.setSeconds(0);
+    d.setMinutes(0);
+    return d;
+  } catch (e) {
+    console.error(e);
+    return new Date();
+  }
 }
 
 function openOrFocusLink(link) {
@@ -258,83 +456,20 @@ function formatDate(date) {
   return [day, month, year].join("-");
 }
 
-function getSubscriptions() {
-  return new Promise((resolve, reject) => {
-    let db;
-    const request = self.indexedDB.open("covid", 1);
-    request.onsuccess = function () {
-      db = request.result;
-      let transaction = db.transaction("subscriptions");
-      let subscriptions = transaction.objectStore("subscriptions");
-      const fetchRequest = subscriptions.getAll();
-      fetchRequest.onsuccess = function () {
-        if (!fetchRequest.result) {
-          return reject("No subscriptions");
-        }
-        resolve(fetchRequest.result);
-      };
-    };
-    // create/upgrade the database without version checks
-    request.onupgradeneeded = function () {
-      let db = request.result;
-      if (!db.objectStoreNames.contains("subscriptions")) {
-        // if there's no "books" store
-        db.createObjectStore("subscriptions", { keyPath: "id" }); // create it
-      }
-    };
-  });
-}
-
-function removeAllSubscriptions() {
-  return new Promise((resolve) => {
-    let db;
-    const request = self.indexedDB.open("covid", 1);
-    request.onsuccess = function () {
-      db = request.result;
-      let transaction = db.transaction("subscriptions", "readwrite");
-      let subscriptions = transaction.objectStore("subscriptions");
-      const req = subscriptions.clear();
-      req.onsuccess = function () {
-        resolve();
-      };
-    };
-    // create/upgrade the database without version checks
-    request.onupgradeneeded = function () {
-      let db = request.result;
-      if (!db.objectStoreNames.contains("subscriptions")) {
-        // if there's no "books" store
-        db.createObjectStore("subscriptions", { keyPath: "id" }); // create it
-      }
-    };
-  });
-}
-
-function removeSubscription(subscription) {
-  return new Promise((resolve) => {
-    let db;
-    const request = self.indexedDB.open("covid", 1);
-    request.onsuccess = function () {
-      db = request.result;
-      db.transaction("subscriptions", "readwrite")
-        .objectStore("subscriptions")
-        .delete(subscription);
-      setTimeout(() => {
-        resolve();
-      }, 300);
-    };
-    // create/upgrade the database without version checks
-    request.onupgradeneeded = function () {
-      let db = request.result;
-      if (!db.objectStoreNames.contains("subscriptions")) {
-        // if there's no "books" store
-        db.createObjectStore("subscriptions", { keyPath: "id" }); // create it
-      }
-    };
-  });
+// the default maxium is (2^31)-1 ms (2147483647 ms) or 24.855 days
+function setTimeoutForLargeDelays(_fn, delay) {
+  const maxDelay = Math.pow(2, 31) - 1;
+  if (delay > maxDelay) {
+    const args = arguments;
+    args[1] -= maxDelay;
+    return setTimeout(function () {
+      setTimeoutForLargeDelays.apply(undefined, args);
+    }, maxDelay);
+  }
+  return setTimeout.apply(undefined, arguments);
 }
 
 function reportToGA(eventCategory, eventAction) {
-  console.log(location.hostname);
   if (location.hostname !== "sembark.com") return;
   fetch("https://www.google-analytics.com/collect", {
     method: "post",

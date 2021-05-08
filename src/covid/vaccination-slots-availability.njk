@@ -198,6 +198,47 @@ sitemap:
               </div>
             </div>
           </form>
+          <template x-if="availabilityStats.length > 0">
+            <div class="mt-8">
+              <h2 class="text-lg font-medium mb-4" id="how_to_book">
+                General Availability
+              </h2>
+              <div class="w-full max-w-full overflow-x-auto">
+                <table class="border">
+                  <tbody>
+                    <tr class="relative">
+                      <th class="px-2 sticky top-0 left-0 bg-white z-1">
+                        Time
+                      </th>
+                      <template
+                        x-for="(availability, index, collection) in availabilityStats"
+                        :key="index"
+                      >
+                        <td class="px-2">
+                          <div x-text="availability.at"></div>
+                        </td>
+                      </template>
+                    </tr>
+                    <tr>
+                      <th class="px-2 sticky top-0 left-0 bg-white z-1">
+                        Aval.
+                      </th>
+                      <template
+                        x-for="(availability, index, collection) in availabilityStats"
+                        :key="index"
+                      >
+                        <td class="px-2">
+                          <div
+                            x-text="availability.average_available_capacity"
+                          ></div>
+                        </td>
+                      </template>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </template>
         </div>
         <div class="flex-1 min-w-0 md:ml-4 md:pl-4 md:border-l">
           <div class="lg:flex lg:space-y-0 lg:space-x-8">
@@ -416,7 +457,8 @@ sitemap:
                               updates.
                             </div>
                             <div class="text-xs text-gray-600 mt-1">
-                              You will receive browser notification for slots
+                              Please keep this tab open in your browser. You
+                              will receive browser notification for slots
                               availability for this area.
                             </div>
                             <div class="text-xs mt-1">
@@ -585,6 +627,10 @@ sitemap:
             problem.
             <ol class="list-decimal ml-5 mt-2 space-y-2">
               <li>
+                Please check that this tab is open in your browser and the
+                browser is not closed. You can keep it in the background.
+              </li>
+              <li>
                 Please check the system settings for notifications on your
                 device to see if the your browser (Google Chrome, Firefox etc.)
                 is allowed to show the notifications.
@@ -637,9 +683,12 @@ sitemap:
     </section>
   </div>
 </div>
+<!-- Pollyfill fetch (Promise will be auto polyfilled) -->
+<script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=fetch"></script>
+<script src="https://unpkg.com/idb@6.0.0/build/iife/index-min.js"></script>
+
 <script>
   window.searchFormController = function searchFormController() {
-    const storage = SubscriptionsStorage();
     const notificationsSupportedByBrowser =
       "serviceWorker" in navigator && "Notification" in window;
     const permissionGranted =
@@ -647,7 +696,6 @@ sitemap:
     const permissionBlocked =
       notificationsSupportedByBrowser && Notification.permission === "denied";
     const locationQuery = getQueryFromLocationSearch();
-    let activeServiceWorkerRegistration = undefined;
     return {
       query: {
         pincode: locationQuery.pincode || "",
@@ -662,6 +710,10 @@ sitemap:
       sessions: [],
       hasBlockedNotifications: permissionBlocked,
       error: null,
+      notificationsSupportedByBrowser,
+      hasSubscribed: false,
+      totalSubscriptionCount: 0,
+      availabilityStats: [],
       handleSubmit() {
         const query = {};
         const m = this;
@@ -685,7 +737,10 @@ sitemap:
         updateLocationSearchWithNewQuery(
           Object.assign({}, query, { minAgeLimit: m.minAgeLimit })
         );
-        fetchSessions(Object.assign({}, query, { minAgeLimit: m.minAgeLimit }))
+        const fetchQuery = Object.assign({}, query, {
+          minAgeLimit: m.minAgeLimit,
+        });
+        fetchSessions(fetchQuery)
           .then((sessions) => {
             m.sessions = sessions;
             m.isSubmitting = false;
@@ -696,9 +751,6 @@ sitemap:
             console.error(e);
           });
       },
-      notificationsSupportedByBrowser,
-      hasSubscribed: false,
-      totalSubscriptionCount: 0,
       handleSubscriptionChange(e) {
         this.hasSubscribed ? this.unsubscribe() : this.subscribe();
       },
@@ -724,8 +776,6 @@ sitemap:
           (locationQuery.pincode || locationQuery.district_id)
         ) {
           m.handleSubmit();
-        } else {
-          m.updateHasSubscribedIfNecessary();
         }
         if (m.hasBlockedNotifications) {
           m.unsubscribeFromAll();
@@ -733,11 +783,40 @@ sitemap:
         // get the service worker
         getServiceWorkerRegistration()
           .then(function (registration) {
-            activeServiceWorkerRegistration = registration;
             // make sure we are on latest every update
             registration.update();
+
+            navigator.serviceWorker.addEventListener("message", (event) => {
+              switch (event.data.type) {
+                case "subscriptions":
+                  const subscriptions = event.data.payload;
+                  m.totalSubscriptionCount = subscriptions.length;
+                  break;
+                case "availability_stats":
+                  const stats = event.data.payload;
+                  m.availabilityStats = stats;
+                  break;
+                case "subscription_details":
+                  const subscription_details = event.data.payload;
+                  if (
+                    subscription_details &&
+                    subscription_details.id === m.getQueryString()
+                  ) {
+                    m.hasSubscribed = true;
+                  } else {
+                    m.hasSubscribed = false;
+                  }
+                  registration.active.postMessage({
+                    type: "get_availability_stats",
+                    payload: m.getQueryString(),
+                  });
+                  break;
+              }
+            });
+            m.updateHasSubscribedIfNecessary();
           })
           .catch(function (error) {
+            console.log(error);
             // service worker not round
             setTimeout(function () {
               m.unsubscribeFromAll();
@@ -746,24 +825,31 @@ sitemap:
       },
       updateHasSubscribedIfNecessary() {
         const m = this;
-        const queryString = this.getQueryString();
-        storage.has(queryString, function (exists) {
-          m.hasSubscribed = permissionGranted && exists;
-        });
-        storage.count(function (count) {
-          m.totalSubscriptionCount = count;
+        const queryString = m.getQueryString();
+        getServiceWorkerRegistration().then((reg) => {
+          reg.active.postMessage({
+            type: "get_subscription_details",
+            payload: queryString,
+          });
+          reg.active.postMessage({ type: "get_subscriptions" });
+          reg.active.postMessage({
+            type: "check_availability_if_subscribed",
+          });
         });
       },
       unsubscribe() {
         const queryString = this.getQueryString();
-        storage.remove(queryString);
         const m = this;
         m.hasSubscribed = false;
         m.totalSubscriptionCount -= 1;
         gtag("event", "covid_notification_unsubscribed");
-        if (!m.totalSubscriptionCount && activeServiceWorkerRegistration) {
-          activeServiceWorkerRegistration.unregister();
-        }
+        // notify via service worker
+        getServiceWorkerRegistration().then((reg) =>
+          reg.active.postMessage({
+            type: "unsubscribe",
+            payload: queryString,
+          })
+        );
       },
       subscribe() {
         const queryString = this.getQueryString();
@@ -779,42 +865,33 @@ sitemap:
             return;
           }
           gtag("event", "covid_notification_subscribed");
-          storage.add(queryString);
           m.hasSubscribed = true;
           m.totalSubscriptionCount += 1;
-          if (!activeServiceWorkerRegistration) {
-            // now we will register the service worker
-            registerNotificationServiceWorker().then(function (registration) {
-              activeServiceWorkerRegistration = registration;
-              setTimeout(() => {
-                activeServiceWorkerRegistration.showNotification(
-                  "Subscribed to slots updates",
-                  {
-                    body:
-                      "You will receive notification(s) for slots availability in this area.",
-                    icon:
-                      "https://assets.sembark.com/images/logos/logo_96x96.png",
-                  }
-                );
-                // get the tracking id
-                const cookie = document.cookie;
-                if (cookie) {
-                  const ga = document.cookie
-                    .split(";")
-                    .map((s) => s.trim().split("="))
-                    .filter((item) => item[0] == "_ga")[0];
-                  if (ga) {
-                    const cid = ga[1];
-                    // send it to service worker
-                    activeServiceWorkerRegistration.active.postMessage({
-                      type: "gcid",
-                      value: cid,
-                    });
-                  }
-                }
-              }, 1000);
+          getServiceWorkerRegistration().then(function (registration) {
+            // notify via service worker
+            registration.active.postMessage({
+              type: "subscribe",
+              payload: queryString,
             });
-          }
+            setTimeout(() => {
+              // get the tracking id
+              const cookie = document.cookie;
+              if (cookie) {
+                const ga = document.cookie
+                  .split(";")
+                  .map((s) => s.trim().split("="))
+                  .filter((item) => item[0] == "_ga")[0];
+                if (ga) {
+                  const cid = ga[1];
+                  // send it to service worker
+                  registration.active.postMessage({
+                    type: "gcid",
+                    payload: cid,
+                  });
+                }
+              }
+            }, 1000);
+          });
         });
       },
       unsubscribeFromAll() {
@@ -824,10 +901,12 @@ sitemap:
         }
         m.hasSubscribed = false;
         m.totalSubscriptionCount = 0;
-        if (activeServiceWorkerRegistration) {
-          activeServiceWorkerRegistration.unregister();
-        }
-        storage.removeAll();
+        getServiceWorkerRegistration().then((reg) => {
+          // notify via service worker
+          reg.active.postMessage({
+            type: "unsubscribe_all",
+          });
+        });
       },
       handleUnsubscribeFromAll() {
         if (
@@ -882,9 +961,9 @@ sitemap:
       d.setFullYear(year);
       d.setMonth(month - 1);
       d.setDate(day);
+      d.setHours(0);
       d.setMinutes(0);
       d.setSeconds(0);
-      d.setMinutes(0);
       return d;
     } catch (e) {
       console.error(e);
@@ -966,7 +1045,7 @@ sitemap:
             return false;
           }
           const minAgeLimit = parseInt(query.minAgeLimit);
-          if (Number(session.min_age_limit) > minAgeLimit) {
+          if (Number(session.min_age_limit) !== minAgeLimit) {
             return false;
           }
           return true;
@@ -974,8 +1053,12 @@ sitemap:
       });
   }
 
+  let activeServiceWorkerRegistration;
+
   function getServiceWorkerRegistration() {
     return new Promise(function (resolve, reject) {
+      if (activeServiceWorkerRegistration)
+        return resolve(activeServiceWorkerRegistration);
       if ("serviceWorker" in navigator) {
         navigator.serviceWorker
           .getRegistrations()
@@ -994,15 +1077,19 @@ sitemap:
                 }
               }
             }
-            reject("Not registered");
+            return navigator.serviceWorker.register(
+              "/assets/covid/service.js",
+              {
+                scope: "/assets/covid/notification-scope",
+              }
+            );
+          })
+          .then((registration) => {
+            activeServiceWorkerRegistration = registration;
           });
+      } else {
+        reject("Not supported");
       }
-    });
-  }
-
-  function registerNotificationServiceWorker() {
-    return navigator.serviceWorker.register("/assets/covid/service.js", {
-      scope: "/assets/covid/notification-scope",
     });
   }
 
@@ -1033,82 +1120,5 @@ sitemap:
         search.toString();
       window.history.pushState({ path: newurl }, "", newurl);
     }
-  }
-
-  function SubscriptionsStorage() {
-    let db;
-    const cbs = [];
-    const request = window.indexedDB.open("covid", 1);
-    request.onsuccess = function () {
-      db = request.result;
-      if (cbs.length) {
-        cbs.map((cb) => cb());
-      }
-    };
-    // create/upgrade the database without version checks
-    request.onupgradeneeded = function () {
-      db = request.result;
-      if (!db.objectStoreNames.contains("subscriptions")) {
-        // if there's no "books" store
-        db.createObjectStore("subscriptions", { keyPath: "id" }); // create it
-      }
-    };
-    return {
-      count(cb) {
-        if (!db) {
-          cbs.push(() => this.count(cb));
-          return;
-        }
-        let transaction = db.transaction("subscriptions");
-        let subscriptions = transaction.objectStore("subscriptions");
-        const request = subscriptions.count();
-        request.onsuccess = function () {
-          cb(request.result);
-        };
-      },
-      has(subscription, cb) {
-        if (!db) {
-          cbs.push(() => this.has(subscription, cb));
-          return;
-        }
-        let transaction = db.transaction("subscriptions");
-        let subscriptions = transaction.objectStore("subscriptions");
-        const request = subscriptions.get(subscription);
-        request.onsuccess = function () {
-          if (!request.result) {
-            cb(false);
-            return;
-          }
-          return cb(true);
-        };
-      },
-      add(subscription) {
-        if (!db) {
-          cbs.push(() => this.add(subscription));
-          return;
-        }
-        let transaction = db.transaction("subscriptions", "readwrite");
-        let subscriptions = transaction.objectStore("subscriptions");
-        subscriptions.add({ id: subscription });
-      },
-      remove(subscription) {
-        if (!db) {
-          cbs.push(() => this.remove(subscription));
-          return;
-        }
-        let transaction = db.transaction("subscriptions", "readwrite");
-        let subscriptions = transaction.objectStore("subscriptions");
-        const req = subscriptions.delete(subscription);
-      },
-      removeAll() {
-        if (!db) {
-          cbs.push(() => this.removeAll());
-          return;
-        }
-        let transaction = db.transaction("subscriptions", "readwrite");
-        let subscriptions = transaction.objectStore("subscriptions");
-        const req = subscriptions.clear();
-      },
-    };
   }
 </script>
