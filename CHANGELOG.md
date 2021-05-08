@@ -1,3 +1,10 @@
+## [1.9.10](https://github.com/sembark/www/compare/v1.9.9...v1.9.10) (2021-05-08)
+
+
+### Bug Fixes
+
+* **stats:** show the stats for a query ([1b45a98](https://github.com/sembark/www/commit/1b45a98161c47ad83a1ecfc4a2533c9aab3ca7c0))
+
 ## [1.9.9](https://github.com/sembark/www/compare/v1.9.8...v1.9.9) (2021-05-06)
 
 
