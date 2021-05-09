@@ -1,0 +1,2 @@
+User-agent: *
+disallow: /assets/covid/redirect-from-district-to-search.js

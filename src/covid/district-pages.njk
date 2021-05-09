@@ -12,6 +12,8 @@ sitemap:
 ---
 
 <div
+  id="pageContainer"
+  data-districtId="{{ district.district_id }}"
   style="
     max-width: 400px;
     margin: 0 auto;
@@ -71,21 +73,5 @@ sitemap:
   </h1>
   <p>Checking slots availability...</p>
 </div>
-
-<script>
-  function winLoad(callback) {
-    if (document.readyState === "complete") {
-      callback();
-    } else {
-      window.addEventListener("load", callback);
-    }
-  }
-
-  winLoad(function () {
-    setTimeout(() => {
-      window.location =
-        window.location.origin +
-        "/covid/vaccination-slots-availability?district_id={{ district.district_id }}&minAgeLimit=18&utm_source=direct&utm_medium=site&utm_campaign=covid-vaccination";
-    }, 1000);
-  });
-</script>
+<!-- Loading it as script to block search engines from redirecting -->
+<script src="/assets/covid/redirect-from-district-to-search.js"></script>
