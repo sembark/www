@@ -1,3 +1,10 @@
+## [1.9.11](https://github.com/sembark/www/compare/v1.9.10...v1.9.11) (2021-05-09)
+
+
+### Bug Fixes
+
+* **redirects:** block bots from redirection ([b73bfe8](https://github.com/sembark/www/commit/b73bfe8598c9cd6ad030a7e6278b10005d041340))
+
 ## [1.9.10](https://github.com/sembark/www/compare/v1.9.9...v1.9.10) (2021-05-08)
 
 
