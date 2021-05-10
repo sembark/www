@@ -1,3 +1,10 @@
+## [1.9.14](https://github.com/sembark/www/compare/v1.9.13...v1.9.14) (2021-05-10)
+
+
+### Bug Fixes
+
+* **seo:** improve seo title ([f7b03e3](https://github.com/sembark/www/commit/f7b03e3c31456dcb0a574e6af7a9f7021c7e4eb1))
+
 ## [1.9.13](https://github.com/sembark/www/compare/v1.9.12...v1.9.13) (2021-05-10)
 
 
