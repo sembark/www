@@ -1,3 +1,10 @@
+## [1.9.13](https://github.com/sembark/www/compare/v1.9.12...v1.9.13) (2021-05-10)
+
+
+### Bug Fixes
+
+* **css:** set min height to search results ([942631e](https://github.com/sembark/www/commit/942631e5ff86eb34520df9ab08a79c6604a90cd3))
+
 ## [1.9.12](https://github.com/sembark/www/compare/v1.9.11...v1.9.12) (2021-05-10)
 
 
