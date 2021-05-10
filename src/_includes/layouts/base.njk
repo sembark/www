@@ -6,19 +6,9 @@
     <link rel="dns-prefetch" href="https://assets.sembark.com" />
     <link rel="dns-prefetch" href="https://rsms.com" />
     <link rel="assets" href="https://assets.sembark.com" />
-    {% if seo.title %}
-    <title>{{ seo.title }}</title>
-    {% else %}
-    <title>{{ meta.appName }} - {{ title }}</title>
-    {% endif %}
-    <meta
-      property="twitter:title"
-      content="{{ meta.appName }} - {{ seo.title or title }}"
-    />
-    <meta
-      property="og:title"
-      content="{{ meta.appName }} - {{ seo.title or title }}"
-    />
+    <title>{{ meta.appName }} - {{ seo.title or title }}</title>
+    <meta property="twitter:title" content="{{ seo.title or title }}" />
+    <meta property="og:title" content="{{ seo.title or title }}" />
     <meta
       name="description"
       content="{{ seo.description or description or  meta.description }}"
@@ -45,7 +35,7 @@
     <meta property="twitter:image:height" content="630" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:site_name" content="{{ meta.siteName }}" />
+    <meta property="og:site_name" content="{{ meta.appName }}" />
     <meta property="og:url" content="{{ meta.publicUrl }}" />
     <meta property="og:type" content="website" />
     <meta name="keywords" value="{{ meta.keywords }}" />

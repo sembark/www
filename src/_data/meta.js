@@ -5,7 +5,6 @@ module.exports = {
   appEnv,
   version: appVersion,
   appName: "Sembark",
-  siteName: "Sembark - The Travel Management Software",
   publicUrl: process.env.APP_PUBLIC_URL,
   description:
     "Manage travel sales, reservation and accounting with Sembark and get 1-click quotation, smart calendar reservation and accounting with expense management",

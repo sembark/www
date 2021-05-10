@@ -11,7 +11,7 @@
     description = "Search for available slots in " + district.district_name + ",
     " + district.state.state_name + " and book an appointment to get vaccinated"
     %}
-    <title>{{ title }}</title>
+    <title>{{ title }} - {{ meta.appName }}</title>
     <meta property="twitter:title" content="{{ title }}" />
     <meta property="og:title" content="{{ title }}" />
     <meta name="description" content="{{ description }}" />
@@ -30,7 +30,7 @@
     <meta property="twitter:image:height" content="630" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:site_name" content="{{ meta.siteName }}" />
+    <meta property="og:site_name" content="{{ meta.appName }}" />
     <meta property="og:url" content="{{ meta.publicUrl }}" />
     <meta property="og:type" content="website" />
     <meta name="keywords" value="{{ meta.keywords }}" />
