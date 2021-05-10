@@ -153,20 +153,21 @@ async function checkForSlotsAvailability() {
                 // no slots available
                 console.log(`[${new Date()}]: No slots available`);
               }
-              getAvailabilityStatsForQuery(sub.id).then(function (details) {
-                getClients().then(function (clients) {
-                  for (let client of clients) {
-                    console.log("notify for stats", sub.id, details);
-                    client.postMessage({
-                      type: "availability_stats",
-                      payload: {
-                        details,
-                        query: sub.id,
-                      },
-                    });
-                  }
+              setTimeout(function () {
+                getAvailabilityStatsForQuery(sub.id).then(function (details) {
+                  getClients().then(function (clients) {
+                    for (let client of clients) {
+                      client.postMessage({
+                        type: "availability_stats",
+                        payload: {
+                          details,
+                          query: sub.id,
+                        },
+                      });
+                    }
+                  });
                 });
-              });
+              }, 300);
             })
             .catch(function (e) {
               reportToGA("covid_vaccination_search_failed", {
@@ -393,13 +394,13 @@ async function storeAvailabilityStatsForQuery(query, sessions) {
       id: existing.id,
       query,
       at,
-      average_available_capacity,
+      average_available_capacity: Math.ceil(average_available_capacity),
     });
   } else {
     return await db.add("availability", {
       query,
       at,
-      average_available_capacity: totalAvailability,
+      average_available_capacity: Math.ceil(totalAvailability),
     });
   }
 }
@@ -421,7 +422,9 @@ async function getAvailabilityStatsForQuery(query) {
     "query_idx",
     query
   );
-  return availability.filter((d) => d.average_available_capacity > 0);
+  return availability
+    .filter((d) => d.average_available_capacity > 0)
+    .sort((a, b) => (a.at > b.at ? 1 : -1));
 }
 
 let db;
