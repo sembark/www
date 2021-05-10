@@ -1,3 +1,10 @@
+## [1.9.12](https://github.com/sembark/www/compare/v1.9.11...v1.9.12) (2021-05-10)
+
+
+### Bug Fixes
+
+* **notification:** improve time and reporting ([a205b0c](https://github.com/sembark/www/commit/a205b0ca559cbaaaee9a5099a477467877308194))
+
 ## [1.9.11](https://github.com/sembark/www/compare/v1.9.10...v1.9.11) (2021-05-09)
 
 
