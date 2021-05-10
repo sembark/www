@@ -200,34 +200,66 @@ sitemap:
           </form>
           <template x-if="availabilityStats.length > 0">
             <div class="mt-8">
-              <h2 class="text-lg font-medium mb-4" id="how_to_book">
+              <h2 class="text-lg font-medium mb-2" id="how_to_book">
                 General Availability
               </h2>
               <div class="w-full max-w-full overflow-x-auto">
-                <table class="border">
+                <table>
                   <tbody>
                     <tr class="relative">
-                      <th class="px-2 sticky top-0 left-0 bg-white z-1">
-                        Time
+                      <th
+                        class="sticky top-0 left-0 bg-white z-1 p-0 vertical-middle border-b"
+                      >
+                        <div class="px-2 py-2 text-gray-600">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-4 w-4"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                          >
+                            <title>Time</title>
+                            <path
+                              fill-rule="evenodd"
+                              d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
+                              clip-rule="evenodd"
+                            />
+                          </svg>
+                        </div>
                       </th>
                       <template
                         x-for="(availability, index, collection) in availabilityStats"
                         :key="index"
                       >
-                        <td class="px-2">
+                        <td
+                          x-bind:class="(index % 2 !== 0 ? 'bg-gray-50 ': '') + 'px-2 py-0 text-sm vertical-middle border-b'"
+                        >
                           <div x-text="availability.at"></div>
                         </td>
                       </template>
                     </tr>
-                    <tr>
-                      <th class="px-2 sticky top-0 left-0 bg-white z-1">
-                        Aval.
+                    <tr class="relative">
+                      <th class="sticky top-0 left-0 bg-white z-1 p-0">
+                        <div class="px-2 py-2 text-gray-600">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-4 w-4"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                          >
+                            <title>Available Slots</title>
+                            <path
+                              d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"
+                            />
+                          </svg>
+                        </div>
                       </th>
                       <template
                         x-for="(availability, index, collection) in availabilityStats"
                         :key="index"
                       >
-                        <td class="px-2">
+                        <td
+                          x-bind:class="(index % 2 !== 0 ? 'bg-gray-50 ': '') + 'px-2 py-0 text-sm vertical-middle'"
+                        >
                           <div
                             x-text="availability.average_available_capacity"
                           ></div>
@@ -237,6 +269,19 @@ sitemap:
                   </tbody>
                 </table>
               </div>
+              <template x-if="hasSubscribed">
+                <p class="text-xs text-gray-500 mt-3">
+                  Please keep this tab open for updates.
+                </p>
+              </template>
+              <template x-if="!hasSubscribed">
+                <p class="text-xs text-gray-500 mt-3">
+                  <a href="#subscribe" @click="handleSubscriptionChange"
+                    >Subscribe</a
+                  >
+                  to auto-update this list
+                </p>
+              </template>
             </div>
           </template>
         </div>
@@ -300,38 +345,70 @@ sitemap:
                           <label
                             class="p-4 border-2 border-dashed border-indigo-100 rounded-lg flex space-x-2 w-full bg-indigo-50 cursor-pointer"
                           >
-                            <div>
+                            <div class="relative mt-1">
                               <input
-                                class="block mt-1"
+                                class="block invisible absolute h-1 w-1 opacity-0"
                                 type="checkbox"
                                 x-bind:checked="hasSubscribed"
                                 @change="handleSubscriptionChange"
                               />
+                              <template x-if="!hasSubscribed">
+                                <div class="text-indigo-800">
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-6 w-6 transform -rotate-12"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                  >
+                                    <path
+                                      stroke-linecap="round"
+                                      stroke-linejoin="round"
+                                      stroke-width="2"
+                                      d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
+                                    />
+                                  </svg>
+                                </div>
+                              </template>
+                              <template x-if="hasSubscribed">
+                                <div class="text-indigo-800">
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-6 w-6 transform -rotate-12"
+                                    viewBox="0 0 20 20"
+                                    fill="currentColor"
+                                  >
+                                    <path
+                                      d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"
+                                    />
+                                  </svg>
+                                </div>
+                              </template>
                             </div>
-                            <div>
+                            <div class="flex-1 min-w-0">
                               <template x-if="hasBlockedNotifications">
-                                <div>
-                                  <div>Notifications have been blocked.</div>
-                                  <div class="text-xs text-gray-600 mt-1">
+                                <section>
+                                  <h5>Notifications have been blocked.</h5>
+                                  <p class="text-xs text-gray-600 mt-1">
                                     Please grant permissions to show
                                     notifications from the browser settings to
                                     receive updates regarding slots
                                     availability.
-                                  </div>
-                                </div>
+                                  </p>
+                                </section>
                               </template>
                               <template x-if="!hasBlockedNotifications">
-                                <div>
-                                  <div>
+                                <section id="subscribe">
+                                  <h5>
                                     Get notification on updates in this area
-                                  </div>
-                                  <div class="text-xs text-gray-600 mt-1">
+                                  </h5>
+                                  <p class="text-xs text-gray-600 mt-1">
                                     Please select the checkbox to get
                                     notifications for slots availability in this
                                     area. You will receive notifications in your
                                     browser. No phone or email required.
-                                  </div>
-                                </div>
+                                  </p>
+                                </section>
                               </template>
                             </div>
                           </label>
@@ -356,7 +433,10 @@ sitemap:
               <template x-if="sessions.length && !isSubmitting">
                 <div class="mb-8">
                   <div class="block">
-                    <ol class="space-y-4 max-h-screen overflow-auto relative">
+                    <ol
+                      class="space-y-4 overflow-auto relative"
+                      style="max-height: calc(100vh - 200px)"
+                    >
                       <li
                         class="sticky top-0 w-full bg-white py-2 px-4 text-sm flex justify-between text-gray-600 items-center font-medium -mb-2"
                       >
@@ -416,55 +496,90 @@ sitemap:
                     <label
                       class="p-4 border-2 border-dashed border-indigo-100 rounded-lg flex space-x-2 w-full bg-indigo-50 cursor-pointer"
                     >
-                      <div>
+                      <div class="relative mt-1">
                         <input
-                          class="block mt-1"
+                          class="block invisible absolute h-1 w-1 opacity-0"
                           type="checkbox"
                           x-bind:checked="hasSubscribed"
                           @change="handleSubscriptionChange"
                         />
+                        <template x-if="!hasSubscribed">
+                          <div class="text-indigo-800">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="h-6 w-6 transform -rotate-12"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
+                              />
+                            </svg>
+                          </div>
+                        </template>
+                        <template x-if="hasSubscribed">
+                          <div class="text-indigo-800">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="h-6 w-6 transform -rotate-12"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                            >
+                              <path
+                                d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"
+                              />
+                            </svg>
+                          </div>
+                        </template>
                       </div>
-                      <div>
+                      <div class="flex-1 min-w-0">
                         <template x-if="hasBlockedNotifications">
-                          <div>
-                            <div>Notifications have been blocked.</div>
-                            <div class="text-xs text-gray-600 mt-1">
+                          <section>
+                            <h5>Notifications have been blocked.</h5>
+                            <p class="text-xs text-gray-600 mt-1">
                               Please grant permissions to show notifications
                               from the browser settings to receive updates
                               regarding slots availability.
-                            </div>
-                          </div>
+                            </p>
+                          </section>
                         </template>
                         <template
                           x-if="!hasSubscribed && !hasBlockedNotifications"
                         >
-                          <div>
-                            <div>Get notification on updates in this area</div>
-                            <div class="text-xs text-gray-600 mt-1">
+                          <section id="subscribe">
+                            <h5>Get notification on updates in this area</h5>
+                            <p class="text-xs text-gray-600 mt-1">
                               Please select the checkbox to get notifications
                               for slots availability in this area. You will
                               receive notifications in your browser. No phone or
                               email required.
-                            </div>
-                          </div>
+                            </p>
+                          </section>
                         </template>
                         <template
                           x-if="hasSubscribed && !hasBlockedNotifications"
                         >
-                          <div>
-                            <div>
+                          <section>
+                            <h5>
                               You have subscribed for slots availability
                               updates.
-                            </div>
-                            <div class="text-xs text-gray-600 mt-1">
-                              Please keep this tab open in your browser. You
-                              will receive browser notification for slots
+                            </h5>
+                            <p class="text-xs text-gray-600 mt-1">
+                              <strong
+                                >Please keep this tab open in your
+                                browser.</strong
+                              >
+                              You will receive browser notification for slots
                               availability for this area.
-                            </div>
-                            <div class="text-xs mt-1">
-                              To unsubscribe, please deselect the checkbox.
-                            </div>
-                          </div>
+                            </p>
+                            <p class="text-xs mt-1">
+                              To unsubscribe, please click the bell icon.
+                            </p>
+                          </section>
                         </template>
                       </div>
                     </label>
@@ -548,6 +663,50 @@ sitemap:
         </li>
         <li>
           <div class="font-medium mb-2">
+            I am not getting notifications regarding slots availability
+          </div>
+          <div class="text-sm text-gray-600">
+            You should get notifications when you have subscribed and there are
+            free slots available for your region. If you know there are some
+            free slots available, please follow these step to troubleshoot the
+            problem.
+            <ol class="list-decimal ml-5 mt-2 space-y-2">
+              <li>
+                Please check that this tab is open in your browser and the
+                browser is not closed. You can keep it in the background.
+              </li>
+              <li>
+                There may be high demand or low supply in your area. If you have
+                subscribed, you will get general availability stats for your
+                area. Be sure to check during the time of availability to get
+                your booking. Please be patient.
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5 inline"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </li>
+              <li>
+                Please check the system settings for notifications on your
+                device to see if the your browser (Google Chrome, Firefox etc.)
+                is allowed to show the notifications.
+              </li>
+              <li>
+                Please check that this website is not block from showing the
+                notifications.
+              </li>
+            </ol>
+          </div>
+        </li>
+        <li>
+          <div class="font-medium mb-2">
             I can not see the "Get Notifications" button on my device
           </div>
           <div class="text-sm text-gray-600">
@@ -614,32 +773,6 @@ sitemap:
             Slots availability is checked in background on a regular basis. As
             soon as there are slots available for your searched region, you will
             get a notification.
-          </div>
-        </li>
-        <li>
-          <div class="font-medium mb-2">
-            I am not getting notifications regarding slots availability
-          </div>
-          <div class="text-sm text-gray-600">
-            You should get notifications when you have subscribed and there are
-            free slots available for your region. If you know there are some
-            free slots available, please follow these step to troubleshoot the
-            problem.
-            <ol class="list-decimal ml-5 mt-2 space-y-2">
-              <li>
-                Please check that this tab is open in your browser and the
-                browser is not closed. You can keep it in the background.
-              </li>
-              <li>
-                Please check the system settings for notifications on your
-                device to see if the your browser (Google Chrome, Firefox etc.)
-                is allowed to show the notifications.
-              </li>
-              <li>
-                Please check that this website is not block from showing the
-                notifications.
-              </li>
-            </ol>
           </div>
         </li>
         <li>
@@ -723,12 +856,6 @@ sitemap:
           query.district_id = m.query.district_id;
         }
         if (!query.pincode && !query.district_id) return;
-        gtag("event", "covid_vaccination_search", {
-          using: m.searchUsing,
-          pincode: query.pincode,
-          district_id: query.district_id,
-          min_age_limit: m.minAgeLimit,
-        });
         m.updateHasSubscribedIfNecessary();
         m.isSubmitting = true;
         m.error = null;
@@ -741,14 +868,25 @@ sitemap:
           minAgeLimit: m.minAgeLimit,
         });
         fetchSessions(fetchQuery)
-          .then((sessions) => {
+          .then(({ totalAvailability, sessions }) => {
             m.sessions = sessions;
             m.isSubmitting = false;
+            gtag("event", "covid_vaccination_search", {
+              using: m.searchUsing,
+              pincode: query.pincode,
+              district_id: query.district_id,
+              min_age_limit: m.minAgeLimit,
+              availability: totalAvailability,
+              sessions_count: sessions.length,
+            });
           })
           .catch(function (e) {
             m.error = e;
             m.isSubmitting = false;
             console.error(e);
+            gtag("event", "covid_vaccination_search_failed", {
+              message: e.message,
+            });
           });
       },
       handleSubscriptionChange(e) {
@@ -793,8 +931,10 @@ sitemap:
                   m.totalSubscriptionCount = subscriptions.length;
                   break;
                 case "availability_stats":
-                  const stats = event.data.payload;
-                  m.availabilityStats = stats;
+                  const { details, query } = event.data.payload;
+                  if (m.getQueryString() === query) {
+                    m.availabilityStats = details;
+                  }
                   break;
                 case "subscription_details":
                   const subscription_details = event.data.payload;
@@ -842,7 +982,9 @@ sitemap:
         const m = this;
         m.hasSubscribed = false;
         m.totalSubscriptionCount -= 1;
-        gtag("event", "covid_notification_unsubscribed");
+        gtag("event", "covid_notification_unsubscribed", {
+          total: m.totalSubscriptionCount,
+        });
         // notify via service worker
         getServiceWorkerRegistration().then((reg) =>
           reg.active.postMessage({
@@ -864,7 +1006,9 @@ sitemap:
             m.unsubscribeFromAll();
             return;
           }
-          gtag("event", "covid_notification_subscribed");
+          gtag("event", "covid_notification_subscribed", {
+            total: m.totalSubscriptionCount + 1,
+          });
           m.hasSubscribed = true;
           m.totalSubscriptionCount += 1;
           getServiceWorkerRegistration().then(function (registration) {
@@ -1040,7 +1184,10 @@ sitemap:
         []);
       })
       .then(function (sessions) {
-        return sessions.filter(function hasAvailableSlots(session) {
+        let totalAvailability = 0;
+        const filteredSessions = sessions.filter(function hasAvailableSlots(
+          session
+        ) {
           if (parseInt(session.available_capacity) <= 0) {
             return false;
           }
@@ -1048,8 +1195,10 @@ sitemap:
           if (Number(session.min_age_limit) !== minAgeLimit) {
             return false;
           }
+          totalAvailability += session.available_capacity;
           return true;
         });
+        return { totalAvailability, sessions: filteredSessions };
       });
   }
 

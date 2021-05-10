@@ -20,8 +20,8 @@ function scheduleSlotsAvailability(after) {
     getSubscriptionsLength().then(function (count) {
       if (count > 0) {
         checkForSlotsAvailability().then(() => {
-          // retry after 5 minutes
-          scheduleSlotsAvailability(1000 * 60 * 5);
+          // retry after 1 minute
+          scheduleSlotsAvailability(1000 * 60 * 1);
         });
       }
     });
@@ -91,7 +91,10 @@ self.addEventListener("message", (event) => {
       getAvailabilityStatsForQuery(event.data.payload).then(function (details) {
         event.source.postMessage({
           type: "availability_stats",
-          payload: details,
+          payload: {
+            details,
+            query: event.data.payload,
+          },
         });
       });
       break;
@@ -106,15 +109,20 @@ async function checkForSlotsAvailability() {
         const query = JSON.parse(sub.id);
         if (query.pincode || query.district_id) {
           fetchSessions(query)
-            .then((sessions) => {
+            .then(({ totalAvailability, sessions }) => {
+              reportToGA("covid_vaccination_search", {
+                using: query.pincode ? "pincode" : "district",
+                pincode: query.pincode,
+                district_id: query.district_id,
+                min_age_limit: query.minAgeLimit,
+                availability: totalAvailability,
+                sessions_count: sessions.length,
+              });
               if (sessions.length) {
                 console.log(`[${new Date()}]: Slots available at for `, query);
                 // some sessions are available
                 notify(
-                  `${sessions.reduce(
-                    (total, s) => total + s.available_capacity,
-                    0
-                  )} Vaccination Slots Available for ${query.minAgeLimit}+`,
+                  `${totalAvailability} Vaccination Slots Available for ${query.minAgeLimit}+`,
                   {
                     body: `${sessions.length} centers in ${sessions[0].district_name} (${sessions[0].pincode})`,
                     actions: [
@@ -145,8 +153,25 @@ async function checkForSlotsAvailability() {
                 // no slots available
                 console.log(`[${new Date()}]: No slots available`);
               }
+              getAvailabilityStatsForQuery(sub.id).then(function (details) {
+                getClients().then(function (clients) {
+                  for (let client of clients) {
+                    console.log("notify for stats", sub.id, details);
+                    client.postMessage({
+                      type: "availability_stats",
+                      payload: {
+                        details,
+                        query: sub.id,
+                      },
+                    });
+                  }
+                });
+              });
             })
             .catch(function (e) {
+              reportToGA("covid_vaccination_search_failed", {
+                message: e.message,
+              });
               // Something went wrong
               notify("Failed to refresh vaccination slots availability", {
                 body: `Error: ${
@@ -184,14 +209,14 @@ self.addEventListener("notificationclick", function (event) {
     case "unsubscribe":
       console.log("unsubscribe from " + event.notification.tag);
       deleteSubscription(event.notification.tag);
-      reportToGA("covid_notification_clicked", "unsubscribe");
+      reportToGA("covid_notification_clicked", { ea: "unsubscribe" });
       break;
     case "retry_now":
       // there were some slots available, client clicked on view / simply  the notification
       // reschedule the check
       console.log("Retry now, Refresh the slots availability");
       event.waitUntil(openOrFocusLink(link));
-      reportToGA("covid_notification_clicked", "retry_now");
+      reportToGA("covid_notification_clicked", { ea: "retry_now" });
       scheduleSlotsAvailability(1000);
       break;
     default:
@@ -200,20 +225,20 @@ self.addEventListener("notificationclick", function (event) {
       console.log(
         "Notification clicked. Rescheduling slots availability check"
       );
-      reportToGA("covid_notification_clicked", "view_or_others");
+      reportToGA("covid_notification_clicked", { ea: "view_or_others" });
       break;
   }
 });
 
 self.addEventListener("notificationclose", function (event) {
   console.log("On notification close: ", event.notification);
-  reportToGA("covid_notification_closed", event.notification.title);
+  reportToGA("covid_notification_closed", { title: event.notification.title });
   // if (!event.notification.actions.length) return;
 });
 
 function notify(title, options) {
   if (self.registration.active) {
-    reportToGA("covid_notification_shown", title);
+    reportToGA("covid_notification_shown", { title: title });
     self.registration.showNotification(
       title,
       Object.assign({}, options, {
@@ -288,14 +313,20 @@ async function fetchSessions(query) {
         }
       );
       storeAvailabilityStatsForQuery(query, sessionsAfterOtherFiltersApplied);
-      return sessionsAfterOtherFiltersApplied.filter(function hasAvailableSlots(
-        session
-      ) {
-        if (parseInt(session.available_capacity) <= 0) {
-          return false;
+      let totalAvailability = 0;
+      const filteredSessions = sessionsAfterOtherFiltersApplied.filter(
+        function hasAvailableSlots(session) {
+          if (parseInt(session.available_capacity) <= 0) {
+            return false;
+          }
+          totalAvailability += session.available_capacity;
+          return true;
         }
-        return true;
-      });
+      );
+      return {
+        totalAvailability,
+        sessions: filteredSessions,
+      };
     });
 }
 
@@ -353,8 +384,11 @@ async function storeAvailabilityStatsForQuery(query, sessions) {
   const at = getTimeString(now);
   const existing = existingAvailabilityStats.find((s) => s.at === at);
   if (existing) {
-    const average_available_capacity =
-      (Number(existing.average_available_capacity) + totalAvailability) / 2;
+    const average_available_capacity = Number(
+      existing.average_available_capacity > 0
+    )
+      ? (Number(existing.average_available_capacity) + totalAvailability) / 2
+      : totalAvailability;
     return await db.put("availability", {
       id: existing.id,
       query,
@@ -432,18 +466,20 @@ function parseDate(date) {
 function openOrFocusLink(link) {
   // This looks to see if the current is already open and
   // focuses if it is
-  return clients
-    .matchAll({
-      includeUncontrolled: true,
-      type: "window",
-    })
-    .then(function (clientList) {
-      for (let i = 0; i < clientList.length; i++) {
-        const client = clientList[i];
-        if (client.url == link && "focus" in client) return client.focus();
-      }
-      if (clients.openWindow) return clients.openWindow(link || "/");
-    });
+  return getClients().then(function (clientList) {
+    for (let i = 0; i < clientList.length; i++) {
+      const client = clientList[i];
+      if (client.url == link && "focus" in client) return client.focus();
+    }
+    if (clients.openWindow) return clients.openWindow(link || "/");
+  });
+}
+
+function getClients() {
+  return clients.matchAll({
+    includeUncontrolled: true,
+    type: "window",
+  });
 }
 
 function formatDate(date) {
@@ -469,18 +505,25 @@ function setTimeoutForLargeDelays(_fn, delay) {
   return setTimeout.apply(undefined, arguments);
 }
 
-function reportToGA(eventCategory, eventAction) {
-  if (location.hostname !== "sembark.com") return;
+function reportToGA(eventCategory, properties) {
+  if (location.hostname !== "sembark.com") {
+    console.log(["event", eventCategory, "covid-serviceworker", properties]);
+    return;
+  }
   fetch("https://www.google-analytics.com/collect", {
     method: "post",
-    body: JSON.stringify({
-      tid: "G-2DEQQHZL6V",
-      cid: gcid,
-      v: 1, // Version Number
-      t: "event", // Hit Type
-      ec: eventCategory, // Event Category
-      ea: eventAction, // Event Action
-      el: "covid-serviceworker", // Event Label
-    }),
+    body: JSON.stringify(
+      Object.assign(
+        {
+          tid: "G-2DEQQHZL6V",
+          cid: gcid,
+          v: 1, // Version Number
+          t: "event", // Hit Type
+          ec: eventCategory, // Event Category
+          el: "covid-serviceworker", // Event Label
+        },
+        properties
+      )
+    ),
   });
 }
