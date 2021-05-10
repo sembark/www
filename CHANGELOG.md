@@ -1,3 +1,10 @@
+## [1.9.15](https://github.com/sembark/www/compare/v1.9.14...v1.9.15) (2021-05-10)
+
+
+### Bug Fixes
+
+* **id:** faq id missing ([4b820bb](https://github.com/sembark/www/commit/4b820bb43463cb02f783685b932b45abfa50ccc8))
+
 ## [1.9.14](https://github.com/sembark/www/compare/v1.9.13...v1.9.14) (2021-05-10)
 
 
