@@ -1,3 +1,10 @@
+## [1.9.16](https://github.com/sembark/www/compare/v1.9.15...v1.9.16) (2021-05-11)
+
+
+### Bug Fixes
+
+* **spell:** correct for hindi ([2cdf061](https://github.com/sembark/www/commit/2cdf0615b579d6d0c83cdc59916b7172ca2a837a))
+
 ## [1.9.15](https://github.com/sembark/www/compare/v1.9.14...v1.9.15) (2021-05-10)
 
 
