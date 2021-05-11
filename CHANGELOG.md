@@ -1,3 +1,10 @@
+## [1.9.17](https://github.com/sembark/www/compare/v1.9.16...v1.9.17) (2021-05-11)
+
+
+### Bug Fixes
+
+* **spell:** desktop spell not correct ([84fd8d9](https://github.com/sembark/www/commit/84fd8d95d45e92e3b145749946793f62b055bf91))
+
 ## [1.9.16](https://github.com/sembark/www/compare/v1.9.15...v1.9.16) (2021-05-11)
 
 
