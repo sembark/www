@@ -1,3 +1,10 @@
+# [1.10.0](https://github.com/sembark/www/compare/v1.9.17...v1.10.0) (2021-05-14)
+
+
+### Features
+
+* **covid-fetch:** reduce interval to 5 sec ([ed8bbcf](https://github.com/sembark/www/commit/ed8bbcfb89405f0e2418f2e2390d7d071a34988e))
+
 ## [1.9.17](https://github.com/sembark/www/compare/v1.9.16...v1.9.17) (2021-05-11)
 
 
