@@ -4,26 +4,42 @@ let gcid = `GA1.2.${parseInt(Math.random() * 1000000000)}${parseInt(
   Math.random() * 1000000000
 )}`;
 
+let PER_REQUEST_THROTTLE_SECONDS = 5;
+
 let timer;
 function scheduleSlotsAvailability(after) {
   console.log(
     `[Scheduled (${new Date()})]: Check for slots availability after ${
-      after / (1000 * 60)
-    } minutes`
+      after / 1000
+    } seconds`
   );
   if (timer) {
     clearTimeout(timer);
   }
   timer = setTimeout(function () {
     timer = undefined;
-    // stop the availability check if there are no subscriptions left
-    getSubscriptionsLength().then(function (count) {
-      if (count > 0) {
-        checkForSlotsAvailability().then(() => {
-          // retry after 1 minute
-          scheduleSlotsAvailability(1000 * 60 * 1);
-        });
-      }
+    // schedule the fetch
+    getSubscriptions().then((subscriptions) => {
+      const subscriptionsCount = subscriptions.length;
+      if (!subscriptionsCount) return;
+      return Promise.all(
+        subscriptions.map(function (sub, index) {
+          return new Promise((resolve) => {
+            const after = PER_REQUEST_THROTTLE_SECONDS * 1000 * index;
+            console.log(
+              `Queued fetch for ${sub.id} after ${after / 1000} sec.`
+            );
+            setTimeout(() => {
+              resolve(sub);
+            }, after);
+          }).then((sub) => {
+            return checkForSlotsAvailability(sub);
+          });
+        })
+      ).then((data) => {
+        // Next fetch after threshold
+        scheduleSlotsAvailability(PER_REQUEST_THROTTLE_SECONDS * 1000);
+      });
     });
   }, after);
 }
@@ -101,100 +117,93 @@ self.addEventListener("message", (event) => {
   }
 });
 
-async function checkForSlotsAvailability() {
-  console.log(`[${new Date()}]: Checking for slots availability...`);
-  return await getSubscriptions().then((subscriptions) => {
-    return Promise.all([
-      subscriptions.map(function (sub) {
-        const query = JSON.parse(sub.id);
-        if (query.pincode || query.district_id) {
-          fetchSessions(query)
-            .then(({ totalAvailability, sessions }) => {
-              reportToGA("covid_vaccination_search", {
-                using: query.pincode ? "pincode" : "district",
-                pincode: query.pincode,
-                district_id: query.district_id,
-                min_age_limit: query.minAgeLimit,
-                availability: totalAvailability,
-                sessions_count: sessions.length,
+async function checkForSlotsAvailability(sub) {
+  console.log(
+    `[${new Date()}]: Checking for slots availability for ${sub.id}...`
+  );
+  const query = JSON.parse(sub.id);
+  if (!query.pincode && !query.district_id) {
+    return Promise.reject(`Invalid subscription details: ${sub.id}`);
+  }
+  return fetchSessions(query)
+    .then(({ totalAvailability, sessions }) => {
+      reportToGA("covid_vaccination_search", {
+        using: query.pincode ? "pincode" : "district",
+        pincode: query.pincode,
+        district_id: query.district_id,
+        min_age_limit: query.minAgeLimit,
+        availability: totalAvailability,
+        sessions_count: sessions.length,
+      });
+      if (sessions.length) {
+        console.log(`[${new Date()}]: Slots available at for `, query);
+        // some sessions are available
+        notify(
+          `${totalAvailability} Vaccination Slots Available for ${query.minAgeLimit}+`,
+          {
+            body: `${sessions.length} centers in ${sessions[0].district_name} (${sessions[0].pincode})`,
+            actions: [
+              {
+                action: "view",
+                title: "View",
+              },
+              {
+                action: "unsubscribe",
+                title: "Unsubscribe",
+              },
+            ],
+            tag: sub.id,
+            data: {
+              link: `${location.origin}/covid/vaccination-slots-availability/?${
+                query.pincode ? `pincode=${query.pincode}` : ``
+              }${
+                query.district_id ? `district_id=${query.district_id}` : ``
+              }&minAgeLimit=45&viaNotification=1`,
+            },
+          }
+        );
+      } else {
+        // no slots available
+        console.log(`[${new Date()}]: No slots available`);
+      }
+      setTimeout(function () {
+        getAvailabilityStatsForQuery(sub.id).then(function (details) {
+          getClients().then(function (clients) {
+            for (let client of clients) {
+              client.postMessage({
+                type: "availability_stats",
+                payload: {
+                  details,
+                  query: sub.id,
+                },
               });
-              if (sessions.length) {
-                console.log(`[${new Date()}]: Slots available at for `, query);
-                // some sessions are available
-                notify(
-                  `${totalAvailability} Vaccination Slots Available for ${query.minAgeLimit}+`,
-                  {
-                    body: `${sessions.length} centers in ${sessions[0].district_name} (${sessions[0].pincode})`,
-                    actions: [
-                      {
-                        action: "view",
-                        title: "View",
-                      },
-                      {
-                        action: "unsubscribe",
-                        title: "Unsubscribe",
-                      },
-                    ],
-                    tag: sub.id,
-                    data: {
-                      link: `${
-                        location.origin
-                      }/covid/vaccination-slots-availability/?${
-                        query.pincode ? `pincode=${query.pincode}` : ``
-                      }${
-                        query.district_id
-                          ? `district_id=${query.district_id}`
-                          : ``
-                      }&minAgeLimit=45&viaNotification=1`,
-                    },
-                  }
-                );
-              } else {
-                // no slots available
-                console.log(`[${new Date()}]: No slots available`);
-              }
-              setTimeout(function () {
-                getAvailabilityStatsForQuery(sub.id).then(function (details) {
-                  getClients().then(function (clients) {
-                    for (let client of clients) {
-                      client.postMessage({
-                        type: "availability_stats",
-                        payload: {
-                          details,
-                          query: sub.id,
-                        },
-                      });
-                    }
-                  });
-                });
-              }, 300);
-            })
-            .catch(function (e) {
-              reportToGA("covid_vaccination_search_failed", {
-                message: e.message,
-              });
-              // Something went wrong
-              notify("Failed to refresh vaccination slots availability", {
-                body: `Error: ${
-                  e.message || "Network Issue"
-                }. Please check that you have a working internet connection.`,
-                tag: "error",
-                actions: [
-                  {
-                    action: "retry_now",
-                    title: "Retry Now",
-                  },
-                  {
-                    action: "unsubscribe",
-                    title: "Unsubscribe",
-                  },
-                ],
-              });
-            });
-        }
-      }),
-    ]);
-  });
+            }
+          });
+        });
+      }, 300);
+    })
+    .catch(function (e) {
+      reportToGA("covid_vaccination_search_failed", {
+        message: e.message,
+      });
+      // Something went wrong
+      notify("Failed to refresh vaccination slots availability", {
+        body: `Error: ${
+          e.message || "Network Issue"
+        }. Please check that you have a working internet connection.`,
+        tag: "error",
+        actions: [
+          {
+            action: "retry_now",
+            title: "Retry Now",
+          },
+          {
+            action: "unsubscribe",
+            title: "Unsubscribe",
+          },
+        ],
+      });
+    });
 }
 
 self.addEventListener("notificationclick", function (event) {
@@ -510,7 +519,7 @@ function setTimeoutForLargeDelays(_fn, delay) {
 
 function reportToGA(eventCategory, properties) {
   if (location.hostname !== "sembark.com") {
-    console.log(["event", eventCategory, "covid-serviceworker", properties]);
+    console.log(["event", eventCategory, "covid-service-worker", properties]);
     return;
   }
   fetch("https://www.google-analytics.com/collect", {
@@ -523,7 +532,7 @@ function reportToGA(eventCategory, properties) {
           v: 1, // Version Number
           t: "event", // Hit Type
           ec: eventCategory, // Event Category
-          el: "covid-serviceworker", // Event Label
+          from: "covid-service-worker", // Event Label
         },
         properties
       )
