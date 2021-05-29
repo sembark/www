@@ -1,3 +1,10 @@
+# [1.11.0](https://github.com/sembark/www/compare/v1.10.0...v1.11.0) (2021-05-29)
+
+
+### Features
+
+* **chat-bot:** add fb messenger and tawk ([50c064d](https://github.com/sembark/www/commit/50c064d8039687d9d8e3cfc22a78e664de7eb177))
+
 # [1.10.0](https://github.com/sembark/www/compare/v1.9.17...v1.10.0) (2021-05-14)
 
 
