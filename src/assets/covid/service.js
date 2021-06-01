@@ -69,8 +69,7 @@ self.addEventListener("message", (event) => {
       saveSubscription(event.data.payload);
       scheduleSlotsAvailability(5000);
       notify("Subscribed to slots updates", {
-        body:
-          "You will receive notification(s) for slots availability in this area.",
+        body: "You will receive notification(s) for slots availability in this area.",
         tag: "subscribed",
       });
       break;
