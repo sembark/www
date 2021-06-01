@@ -341,11 +341,15 @@ layout: base
 <div id="fb-root"></div>
 
 <!-- Your Chat Plugin code -->
-<div id="fb-customer-chat" class="fb-customerchat"></div>
+<div
+  id="fb-customer-chat"
+  class="fb-customerchat"
+  greeting_dialog_delay="5000"
+></div>
 
 <script>
   var chatbox = document.getElementById("fb-customer-chat");
-  chatbox.setAttribute("page_id", "104237884797689");
+  chatbox.setAttribute("page_id", "{{ meta.facebookPageId }}");
   chatbox.setAttribute("attribution", "biz_inbox");
   window.fbAsyncInit = function () {
     FB.init({
@@ -354,7 +358,7 @@ layout: base
     });
   };
 
-  (function (d, s, id) {
+  function loadFBCustomerChat(d, s, id) {
     var js,
       fjs = d.getElementsByTagName(s)[0];
     if (d.getElementById(id)) return;
@@ -363,21 +367,35 @@ layout: base
     js.id = id;
     js.src = "https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js";
     fjs.parentNode.insertBefore(js, fjs);
-  })(document, "script", "facebook-jssdk");
+  }
+  // TODO: Add it when we fix the alignment of the Messenger Icon
+  // loadFBCustomerChat(document, "script", "facebook-jssdk");
 </script>
 
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">
   var Tawk_API = Tawk_API || {},
     Tawk_LoadStart = new Date();
-  (function () {
-    var s1 = document.createElement("script"),
-      s0 = document.getElementsByTagName("script")[0];
+
+  Tawk_API.onChatMaximized = function () {
+    gtag("event", "tawk_chat_maximized");
+  };
+  Tawk_API.onChatMinimized = function () {
+    gtag("event", "tawk_chat_minimized");
+  };
+  Tawk_API.onChatStarted = function () {
+    gtag("event", "tawk_chat_started");
+  };
+  (function (document, tagName, id) {
+    var s1 = document.createElement(tagName),
+      s0 = document.getElementsByTagName(tagName)[0];
     s1.async = true;
-    s1.src = "https://embed.tawk.to/60b0f548de99a4282a1a1dd7/1f6pjsa2b";
+    s1.id = id;
+    s1.src =
+      "https://embed.tawk.to/{{ services.tawk.accountKey }}/{{ services.tawk.widgetId }}";
     s1.charset = "UTF-8";
     s1.setAttribute("crossorigin", "*");
     s0.parentNode.insertBefore(s1, s0);
-  })();
+  })(document, "script", "tawk-jssdk");
 </script>
 <!--End of Tawk.to Script-->
