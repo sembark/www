@@ -1,0 +1,166 @@
+---
+layout: main
+title: Amount Sembark
+sitemap:
+  changefreq: monthy
+  priority: 0.90
+---
+
+<main>
+  <section class="container px-4 mx-auto py-24">
+    <h1 class="text-5xl max-w-2xl font-medium text-indigo-50">
+      Our mission is to empower travel businesses with tools that help them
+      grow.
+    </h1>
+  </section>
+  <section class="bg-indigo-800 py-24 px-4">
+    <div class="container mx-auto">
+      <div class="lg:flex lg:space-x-12">
+        <section class="flex-1">
+          <h3 class="text-3xl mb-8 text-indigo-100 font-medium">Our Story</h3>
+          <p class="text-lg mb-8 max-w-2xl text-indigo-200">
+            We created Sembark for businesses that share our passion for using
+            technology to empower travel businesses for better customer
+            experience and growth. For many of us, great customer service isn't
+            a cost center — it's an effective marketing tool, a competitive
+            differentiator, and a cornerstone of the brand. Sembark was built
+            with
+            <b>"work together for better"</b> theme in mind and connects your
+            sales, reservations and accounting for ease of management.
+          </p>
+          <p class="text-lg mb-8 max-w-2xl text-indigo-200">
+            But till 2018, there were no travel business management platforms
+            available that embodied our technology-centric values. There were
+            software that quite literally required to manage the software
+            instead of software managing there business. These made it far too
+            difficult for a long term growth. We felt a strong pull to make
+            something different, and we did.
+          </p>
+          <p class="text-lg mb-8 max-w-2xl text-indigo-200">
+            Today Sembark is used by technology-centric organizations across
+            India, from small businesses to high-growth startups and
+            organizations. We've been on this journey for 1 year now and are
+            still in early days. And we are hoping for really long run.
+          </p>
+        </section>
+        <section class="lg:w-1/3 lg:mt-20">
+          <ul
+            class="
+              grid
+              sm:grid-cols-2
+              lg:grid-cols-1
+              rounded-lg
+              bg-indigo-700
+              text-center
+              divide-y
+              sm:divide-y-0 sm:divide-x
+              lg:divide-y lg:divide-x-0
+              divide-indigo-900
+              hover:divide-transparent
+            "
+          >
+            <li
+              class="
+                p-8
+                hover:transform
+                hover:scale-105
+                hover:rounded-lg
+                hover:shadow-lg
+                hover:bg-indigo-700
+                flex flex-col
+                space-y-2
+                duration-300
+                ease
+              "
+            >
+              <span>Launched in November of </span>
+              <span class="text-5xl font-bold">2019</span>
+              <span>remove from day one</span>
+            </li>
+            <li
+              class="
+                p-8
+                hover:transform
+                hover:scale-105
+                hover:rounded-lg
+                hover:shadow-lg
+                hover:bg-indigo-700
+                flex flex-col
+                space-y-2
+                duration-300
+                ease
+              "
+            >
+              <span>We serve customers in</span>
+              <span class="text-5xl font-bold">10+</span>
+              <span>cities in India</span>
+            </li>
+          </ul>
+        </section>
+      </div>
+    </div>
+  </section>
+  <section class="bg-indigo-50 py-24 px-4">
+    <div class="container mx-auto">
+      <h3 class="text-3xl mb-8 text-indigo-900 font-medium text-center">
+        Our Values
+      </h3>
+      <p class="text-lg mb-8 max-w-xl mx-auto text-indigo-800 text-center">
+        People love to buy from and support businesses they believe in. It's
+        what makes small businesses so special, and it's why we choose to share
+        our values publicly.
+      </p>
+      <section class="mt-16 bg-white p-8 rounded-lg">
+        <h4 class="text-2xl mb-8 text-indigo-900 font-medium">
+          Do less, do it better
+        </h4>
+        <p class="text-lg mb-8 max-w-2xl text-indigo-800">
+          Instead of chasing feature parity, we aspire to build products that
+          get the details right. We're fiercely committed to helping our
+          customers feel like they've got superpowers.
+        </p>
+      </section>
+    </div>
+  </section>
+  <section class="px-4 py-24 bg-purple-800">
+    <div class="container mx-auto">
+      <h3 class="text-3xl mb-12 text-purple-100 font-medium text-center">
+        Meet Our Team
+      </h3>
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
+        {% for member in team.members %}
+        <div
+          class="
+            hover:shadow-xl
+            p-8
+            rounded-lg
+            transition-colors
+            duration-300
+            hover:bg-purple-700
+          "
+        >
+          <div class="text-center">
+            <img
+              src="/assets/images/{{ member.profile_img }}@2x.jpg"
+              srcset="
+                      /assets/images/{{ member.profile_img }}.jpg,
+                      /assets/images/{{ member.profile_img }}@2x.jpg 2x,
+                      /assets/images/{{ member.profile_img }}@3x.jpg 3x
+              "
+              alt="{{ member.name }}"
+              class="w-36 h-36 rounded-full mb-8 block mx-auto"
+            />
+            <h5 class="text-lg font-medium">{{ member.name }}</h5>
+            <p class="text-purple-200 my-2">
+              <span>{{ member.designation }}</span>
+            </p>
+            <p class="text-purple-300 text-sm">
+              <span>{{ member.past }}</span>
+            </p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+</main>

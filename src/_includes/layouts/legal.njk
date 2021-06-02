@@ -1,239 +1,15 @@
 ---
-layout: base
+layout: main
+showChatBox: false
+showAnnouncement: false
 sitemap:
   changefreq: monthly
   priority: 0.20
 ---
 
-<header class="bg-indigo-900 text-white sticky top-0 z-10">
-  <div>
-    <div class="container mx-auto py-4 px-4">
-      <nav x-data="{ open: false }">
-        <div class="flex space-x-4 items-center">
-          <h1 class="flex items-center">
-            <a href="/#main" class="inline-flex items-center space-x-3 text-lg">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 16 16"
-                class="w-10 h-10"
-                fill="currentColor"
-              >
-                <path
-                  d="M8 16a8 8 0 10-4.465-1.361c.41.276 0-.846.715-2.639.534-1.34 1.81-4.466 1.825-5.205.01-.534-.193-.994-.4-1.466-.046-.101-.09-.204-.134-.307-.391.768-1.764 1.929-2.69 1.743-1.285-.256-.419-1.777.116-2.359l.18-.201c.498-.563 1.191-1.347 1.836-1.076.312.13 1.09.701 1.707 1.19 0 0-.018-.047-.028-.079-.282-.87-.67-1.896 1.14-2.047.46-.04 2.776-.023 2.275.854-.202.352-1.139.45-1.863.526-.305.032-.573.06-.732.101.076.42.121.93.128 1.396 1.074.123 1.755.032 2.557-.075.399-.053.827-.11 1.348-.147C12.035 4.81 12.75 4.75 13 5c.165.165.204.575.145.934-.247 1.491-1.68 2.794-2.812 3.823-.191.174-.374.34-.54.498-1.642 1.55-2.523 3.144-2.434 5.127.01.189-.011.607.225.607.138.007.276.011.416.011z"
-                />
-              </svg>
-              <span class="tracking-widest uppercase font-medium">Sembark</span>
-            </a>
-          </h1>
-          <div
-            class="
-              flex-1 flex
-              justify-end
-              items-center
-              font-medium
-              tracking-wider
-            "
-          >
-            <ul class="flex items-center md:space-x-2 lg:space-x-4">
-              <li class="hidden sm:block">
-                <a href="/#features" class="px-4">Features</a>
-              </li>
-              <li class="hidden sm:block">
-                <a href="/#pricing" class="px-4">Pricing</a>
-              </li>
-              <li class="hidden sm:block">
-                <a
-                  href="/#contact-us"
-                  class="
-                    px-4
-                    py-2
-                    bg-gradient-to-r
-                    from-indigo-500
-                    to-indigo-600
-                    rounded-lg
-                    shadow-lg
-                  "
-                  >Contact Us</a
-                >
-              </li>
-              <li class="hidden sm:block">
-                <a
-                  href="https://app.sembark.com/login"
-                  class="px-4 inline-flex space-x-2 items-center opacity-80"
-                >
-                  <span>Login</span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    class="w-4 h-4"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-                </a>
-              </li>
-              {# MOBILE MENU #}
-              <li class="flex items-center sm:hidden">
-                {# Mobile menu button #}
-                <button
-                  @click="open = !open"
-                  class="
-                    inline-flex
-                    items-center
-                    justify-center
-                    p-2
-                    transition
-                    duration-150
-                    ease-in-out
-                    rounded-md
-                  "
-                  x-bind:aria-label="open ? 'Close main menu' : 'Main menu'"
-                  aria-label="Main menu"
-                  x-bind:aria-expanded="open"
-                >
-                  {# Icon when menu is closed. #}
-                  <svg
-                    x-state:on="Menu open"
-                    x-state:off="Menu closed"
-                    :class="{ 'hidden': open, 'block': !open }"
-                    class="block w-6 h-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M4 6h16M4 12h16M4 18h16"
-                    ></path>
-                  </svg>
-                  {# Icon when menu is open. #}
-                  <svg
-                    x-state:on="Menu open"
-                    x-state:off="Menu closed"
-                    :class="{ 'hidden': !open, 'block': open }"
-                    class="hidden w-6 h-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M6 18L18 6M6 6l12 12"
-                    ></path>
-                  </svg>
-                </button>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="md:hidden" :class="{ 'hidden': !open, 'block': open }">
-          <ul
-            class="p-4 bg-indigo-600 rounded-lg mt-4 space-y-1 sm:px-3"
-            @click="open = !open"
-          >
-            <li>
-              <a
-                href="/#features"
-                class="
-                  text-indigo-100
-                  hover:bg-indigo-700
-                  hover:text-white
-                  block
-                  px-3
-                  py-2
-                  rounded-md
-                  text-base
-                  font-medium
-                "
-                >Features</a
-              >
-            </li>
-            <li>
-              <a
-                href="/#pricing"
-                class="
-                  text-indigo-100
-                  hover:bg-indigo-700
-                  hover:text-white
-                  block
-                  px-3
-                  py-2
-                  rounded-md
-                  text-base
-                  font-medium
-                "
-                >Pricing</a
-              >
-            </li>
-            <li>
-              <a
-                href="/#contact-us"
-                class="
-                  text-indigo-100
-                  hover:bg-indigo-700
-                  hover:text-white
-                  block
-                  px-3
-                  py-2
-                  rounded-md
-                  text-base
-                  font-medium
-                "
-                >Contact Us</a
-              >
-            </li>
-            <li class="border-t-4 border-indigo-700">
-              <a
-                href="https://app.sembark.com"
-                class="
-                  text-indigo-100
-                  hover:bg-indigo-700
-                  hover:text-white
-                  block
-                  px-3
-                  py-2
-                  rounded-md
-                  text-base
-                  font-medium
-                  flex
-                  items-center
-                  space-x-2
-                  mt-2
-                "
-              >
-                <span>Login</span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  class="w-4 h-4"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </div>
-  </div>
-</header>
-
 <main class="mx-auto">
-  <div class="text-center py-24 bg-indigo-800">
-    <h1 class="text-5xl mb-8 text-indigo-50 font-bold">
+  <div class="text-center py-24 bg-indigo-800 px-4">
+    <h1 class="text-4xl md:text-5xl mb-8 text-indigo-50 font-bold">
       Policies and Procedures
     </h1>
     <p class="max-w-2xl text-lg mx-auto text-indigo-100">
@@ -241,8 +17,8 @@ sitemap:
       private, and being transparent about our practices as a business.
     </p>
   </div>
-  <div class="md:flex py-24 container mx-auto px-4">
-    <aside class="md:w-64 sticky top-0">
+  <div class="py-24 container mx-auto px-4 space-y-12 lg:flex lg:space-y-0">
+    <aside class="lg:w-64 lg:sticky top-0 z-10">
       <nav
         class="flex flex-col space-y-4 bg-indigo-800 p-4 rounded font-medium"
       >
@@ -273,7 +49,7 @@ sitemap:
         >
       </nav>
     </aside>
-    <div class="flex-1">
+    <div class="flex-1 pl-4">
       <article class="prose lg:prose-lg mx-auto">
         {{ content | safe }}
       </article>
