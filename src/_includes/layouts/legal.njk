@@ -1,80 +1,10 @@
 ---
 layout: base
+sitemap:
+  changefreq: monthly
+  priority: 0.20
 ---
 
-<div role="alert" aria-live="polite" class="py-4 bg-pink-50 text-pink-900">
-  <a
-    class="block max-w-4xl mx-auto px-4"
-    href="{{ meta.publicUrl }}/covid/vaccination-slots-availability/"
-  >
-    <div class="flex items-center">
-      <div class="mr-4">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-6 w-6 inline-block"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"
-          />
-        </svg>
-      </div>
-      <div
-        class="
-          flex-1
-          lg:flex
-          justify-between
-          items-center
-          space-y-2
-          lg:space-y-0 lg:space-x-4
-        "
-      >
-        <div class="font-medium">
-          Check your nearest vaccination center and slots availability for Covid
-          in India
-        </div>
-        <div>
-          <object>
-            <a
-              href="{{ meta.publicUrl }}/covid/vaccination-slots-availability"
-              class="
-                bg-pink-900
-                text-pink-50
-                inline-bloc
-                px-4
-                py-2
-                rounded
-                text-sm
-                font-medium
-                tracking-wide
-              "
-              >Check Availability
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-4 w-4 inline-block ml-2"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M14 5l7 7m0 0l-7 7m7-7H3"
-                />
-              </svg>
-            </a>
-          </object>
-        </div>
-      </div>
-    </div>
-  </a>
-</div>
 <header class="bg-indigo-900 text-white sticky top-0 z-10">
   <div>
     <div class="container mx-auto py-4 px-4">
@@ -226,7 +156,6 @@ layout: base
                 >Features</a
               >
             </li>
-
             <li>
               <a
                 href="/#pricing"
@@ -302,69 +231,52 @@ layout: base
   </div>
 </header>
 
-<main>
-  {{ content | safe }}
+<main class="mx-auto">
+  <div class="text-center py-24 bg-indigo-800">
+    <h1 class="text-5xl mb-8 text-indigo-50 font-bold">
+      Policies and Procedures
+    </h1>
+    <p class="max-w-2xl text-lg mx-auto text-indigo-100">
+      We're committed to keeping your data secure, your private information
+      private, and being transparent about our practices as a business.
+    </p>
+  </div>
+  <div class="md:flex py-24 container mx-auto px-4">
+    <aside class="md:w-64 sticky top-0">
+      <nav
+        class="flex flex-col space-y-4 bg-indigo-800 p-4 rounded font-medium"
+      >
+        <a
+          href="/legal/terms"
+          class="block w-full py-2 px-3 rounded {{ 'text-indigo-50 bg-indigo-900 ' if key === 'terms' else 'text-indigo-200 hover:text-gray-100'}}"
+          >Terms of Service</a
+        >
+        <a
+          href="/legal/privacy"
+          class="block w-full py-2 px-3 rounded {{ 'text-indigo-50 bg-indigo-900 ' if key === 'privacy' else 'text-indigo-200 hover:text-indigo-100'}}"
+          >Privacy Policy</a
+        >
+        <a
+          href="/legal/security"
+          class="block w-full py-2 px-3 rounded {{ 'text-indigo-50 bg-indigo-900 ' if key === 'security' else 'text-indigo-200 hover:text-indigo-100'}}"
+          >Security</a
+        >
+        <a
+          href="/legal/cookie-policy"
+          class="block w-full py-2 px-3 rounded {{ 'text-indigo-50 bg-indigo-900 ' if key === 'cookie' else 'text-indigo-200 hover:text-indigo-100'}}"
+          >Cookie Policy</a
+        >
+        <a
+          href="/legal/sub-processors"
+          class="block w-full py-2 px-3 rounded {{ 'text-indigo-50 bg-indigo-900 ' if key === 'subprocessors' else 'text-indigo-200 hover:text-indigo-100'}}"
+          >List of Sub-processors</a
+        >
+      </nav>
+    </aside>
+    <div class="flex-1">
+      <article class="prose lg:prose-lg mx-auto">
+        {{ content | safe }}
+      </article>
+    </div>
+  </div>
 </main>
-
-<!-- Messenger Chat Plugin Code -->
-<div id="fb-root"></div>
-
-<!-- Your Chat Plugin code -->
-<div
-  id="fb-customer-chat"
-  class="fb-customerchat"
-  greeting_dialog_delay="5000"
-></div>
-
-<script>
-  var chatbox = document.getElementById("fb-customer-chat");
-  chatbox.setAttribute("page_id", "{{ meta.facebookPageId }}");
-  chatbox.setAttribute("attribution", "biz_inbox");
-  window.fbAsyncInit = function () {
-    FB.init({
-      xfbml: true,
-      version: "v10.0",
-    });
-  };
-
-  function loadFBCustomerChat(d, s, id) {
-    var js,
-      fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s);
-    js.async = true;
-    js.id = id;
-    js.src = "https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js";
-    fjs.parentNode.insertBefore(js, fjs);
-  }
-  // TODO: Add it when we fix the alignment of the Messenger Icon
-  // loadFBCustomerChat(document, "script", "facebook-jssdk");
-</script>
-
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-  var Tawk_API = Tawk_API || {},
-    Tawk_LoadStart = new Date();
-
-  Tawk_API.onChatMaximized = function () {
-    gtag("event", "tawk_chat_maximized");
-  };
-  Tawk_API.onChatMinimized = function () {
-    gtag("event", "tawk_chat_minimized");
-  };
-  Tawk_API.onChatStarted = function () {
-    gtag("event", "tawk_chat_started");
-  };
-  (function (document, tagName, id) {
-    var s1 = document.createElement(tagName),
-      s0 = document.getElementsByTagName(tagName)[0];
-    s1.async = true;
-    s1.id = id;
-    s1.src =
-      "https://embed.tawk.to/{{ services.tawk.accountKey }}/{{ services.tawk.widgetId }}";
-    s1.charset = "UTF-8";
-    s1.setAttribute("crossorigin", "*");
-    s0.parentNode.insertBefore(s1, s0);
-  })(document, "script", "tawk-jssdk");
-</script>
-<!--End of Tawk.to Script-->

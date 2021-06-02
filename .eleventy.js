@@ -28,6 +28,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addLayoutAlias("base", "layouts/base.njk");
   eleventyConfig.addLayoutAlias("main", "layouts/main.njk");
   eleventyConfig.addLayoutAlias("blog", "layouts/blog.njk");
+  eleventyConfig.addLayoutAlias("legal", "layouts/legal.njk");
   eleventyConfig.addLayoutAlias(
     "covidDistrictSlots",
     "layouts/covid/district-slots.njk"
