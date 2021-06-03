@@ -1,0 +1,20 @@
+[
+  {
+    "url": "https://app.sembark.com/",
+    "data": {
+      "sitemap": {
+        "changefreq": "monthly",
+        "priority": 1.0
+      }
+    }
+  },
+  {
+    "url": "https://docs.sembark.com/",
+    "data": {
+      "sitemap": {
+        "changefreq": "weekly",
+        "priority": 0.9
+      }
+    }
+  }
+]
