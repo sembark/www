@@ -19,7 +19,8 @@
     "build_postcss": "NODE_ENV=production postcss src/assets/main.css -o dist/assets/main.css",
     "build": "run-s clean build_* --print-label",
     "build:staging": "env-cmd -f ./.env.staging npm run build",
-    "build:production": "env-cmd -f ./.env.production npm run build"
+    "build:production": "env-cmd -f ./.env.production npm run build",
+    "test": "node src/no-broken-links.test.js"
   },
   "keywords": [],
   "author": "Sudhir Mitharwal <sudhir@sembark.com>",
@@ -32,7 +33,6 @@
     "autoprefixer": "^10.2.6",
     "env-cmd": "^10.1.0",
     "html-minifier": "^4.0.0",
-    "node-fetch": "^2.6.1",
     "npm-run-all": "^4.1.5",
     "postcss": "^8.3.0",
     "postcss-cli": "^8.3.1",
@@ -61,6 +61,9 @@
     ]
   },
   "devDependencies": {
+    "cli-progress": "^3.9.0",
+    "node-fetch": "^2.6.1",
+    "node-html-parser": "^3.3.4",
     "prettier": "^2.3.0"
   }
 }

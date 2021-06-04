@@ -40,7 +40,7 @@ module.exports = function (eleventyConfig) {
     // to the `date` property when needed.
     lastModifiedProperty: "modified",
     sitemap: {
-      hostname: "https://sembark.com",
+      hostname: process.env.APP_PUBLIC_URL || "https://sembark.com",
     },
   });
 

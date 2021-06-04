@@ -28,7 +28,7 @@ write down clear [payment terms](https://yourstory.com/mystory/payment-terms-tip
 
 Payment terms and policies should be defined in a clear way so that customers
 don’t get confused about the terms or, if you are using a specific
-[travel software](https://sembark.com)</a>, you can do this by
+[travel software](https://sembark.com), you can do this by
 including the payment terms at the end of itinerary, invoice or other
 documents created by the software.
 
@@ -51,7 +51,7 @@ would manually send the payment reminders to customers to get paid.
 
 ## Improve on time payment rate with Sembark Travel Software</h2>
 
-[Sembark Travel software]("https://sembark.com") enables a simple and
+[Sembark Travel software](https://sembark.com) enables a simple and
 accurate way to keep track of payment status for the DMCs and Travel
 companies.
 

@@ -20,7 +20,7 @@ You are agreeing to be bound by these Terms of Service. If you do not agree to t
 
 - **Registration Information.** You must provide your legal full name, a valid permanent email address, along with any other information required by Sembark during the registration process. One person or legal entity may not maintain more than one account.
 
-- **Password.** You are responsible for maintaining the security of your account and password. We will not be liable for any loss or damage from your failure to comply with this security obligation. Personally identifiable information submitted by you will be subject to our [Privacy Policy](/privacy).
+- **Password.** You are responsible for maintaining the security of your account and password. We will not be liable for any loss or damage from your failure to comply with this security obligation. Personally identifiable information submitted by you will be subject to our [Privacy Policy](/legal/privacy).
 
 - **Restrictions.** You may not use the Sembark Service for any illegal or unauthorized purpose. You must not, in the use of the Sembark Service, violate any laws in your jurisdiction, including, among other things, by:
 
@@ -37,7 +37,7 @@ A valid payment method, such as a credit card, is required to process the paymen
 
 The Sembark Service is billed in advance in accordance with our pricing schedule. You will be billed in advance on a recurring and periodic basis ("Billing Cycle"). Billing cycles are set either on a monthly or annual basis, depending on the type of subscription plan you choose when purchasing a Subscription. There will be no refunds or credits for partial months of service, annual payments, or refunds for months unused with an open account, except in the case of our 30-day money back guarantee (see below). In order to treat everyone equally, no exceptions will be made.
 
-At the end of each Billing Cycle, your Subscription will automatically renew under the exact same conditions unless you cancel it or the Company cancels it. You may cancel your Subscription renewal through our website or by contacting Sembark customer support [support@sembark.com](support@sembark.com).
+At the end of each Billing Cycle, your Subscription will automatically renew under the exact same conditions unless you cancel it or the Company cancels it. You may cancel your Subscription renewal through our website or by contacting Sembark customer support [support@sembark.com](mailto:support@sembark.com).
 
 All fees are exclusive of all taxes, levies, or duties imposed by taxing authorities, and you will be responsible for payment of all such taxes, levies, or duties, excluding only United States (federal or state) income taxes. You agree to pay for any taxes that might be applicable to your use of the Sembark Service or payments made by you in connection with your use of the Sembark Service.
 
@@ -89,7 +89,7 @@ To the fullest extent permitted by law, these disclaimers and limitations of lia
 
 ## Jurisdiction and Venue
 
-These Terms of Service and any controversy, claim or dispute arising under or related to these Terms of Service will be construed, pursued and resolved in accordance with and will be governed by the laws of India without regard to its conflicts of laws provisions. You irrevocably consent to the exclusive jurisdiction of the courts of India and the federal courts situated in India in connection with any action or dispute arising between the parties under or in connection with these Terms of Service.
+These Terms of Service and any controversy, claim or dispute arising under or related to these Terms of Service will be construed, pursued and resolved in accordance with and will be governed by the laws of Jaipur, India without regard to its conflicts of laws provisions. You irrevocably consent to the exclusive jurisdiction of the courts of Jaipur, India and the federal courts situated in Jaipur, India in connection with any action or dispute arising between the parties under or in connection with these Terms of Service.
 
 ## Cancellation
 
@@ -111,7 +111,7 @@ We reserve the right to investigate and prosecute violations of any of these Ter
 
 ## Miscellaneous
 
-If for any reason a court of competent jurisdiction finds any provision or portion of these Terms of Service to be unenforceable, the remainder of these Terms of Service will continue in full force and effect. Any waiver of any provision of these Terms of Service will be effective only if in writing and signed by an authorized representative of Sembark. Sembark will be entitled to injunctive or other equitable relief (without the obligations of posting any bond or surety) in the event of any breach or anticipatory breach by you. Sembark operates and controls the Sembark Service from its offices in the India. The Service is not intended for distribution to or use by any person or entity in any jurisdiction or country where such distribution or use would be contrary to law or regulation. Accordingly, those persons who choose to access the Sembark Service from other locations do so on their own initiative and are solely responsible for compliance with local laws, if and to the extent local laws are applicable. These Terms of Service (which include and incorporate the [Sembark Privacy Policy](/privacy)) contains the entire understanding, and supersedes all prior understandings, between you and Sembark concerning its subject matter, and cannot be changed or modified by you.
+If for any reason a court of competent jurisdiction finds any provision or portion of these Terms of Service to be unenforceable, the remainder of these Terms of Service will continue in full force and effect. Any waiver of any provision of these Terms of Service will be effective only if in writing and signed by an authorized representative of Sembark. Sembark will be entitled to injunctive or other equitable relief (without the obligations of posting any bond or surety) in the event of any breach or anticipatory breach by you. Sembark operates and controls the Sembark Service from its offices in the India. The Service is not intended for distribution to or use by any person or entity in any jurisdiction or country where such distribution or use would be contrary to law or regulation. Accordingly, those persons who choose to access the Sembark Service from other locations do so on their own initiative and are solely responsible for compliance with local laws, if and to the extent local laws are applicable. These Terms of Service (which include and incorporate the [Sembark Privacy Policy](/legal/privacy)) contains the entire understanding, and supersedes all prior understandings, between you and Sembark concerning its subject matter, and cannot be changed or modified by you.
 
 1. Technical support is only provided via email.
 2. You understand that the Company uses third party vendors and hosting partners to provide the necessary hardware, software, networking, storage, and related technology required to run the Service.

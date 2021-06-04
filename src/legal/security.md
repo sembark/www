@@ -10,7 +10,7 @@ title: Sembark's Security Details
 
 As an online web application, we recognize the importance of excellent security practices. While we are a small team, we work hard to punch above our weight on security.
 
-This document covers our security practices and policies. If you are interested in the data we collect and store, please see our [privacy policy](/privacy).
+This document covers our security practices and policies. If you are interested in the data we collect and store, please see our [privacy policy](/legal/privacy).
 
 ## General practices
 
