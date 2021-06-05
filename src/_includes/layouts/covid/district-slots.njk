@@ -65,7 +65,7 @@
     <script
       async
       src="https://www.googletagmanager.com/gtag/js?id={{
-        meta.gaMeasurementId
+        services.googleAnalytics.measurementId
       }}"
     ></script>
     <script>
@@ -79,7 +79,7 @@
         }
       }
       gtag("js", new Date());
-      gtag("config", "{{ meta.gaMeasurementId }}", {
+      gtag("config", "{{ services.googleAnalytics.measurementId }}", {
         cookie_domain: "sembark.com",
         cookie_flags: "SameSite=None;Secure",
       });

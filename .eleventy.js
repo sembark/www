@@ -28,6 +28,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addLayoutAlias("base", "layouts/base.njk");
   eleventyConfig.addLayoutAlias("main", "layouts/main.njk");
   eleventyConfig.addLayoutAlias("blog", "layouts/blog.njk");
+  eleventyConfig.addLayoutAlias("legal", "layouts/legal.njk");
   eleventyConfig.addLayoutAlias(
     "covidDistrictSlots",
     "layouts/covid/district-slots.njk"
@@ -39,7 +40,7 @@ module.exports = function (eleventyConfig) {
     // to the `date` property when needed.
     lastModifiedProperty: "modified",
     sitemap: {
-      hostname: "https://sembark.com",
+      hostname: process.env.APP_PUBLIC_URL || "https://sembark.com",
     },
   });
 

@@ -1,14 +1,24 @@
 <!DOCTYPE html>
-<html lang="en" class="bg-indigo-900 text-white">
+<html
+  lang="en"
+  class="bg-indigo-900 text-white"
+  data-version="{{ meta.version }}"
+>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="dns-prefetch" href="https://assets.sembark.com" />
     <link rel="dns-prefetch" href="https://rsms.com" />
     <link rel="assets" href="https://assets.sembark.com" />
-    <title>{{ meta.appName }} - {{ seo.title or title }}</title>
-    <meta property="twitter:title" content="{{ seo.title or title }}" />
-    <meta property="og:title" content="{{ seo.title or title }}" />
+    <title>{{ seo.title or title }}</title>
+    <meta
+      property="twitter:title"
+      content="{{ seo.title or title }} - {{ meta.appName }}"
+    />
+    <meta
+      property="og:title"
+      content="{{ seo.title or title }} - {{ meta.appName }}"
+    />
     <meta
       name="description"
       content="{{ seo.description or description or  meta.description }}"
@@ -87,7 +97,7 @@
     <script
       async
       src="https://www.googletagmanager.com/gtag/js?id={{
-        meta.gaMeasurementId
+        services.googleAnalytics.measurementId
       }}"
     ></script>
     <script>
@@ -101,7 +111,7 @@
         }
       }
       gtag("js", new Date());
-      gtag("config", "{{ meta.gaMeasurementId }}", {
+      gtag("config", "{{ services.googleAnalytics.measurementId }}", {
         cookie_domain: "sembark.com",
         cookie_flags: "SameSite=None;Secure",
       });
