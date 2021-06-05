@@ -1,3 +1,21 @@
+# [1.12.0](https://github.com/sembark/www/compare/v1.11.0...v1.12.0) (2021-06-05)
+
+
+### Bug Fixes
+
+* **broken:** ensure no broken links ([441cc84](https://github.com/sembark/www/commit/441cc84d17f92bd9f233f7ed63a6c8cae8dd26ad))
+* **chat:** remove the message chat ([140c63d](https://github.com/sembark/www/commit/140c63d8e2e47f79720526875191d4f3467db686))
+* **photo:** update teams photos ([2b9a5c8](https://github.com/sembark/www/commit/2b9a5c88df46f71eec3b0ed53b200e1f799be9af))
+* **sitemap:** incorrect change frequest for about us ([af15614](https://github.com/sembark/www/commit/af15614f6e6dcfdca3583fbf1123711e0802f076))
+* **tags:** update keywords ([6b66984](https://github.com/sembark/www/commit/6b66984b95653c2708db166e1a0e0455ac6167f1))
+
+
+### Features
+
+* **legal:** add terms and privacy pages ([bf0bb26](https://github.com/sembark/www/commit/bf0bb26d50d4e47f81f1450d3e1782de61021ff6))
+* **page:** add about us page ([16bde64](https://github.com/sembark/www/commit/16bde6486ea37e58a5984c0a7e89e3aa17cd8490))
+* **sitemap:** add extra sitemaps ([5960745](https://github.com/sembark/www/commit/5960745149ffa29f5d39a05ef1f71fd1b8c0df4c))
+
 # [1.11.0](https://github.com/sembark/www/compare/v1.10.0...v1.11.0) (2021-05-29)
 
 
