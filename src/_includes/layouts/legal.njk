@@ -1,5 +1,7 @@
 ---
 layout: main
+description: "Keeping your data secure and private is important to us at Sembark. We processing your personal data in a secure,
+fair, and we are transparent about our practices as a business"
 showChatBox: false
 showAnnouncement: false
 sitemap:
@@ -10,7 +12,7 @@ sitemap:
 <main class="mx-auto">
   <div class="text-center py-24 bg-indigo-800 px-4">
     <h1 class="text-4xl md:text-5xl mb-8 text-indigo-50 font-bold">
-      Policies and Procedures
+      Terms, Privacy and Procedures
     </h1>
     <p class="max-w-2xl text-lg mx-auto text-indigo-100">
       We're committed to keeping your data secure, your private information
@@ -52,6 +54,11 @@ sitemap:
     <div class="flex-1 pl-4">
       <article class="prose lg:prose-lg mx-auto">
         {{ content | safe }}
+        <hr />
+        <p>
+          Questions about the Terms, Privacy and Procedures should be sent to
+          <a href="mailto:{{ meta.legalEmail }}">{{ meta.legalEmail }}</a>
+        </p>
       </article>
     </div>
   </div>

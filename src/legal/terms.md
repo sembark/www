@@ -37,7 +37,7 @@ A valid payment method, such as a credit card, is required to process the paymen
 
 The Sembark Service is billed in advance in accordance with our pricing schedule. You will be billed in advance on a recurring and periodic basis ("Billing Cycle"). Billing cycles are set either on a monthly or annual basis, depending on the type of subscription plan you choose when purchasing a Subscription. There will be no refunds or credits for partial months of service, annual payments, or refunds for months unused with an open account, except in the case of our 30-day money back guarantee (see below). In order to treat everyone equally, no exceptions will be made.
 
-At the end of each Billing Cycle, your Subscription will automatically renew under the exact same conditions unless you cancel it or the Company cancels it. You may cancel your Subscription renewal through our website or by contacting Sembark customer support [support@sembark.com](mailto:support@sembark.com).
+At the end of each Billing Cycle, your Subscription will automatically renew under the exact same conditions unless you cancel it or the Company cancels it. You may cancel your Subscription renewal through our website or by contacting Sembark customer support [{{ meta.supportEmail }}](mailto:{{ meta.supportEmail }}).
 
 All fees are exclusive of all taxes, levies, or duties imposed by taxing authorities, and you will be responsible for payment of all such taxes, levies, or duties, excluding only United States (federal or state) income taxes. You agree to pay for any taxes that might be applicable to your use of the Sembark Service or payments made by you in connection with your use of the Sembark Service.
 
@@ -118,7 +118,3 @@ If for any reason a court of competent jurisdiction finds any provision or porti
 3. You agree not to reproduce, duplicate, copy, sell, resell or exploit any portion of the Service, use of the Service, or access to the Service without the express written permission by the Company. You must not modify, adapt or hack the Service. You must not modify another website so as to falsely imply that it is associated with the Service or the Company.
 4. Verbal, physical, written or other abuse (including threats of abuse or retribution) of any Service customer, Company employee or officer will result in immediate account termination.
 5. The section headings used in this Agreement are for convenience only and will not be given any legal import.
-
----
-
-Questions about the Terms of Service should be sent to [support@sembark.com](mailto:support@sembark.com)

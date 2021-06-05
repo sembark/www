@@ -10,9 +10,15 @@
     <link rel="dns-prefetch" href="https://assets.sembark.com" />
     <link rel="dns-prefetch" href="https://rsms.com" />
     <link rel="assets" href="https://assets.sembark.com" />
-    <title>{{ meta.appName }} - {{ seo.title or title }}</title>
-    <meta property="twitter:title" content="{{ seo.title or title }}" />
-    <meta property="og:title" content="{{ seo.title or title }}" />
+    <title>{{ seo.title or title }}</title>
+    <meta
+      property="twitter:title"
+      content="{{ seo.title or title }} - {{ meta.appName }}"
+    />
+    <meta
+      property="og:title"
+      content="{{ seo.title or title }} - {{ meta.appName }}"
+    />
     <meta
       name="description"
       content="{{ seo.description or description or  meta.description }}"

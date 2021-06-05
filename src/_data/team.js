@@ -4,7 +4,7 @@ module.exports = {
       name: "Anand Singh Shekhawat",
       designation: "CEO, Co-founder",
       past: "IIT Alumni",
-      profile_img: "profile_rajat",
+      profile_img: "profile_anand",
     },
     {
       name: "Rajat Sharma",

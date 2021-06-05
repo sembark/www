@@ -169,7 +169,7 @@ We may revise this Privacy Policy from time to time without notice. Having said 
 ## Whom do I contact if I have any privacy questions?
 
 If you have any questions or comments about this Privacy Policy or feel that we are not abiding by the terms of this
-Privacy Policy, please contact our Privacy Agent via email at [support@sembark.com](mailto:support@sembark.com)
+Privacy Policy, please contact our Privacy Agent via email at [{{ meta.legalEmail }}](mailto:{{ meta.legalEmail }})
 
 ## Applicable Law
 

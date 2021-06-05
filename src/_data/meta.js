@@ -50,4 +50,6 @@ module.exports = {
     landmark: "Akshardham Temple",
     country: "India",
   },
+  supportEmail: "support@sembark.com",
+  legalEmail: "support@sembark.com",
 };
