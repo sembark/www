@@ -1,3 +1,10 @@
+# [1.13.0](https://github.com/sembark/www/compare/v1.12.0...v1.13.0) (2021-06-08)
+
+
+### Features
+
+* **footer:** add status page url ([da007c3](https://github.com/sembark/www/commit/da007c378fe04a3981784ac0f544871c23b1c95a))
+
 # [1.12.0](https://github.com/sembark/www/compare/v1.11.0...v1.12.0) (2021-06-05)
 
 
