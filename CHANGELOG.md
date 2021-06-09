@@ -1,3 +1,10 @@
+## [1.13.1](https://github.com/sembark/www/compare/v1.13.0...v1.13.1) (2021-06-09)
+
+
+### Bug Fixes
+
+* **markup:** announcement markup not correct ([648cb68](https://github.com/sembark/www/commit/648cb68d35e5f580b79acb26e732bf25c5ba8252))
+
 # [1.13.0](https://github.com/sembark/www/compare/v1.12.0...v1.13.0) (2021-06-08)
 
 
