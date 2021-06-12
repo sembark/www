@@ -4,7 +4,16 @@
     "data": {
       "sitemap": {
         "changefreq": "monthly",
-        "priority": 1.0
+        "priority": 0.7
+      }
+    }
+  },
+  {
+    "url": "https://sembark.travel/",
+    "data": {
+      "sitemap": {
+        "changefreq": "weekly",
+        "priority": 0.9
       }
     }
   },
