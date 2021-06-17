@@ -52,4 +52,6 @@ module.exports = {
   },
   supportEmail: "support@sembark.com",
   legalEmail: "support@sembark.com",
+  whatsappNumber: "+919621324422",
+  travelProductUrl: "/travel-agency-software/",
 };
