@@ -1,3 +1,15 @@
+# [1.14.0](https://github.com/sembark/www/compare/v1.13.1...v1.14.0) (2021-06-17)
+
+
+### Bug Fixes
+
+* **cookie-consent:** fix policy url ([77f549f](https://github.com/sembark/www/commit/77f549f2481a63fd651982089f77b5f473007083))
+
+
+### Features
+
+* **content:** create company landing website ([e97edb4](https://github.com/sembark/www/commit/e97edb4b54e23cfa444944b41b34b93d232482d7))
+
 ## [1.13.1](https://github.com/sembark/www/compare/v1.13.0...v1.13.1) (2021-06-09)
 
 
