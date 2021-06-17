@@ -1,0 +1,125 @@
+<div
+  id="js-cookie-consent"
+  style="opacity: 0"
+  class="transition-opacity duration-700 ease-in-out"
+>
+  <div
+    class="
+      fixed
+      overflow-visible
+      z-50
+      w-full
+      bg-white bg-opacity-95
+      shadow-lg
+      bottom-0
+      px-24
+      md:px-6
+      py-4
+      text-sm
+      md:left-1/2
+      transform
+      md:-translate-x-1/2
+      md:max-w-lg
+      md:bottom-8
+      md:rounded-lg
+    "
+  >
+    <div
+      class="
+        text-gray-600
+        sm:flex
+        items-center
+        space-y-2
+        sm:space-y-0 sm:space-x-4
+      "
+    >
+      <div class="flex-1">
+        <p>
+          By using Sembark, you agree to our
+          <a
+            href="https://sembark.com/legal/cookie-policy/"
+            class="text-indigo-600"
+            >Cookie Policy</a
+          >.
+        </p>
+      </div>
+      <div>
+        <a
+          href="javascript:void(0);"
+          role="button"
+          id="js-accept-cookie-consent-action"
+          class="
+            inline-block
+            whitespace-pre
+            px-4
+            py-2
+            text-white
+            bg-indigo-500
+            hover:bg-indigo-600
+            rounded-lg
+          "
+        >
+          Accept
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  (function (document) {
+    // sembark_cookie_consent_accepted
+    let cookieName = "smb_cc_acpt";
+
+    function getCookieContainerElm() {
+      return document.getElementById("js-cookie-consent");
+    }
+
+    function requestConsent() {
+      getCookieContainerElm().style.opacity = 1;
+    }
+
+    function getCookie(cname) {
+      var name = cname + "=";
+      var ca = document.cookie.split(";");
+      for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == " ") c = c.substring(1);
+        if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+      }
+      return "";
+    }
+
+    function accept() {
+      var container = getCookieContainerElm();
+      removeElm(container);
+      var d = new Date();
+      d.setTime(d.getTime() + 365 * 24 * 60 * 60 * 1000);
+      var expires = "expires=" + d.toUTCString();
+      document.cookie = cookieName + "=1; " + expires;
+    }
+
+    function removeElm(elm) {
+      elm.style.opacity = "0";
+      setTimeout(function () {
+        elm.parentNode.removeChild(elm);
+      }, 1000);
+    }
+
+    let hasAccepted = getCookie(cookieName);
+    if (!hasAccepted) {
+      setTimeout(function () {
+        requestConsent();
+        var acceptButton = document.getElementById(
+          "js-accept-cookie-consent-action"
+        );
+        acceptButton.addEventListener("click", function () {
+          accept();
+        });
+      }, 3000);
+    } else {
+      setTimeout(function () {
+        removeElm(getCookieContainerElm());
+      }, 1000);
+    }
+  })(document);
+</script>
