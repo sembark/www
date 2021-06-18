@@ -33,6 +33,11 @@ module.exports = function (eleventyConfig) {
     "covidDistrictSlots",
     "layouts/covid/district-slots.njk"
   );
+  eleventyConfig.addLayoutAlias(
+    "travel-software",
+    "layouts/travel-software.njk"
+  );
+
   eleventyConfig.addPlugin(sitemap, {
     // Name of the property for the last modification date.
     // By default it is undefined and the plugin will fallback to `date`.

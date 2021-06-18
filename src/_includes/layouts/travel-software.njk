@@ -1,90 +1,9 @@
 ---
 layout: base
-showAnnouncement: true
+showAnnouncement: false
 showChatBox: true
 ---
 
-{% if showAnnouncement %}
-<div>
-  <div role="alert" aria-live="polite" class="bg-pink-50 text-pink-900">
-    <div class="px-4 container mx-auto py-4">
-      <a
-        class="block max-w-4xl mx-auto"
-        href="{{ meta.publicUrl }}/covid/vaccination-slots-availability/"
-      >
-        <div class="flex items-center">
-          <div class="mr-4">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6 inline-block"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"
-              />
-            </svg>
-          </div>
-          <div
-            class="
-              flex-1
-              lg:flex
-              justify-between
-              items-center
-              space-y-2
-              lg:space-y-0 lg:space-x-4
-            "
-          >
-            <div class="font-medium">
-              Check your nearest vaccination center and slots availability for
-              Covid in India
-            </div>
-            <div>
-              <object>
-                <a
-                  href="{{
-                    meta.publicUrl
-                  }}/covid/vaccination-slots-availability"
-                  class="
-                    bg-pink-900
-                    text-pink-50
-                    inline-bloc
-                    px-4
-                    py-2
-                    rounded
-                    text-sm
-                    font-medium
-                    tracking-wide
-                  "
-                  >Check Availability
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-4 w-4 inline-block ml-2"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M14 5l7 7m0 0l-7 7m7-7H3"
-                    />
-                  </svg>
-                </a>
-              </object>
-            </div>
-          </div>
-        </div>
-      </a>
-    </div>
-  </div>
-</div>
-{% endif %}
 <header class="bg-indigo-900 text-white sticky top-0 z-50">
   <div>
     <div class="container mx-auto py-4 px-4">
@@ -116,22 +35,10 @@ showChatBox: true
           >
             <ul class="flex items-center md:space-x-2 lg:space-x-4">
               <li class="hidden sm:block">
-                <a
-                  href="{{
-                    meta.travelProductUrl
-                  }}?utm_source=sembark_site&utm_medium=web&utm_campaign=internal_connect&utm_content=header_nav"
-                  class="px-4"
-                  >Product</a
-                >
+                <a href="#features" class="px-4">Features</a>
               </li>
               <li class="hidden sm:block">
-                <a
-                  href="{{
-                    meta.travelProductUrl
-                  }}?utm_source=sembark_site&utm_medium=web&utm_campaign=internal_connect&utm_content=header_nav#pricing"
-                  class="px-4"
-                  >Pricing</a
-                >
+                <a href="#pricing" class="px-4">Pricing</a>
               </li>
               <li class="hidden sm:block">
                 <a
@@ -233,9 +140,7 @@ showChatBox: true
           >
             <li>
               <a
-                href="{{
-                  meta.travelProductUrl
-                }}?utm_source=sembark_site&utm_medium=web&utm_campaign=internal_connect&utm_content=header_nav"
+                href="#features"
                 class="
                   text-indigo-100
                   hover:bg-indigo-700
@@ -250,11 +155,10 @@ showChatBox: true
                 >Features</a
               >
             </li>
+
             <li>
               <a
-                href="{{
-                  meta.travelProductUrl
-                }}?utm_source=sembark_site&utm_medium=web&utm_campaign=internal_connect&utm_content=header_nav#pricing"
+                href="#pricing"
                 class="
                   text-indigo-100
                   hover:bg-indigo-700
