@@ -5,7 +5,7 @@ title: Travel Software Blogs
 ---
 
 <div class="min-h-screen">
-  <div class="max-w-screen-xl mx-auto relative pt-6 px-4 sm:px-6 lg:px-8 pb-12">
+  <div class="max-w-screen-xl mx-auto relative pt-6 px-4 sm:px-6 lg:px-8 pb-24">
     <div class="text-center mt-16">
       <h1
         class="
@@ -24,38 +24,34 @@ title: Travel Software Blogs
       </p>
     </div>
   </div>
-  <div class="py-16 px-4">
+  <div class="py-16 bg-white text-gray-900">
     <div class="max-w-2xl mx-auto">
       <ul class="space-y-8">
+        {% for blog in blogs %}
         <li>
           <a
-            href="/blogs/how-to-make-sure-on-time-payment-from-your-customers"
+            href="{{ blog.url }}"
             class="
-              hover:opacity-90
               block
-              p-8
-              bg-indigo-700
+              p-4
+              sm:p-8
+              hover:shadow
+              transition
               rounded-lg
-              hover:shadow-lg
+              hover:bg-gray-50
             "
           >
-            <h3 class="text-xl mb-2 font-semibold">
-              How to make sure On-Time Payments from your customers
-            </h3>
-            <p class="text-sm mb-2 text-indigo-300">
-              02 November, 2020 by Rajat Sharma
+            <h3 class="text-xl mb-2 font-medium">{{ blog.title }}</h3>
+            <p class="text-sm mb-2 text-gray-500 font-medium">
+              {{ blog.date }} by {{ blog.author }}
             </p>
-            <p class="text-indigo-100 text-sm my-3">
-              Ensuring timely payments from customers is a real challenge for a
-              Travel business. Not getting timely payments from customers can
-              choke off cash flow and can be really frustrating for any
-              business.
-            </p>
-            <p class="font-medium text-indigo-300 text-right">
+            <p class="text-gray-600 text-sm my-3">{{ blog.description }}</p>
+            <p class="font-medium text-indigo-600 text-left text-xs">
               Read More &#8594;
             </p>
           </a>
         </li>
+        {% endfor %}
       </ul>
     </div>
   </div>
