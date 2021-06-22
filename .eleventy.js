@@ -20,7 +20,6 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/robots.txt");
   eleventyConfig.addPassthroughCopy("src/assets/images/");
   eleventyConfig.addPassthroughCopy("src/assets/svg/");
-  eleventyConfig.addPassthroughCopy("src/assets/covid/");
   /**
    * Add layout aliases
    * @link https://www.11ty.dev/docs/layouts/#layout-aliasing
@@ -29,10 +28,6 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addLayoutAlias("main", "layouts/main.njk");
   eleventyConfig.addLayoutAlias("blog", "layouts/blog.njk");
   eleventyConfig.addLayoutAlias("legal", "layouts/legal.njk");
-  eleventyConfig.addLayoutAlias(
-    "covidDistrictSlots",
-    "layouts/covid/district-slots.njk"
-  );
   eleventyConfig.addLayoutAlias(
     "travel-software",
     "layouts/travel-software.njk"
