@@ -11,3 +11,7 @@
 [id] {
   scroll-margin-top: 72px;
 }
+
+body {
+  font-weight: 300;
+}

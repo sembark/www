@@ -12,7 +12,7 @@ sitemap:
       <div class="space-y-16 md:flex md:space-y-0">
         <div class="flex-1 min-w-0">
           <div class="mt-16">
-            <h2 class="text-4xl lg:text-5xl xl:text-6xl font-bold">
+            <h2 class="text-4xl lg:text-5xl xl:text-6xl font-medium">
               Best-in-class Management and Growth solutions for Travel
               Businesses
             </h2>
@@ -736,7 +736,9 @@ sitemap:
             <p class="text-lg">
               Explore
               <a
-                href="https://sembark.travel/?utm_source=sembark_site&utm_medium=web&utm_campaign=internal_connect&utm_content=ready_to_get_started"
+                href="{{
+                  meta.travelProductUrl
+                }}?utm_source=sembark_site&utm_medium=web&utm_campaign=internal_connect&utm_content=ready_to_get_started"
                 class="text-indigo-600 font-medium"
                 >Sembark Solutions</a
               >, or create an account instantly and start accepting payments.
@@ -818,7 +820,9 @@ sitemap:
           </div>
           <footer class="mt-4">
             <a
-              href="#pricing"
+              href="{{
+                meta.travelProductUrl
+              }}?utm_source=sembark_site&utm_medium=web&utm_campaign=internal_connect&utm_content=ready_to_get_started#pricing"
               class="text-indigo-600 font-medium text-sm inline-flex space-x-2"
               ><span>Pricing Details</span>
               <svg

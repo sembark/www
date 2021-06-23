@@ -1,6 +1,7 @@
 ---
 layout: main
 showChatBox: false
+showAnnouncement: false
 title: Blog Title
 author: Blog Author
 publishedOn: published on
@@ -52,20 +53,12 @@ publishedOn: published on
       </div>
     </div>
   </header>
-  <article class="py-16 prose mx-auto max-w-2xl px-4">
-    {{ content | safe }}
-  </article>
-  <div
-    class="
-      mt-8
-      border-t-4 border-indigo-700
-      pt-8
-      max-w-2xl
-      px-4
-      mx-auto
-      text-indigo-200
-    "
-  >
+  <section class="bg-white px-4">
+    <article class="py-16 prose mx-auto">
+      {{ content | safe }}
+    </article>
+  </section>
+  <div class="mt-8 pt-8 max-w-2xl px-4 mx-auto text-indigo-200">
     <p>
       Thank you for reading. Follow us on
       <a
