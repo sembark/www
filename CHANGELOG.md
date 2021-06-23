@@ -1,3 +1,16 @@
+# [1.16.0](https://github.com/sembark/www/compare/v1.15.0...v1.16.0) (2021-06-23)
+
+
+### Bug Fixes
+
+* **content:** add content for product ([96e7f3d](https://github.com/sembark/www/commit/96e7f3debce082385f30fb14a27ac15ca4fa7c3b))
+* **content:** update content for product details ([759baed](https://github.com/sembark/www/commit/759baed5babf0bf650f7d19059b2c4aa48c36966))
+
+
+### Features
+
+* **blog:** add overview blog ([b03c687](https://github.com/sembark/www/commit/b03c68759fc87589a285fc56d1cccfbfe499f70a))
+
 # [1.15.0](https://github.com/sembark/www/compare/v1.14.0...v1.15.0) (2021-06-18)
 
 
