@@ -46,7 +46,7 @@ showChatBox: true
                 <a
                   href="{{
                     meta.travelProductUrl
-                  }}?utm_source=sembark_site&utm_medium=web&utm_campaign=internal_connect&utm_content=header_nav"
+                  }}?utm_source={{ utmSource or 'sembark_site' }}&utm_medium={{ utmMedium or 'web' }}&utm_campaign=internal_connect&utm_content=header_nav"
                   class="px-4"
                   >Product</a
                 >
@@ -55,7 +55,8 @@ showChatBox: true
                 <a
                   href="{{
                     meta.travelProductUrl
-                  }}?utm_source=sembark_site&utm_medium=web&utm_campaign=internal_connect&utm_content=header_nav#pricing"
+                  }}?utm_source={{ utmSource or 'sembark_site' }}&utm_medium={{ utmMedium or 'web'
+                }}&utm_campaign=internal_connect&utm_content=header_nav#pricing"
                   class="px-4"
                   >Pricing</a
                 >
@@ -162,7 +163,7 @@ showChatBox: true
               <a
                 href="{{
                   meta.travelProductUrl
-                }}?utm_source=sembark_site&utm_medium=web&utm_campaign=internal_connect&utm_content=header_nav"
+                }}?utm_source={{ utmSource or 'sembark_site' }}&utm_medium={{ utmMedium or 'web' }}&utm_campaign=internal_connect&utm_content=header_nav"
                 class="
                   text-indigo-100
                   hover:bg-indigo-700
@@ -181,7 +182,7 @@ showChatBox: true
               <a
                 href="{{
                   meta.travelProductUrl
-                }}?utm_source=sembark_site&utm_medium=web&utm_campaign=internal_connect&utm_content=header_nav#pricing"
+                }}?utm_source={{ utmSource or 'sembark_site' }}&utm_medium={{ utmMedium or 'web' }}&utm_campaign=internal_connect&utm_content=header_nav#pricing"
                 class="
                   text-indigo-100
                   hover:bg-indigo-700

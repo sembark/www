@@ -54,4 +54,6 @@ module.exports = {
   legalEmail: "support@sembark.com",
   whatsappNumber: "+919621324422",
   travelProductUrl: "/travel-management-software/",
+  accountRegistrationUrl: process.env.APP_ACCOUNT_REGISTRATION_URL,
+  docsUrl: "https://docs.sembark.com",
 };

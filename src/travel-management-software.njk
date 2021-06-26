@@ -4,6 +4,8 @@ title: Online Travel Management Software for Sales, Reservation and Finance
 sitemap:
   changefreq: weekly
   priority: 0.90
+utmSource: product_page
+utmMedium: web
 ---
 
 <section
@@ -36,7 +38,8 @@ sitemap:
           <div class="mt-8">
             <a
               class="
-                inline-block
+                inline-flex
+                space-x-4
                 px-8
                 sm:px-10
                 py-4
@@ -44,14 +47,30 @@ sitemap:
                 text-lg
                 md:text-xl
                 rounded-lg
-                bg-gradient-to-r
-                from-indigo-500
-                to-indigo-600
+                bg-indigo-100
+                text-indigo-900
                 shadow-lg
+                items-center
               "
-              href="/#contact-us"
-              >Contact Us for a Demo</a
-            >
+              href="{{ meta.accountRegistrationUrl }}?utm_source={{
+                utmSource
+              }}&utm_medium={{
+                utmMedium
+              }}&utm_campaign=internal_connect&utm_content=hero_section"
+              ><span>Get Started</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </a>
             <div class="mt-8 text-lg text-indigo-200 space-y-4">
               <a
                 href="tel:{{ meta.address.phoneCall }}"
@@ -145,7 +164,11 @@ sitemap:
         </div>
         <footer>
           <a
-            href="/#contact-us"
+            href="{{ meta.accountRegistrationUrl }}?utm_source={{
+              utmSource
+            }}&utm_medium={{
+              utmMedium
+            }}&utm_campaign=internal_connect&utm_content=grow_sales"
             class="
               text-indigo-800
               bg-indigo-200
@@ -298,7 +321,11 @@ sitemap:
         </div>
         <footer>
           <a
-            href="/#contact-us"
+            href="{{ meta.accountRegistrationUrl }}?utm_source={{
+              utmSource
+            }}&utm_medium={{
+              utmMedium
+            }}&utm_campaign=internal_connect&utm_content=manage_bookings"
             class="
               bg-indigo-500
               shadow
@@ -433,7 +460,11 @@ sitemap:
         </div>
         <footer>
           <a
-            href="/#contact-us"
+            href="{{ meta.accountRegistrationUrl }}?utm_source={{
+              utmSource
+            }}&utm_medium={{
+              utmMedium
+            }}&utm_campaign=internal_connect&utm_content=start_with_accounting"
             class="
               bg-cyan-50
               shadow
@@ -668,22 +699,39 @@ sitemap:
           >
             <a
               class="
-                inline-block
+                inline-flex
+                space-x-4
+                items-center
                 px-8
                 py-3
                 font-medium
                 text-lg
                 md:text-2xl
                 rounded-lg
-                bg-gradient-to-r
-                from-indigo-500
-                to-indigo-600
+                bg-indigo-600
+                text-white
                 shadow-lg
                 hover:shadow-xl
               "
-              href="/#contact-us"
-              >Contact Us</a
-            >
+              href="{{ meta.accountRegistrationUrl }}?utm_source={{
+                utmSource
+              }}&utm_medium={{
+                utmMedium
+              }}&utm_campaign=internal_connect&utm_content=pricing"
+              ><span>Create Account</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </a>
             <div
               class="
                 text-lg text-white
